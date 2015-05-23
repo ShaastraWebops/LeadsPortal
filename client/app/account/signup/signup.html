@@ -1,0 +1,168 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="jumbotron col-sm-offset-2 col-sm-4">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="text-center">Sign up</h2>
+    </div>
+    <div class="col-sm-12">
+      <form class="form" name="form" ng-submit="register(form)" novalidate>
+
+        <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
+                                            'has-error': form.name.$invalid && submitted }">
+          <label>Name</label>
+
+          <input type="text" name="name" class="form-control" ng-model="user.name"
+                 required
+                 mongoose-error/>
+          <span class="help-block" ng-show="form.name.$error.required && submitted">
+            A name is required
+          </span>
+          <span class="help-block" ng-show="form.name.$error.mongoose">
+            {{ errors.name }}
+          </span>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
+                                            'has-error': form.email.$invalid && submitted }">
+          <label>Email</label>
+
+          <input type="email" name="email" class="form-control" ng-model="user.email"
+                 required
+                 mongoose-error/>
+          <span class="help-block" ng-show="form.email.$error.email && submitted">
+            Doesn't look like a valid email.
+          </span>
+          <span class="help-block" ng-show="form.email.$error.required && submitted">
+            What's your email address?
+          </span>
+          <span class="help-block" ng-show="form.email.$error.mongoose">
+            {{ errors.email }}
+          </span>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted,
+                                            'has-error': form.password.$invalid && submitted }">
+          <label>Password</label>
+
+          <input type="password" name="password" class="form-control" ng-model="user.password"
+                 ng-minlength="3"
+                 required
+                 mongoose-error/>
+          <span class="help-block"
+             ng-show="(form.password.$error.minlength || form.password.$error.required) && submitted">
+            Password must be at least 3 characters.
+          </span>
+          <span class="help-block" ng-show="form.password.$error.mongoose">
+            {{ errors.password }}
+          </span>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.cgpa.$valid && submitted,
+                                            'has-error': form.cgpa.$invalid && submitted }">
+          <label>CGPA</label>
+
+          <input type="text" name="cgpa" class="form-control" ng-model="user.cgpa"
+                 ng-pattern="/^(10|\d)(\.\d{1,2})?$/"
+                 required
+                 mongoose-error/>
+          <span class="help-block" ng-show="form.cgpa.$error.pattern && submitted">
+            Enter a vaild CGPA
+          </span>
+          <span class="help-block" ng-show="form.cgpa.$error.required && submitted">
+            Your CGPA is required
+          </span>
+          <span class="help-block" ng-show="form.cgpa.$error.mongoose">
+            {{ errors.cgpa }}
+          </span>          
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.city.$valid && submitted,
+                                            'has-error': form.city.$invalid && submitted }">
+          <label>City</label>
+
+          <input type="text" name="city" class="form-control" ng-model="user.city"
+                 required
+                 mongoose-error/>
+          <span class="help-block">Which city you are from ?</span>                 
+          <span class="help-block" ng-show="form.city.$error.required && submitted">
+            City is required
+          </span>
+          <span class="help-block" ng-show="form.city.$error.mongoose">
+            {{ errors.city }}
+          </span>          
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.summerLocation.$valid && submitted,
+                                            'has-error': form.summerLocation.$invalid && submitted }">
+          <label>Summer Location</label>
+
+          <input type="text" name="summerLocation" class="form-control" ng-model="user.summerLocation"
+                 required
+                 mongoose-error/>
+          <span class="help-block">Where are you staying during summer vacation ?</span>       
+          <span class="help-block" ng-show="form.summerLocation.$error.required && submitted">
+            Summer location is required
+          </span>
+          <span class="help-block" ng-show="form.summerLocation.$error.mongoose">
+            {{ errors.summerLocation }}
+          </span>          
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.rollNumber.$valid && submitted,
+                                            'has-error': form.rollNumber.$invalid && submitted }">
+          <label>Roll No.</label>
+
+          <input type="text" name="rollNumber" class="form-control" ng-model="user.rollNumber"
+                 ng-minlength="8"
+                 ng-maxlength="8"
+                 required
+                 mongoose-error/>
+          <span class="help-block">Enter your roll number</span>
+          <span class="help-block" 
+             ng-show="(form.rollNumber.$error.minlength || form.rollNumber.$error.maxlength || form.rollNumber.$error.required) && submitted">
+            Roll Number must be of 8 characters
+          </span>
+          <span class="help-block" ng-show="form.rollNumber.$error.mongoose">
+            {{ errors.rollNumber }}
+          </span>          
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.phoneNumber.$valid && submitted,
+                                            'has-error': form.phoneNumber.$invalid && submitted }">
+          <label>Phone Number</label>
+
+          <input type="text" name="phoneNumber" class="form-control" ng-model="user.phoneNumber"
+                 ng-pattern="/^\d{10}$/"
+                 required
+                 mongoose-error/>
+          <span class="help-block">Do not include 0 or +91 before your 10 digit number</span>
+          <span class="help-block" 
+             ng-show="(form.phoneNumber.$error.pattern || form.phoneNumber.$error.required) && submitted">
+            Phone Number must be of 10 digits
+          </span>
+          <span class="help-block" ng-show="form.phoneNumber.$error.mongoose">
+            {{ errors.phoneNumber }}
+          </span>          
+        </div>
+
+        <div>
+          <button class="btn btn-primary btn-lg btn-login" type="submit">
+            Sign up
+          </button>
+          <a href="/login">
+            Already have an account ?
+          </a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+<div class="jumbotron col-sm-4">
+  <div class="container-fluid">
+      <div id="fb-root">
+      <div class="fb-page" data-href="https://www.facebook.com/Shaastra" data-width="500" data-height="250" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/Shaastra"><a href="https://www.facebook.com/Shaastra">Shaastra | IIT Madras</a></blockquote></div></div>
+    </div>
+  </div>
+</div>
