@@ -16,7 +16,6 @@ angular.module('erp2015App')
         .then( function() {
           // Logged in, redirect to home
           // $location.path('/coordPortal/dashboard');
-          $state.go('coordPortalEditProfile');
         })
         .catch( function(err) {
           $scope.errors.other = err.message;

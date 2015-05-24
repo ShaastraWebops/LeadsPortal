@@ -14,7 +14,7 @@ angular.module('erp2015App')
   				return response.data;
   			});
   		},
-  		updateDeal: function () {
+  		editDeal: function () {
   			// return $http.post('/api/deals').then(function (response) {
   			// 	return response.data;
   			// });
@@ -24,7 +24,7 @@ angular.module('erp2015App')
   			// 	return response.data;
   			// });
   		},
-  		updateUpdate: function () {
+  		editUpdate: function () {
   			// return $http.put('/api/updates').then(function (response) {
   			// 	return response.data;
   			// });

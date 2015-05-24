@@ -287,7 +287,7 @@ exports.resetPassword = function(req, res) {
   console.log(req.body);
   User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function (err, user) {
     if(err) { return handleError(res, err); }
-    if(!user) { console.log('sdad'); return res.sendStatus(404); }
+    if(!user) { return res.sendStatus(404); }
     user.password = req.body.newPassword;
     user.token = '';
     user.updatedOn = Date.now();
