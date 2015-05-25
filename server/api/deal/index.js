@@ -10,7 +10,8 @@ router.get('/', auth.hasRole('coord'), controller.index);
 router.get('/:id', auth.hasRole('coord'), controller.show);
 router.get('/myDeals', auth.hasRole('coord'), controller.myDeals);
 
-router.post('/', auth.hasRole('coord'), controller.create);
+
+router.post('/', auth.hasRole('core'), controller.create);
 
 router.put('/:id', auth.hasRole('coord'), controller.update);
 router.patch('/:id', auth.hasRole('coord'), controller.update);

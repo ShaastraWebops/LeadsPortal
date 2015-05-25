@@ -36,7 +36,6 @@ exports.create = function(req, res) {
     return res.json(201, deal);
   });
 };
-
 // Updates an existing deal in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }

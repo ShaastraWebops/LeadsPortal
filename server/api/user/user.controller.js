@@ -329,3 +329,13 @@ exports.resetPassword = function(req, res) {
 exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
+
+exports.filter=function(req,res,next){
+var query=req.body;
+var filter=query.filter;
+delete query.filter;
+User.find(query,filter,function(err,result){
+  if(err){return handleError(res,err);}
+    return res.json(result);
+});
+};
