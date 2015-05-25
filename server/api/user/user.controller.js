@@ -26,7 +26,7 @@ function handleError(res, err) {
  * Get list of users
  * restriction: 'admin'
  */
-exports.index = function (req, res) {
+ exports.index = function (req, res) {
   User.find({}, '-salt -hashedPassword -lastSeen', function (err, users) {
     if(err) return res.json(500, err);
     res.status(200).json(users);
@@ -37,7 +37,7 @@ exports.index = function (req, res) {
 /**
  * Creates a new user
  */
-exports.create = function (req, res, next) {
+ exports.create = function (req, res, next) {
   console.log('asdasdasdasd');
   console.log(req.body);
   var newUser = new User(req.body);
@@ -55,7 +55,7 @@ exports.create = function (req, res, next) {
 /**
  * Get a single user
  */
-exports.show = function (req, res, next) {
+ exports.show = function (req, res, next) {
   var userId = req.params.id;
 
   User.findById(userId, function (err, user) {
@@ -69,7 +69,7 @@ exports.show = function (req, res, next) {
  * Deletes a user
  * restriction: 'admin'
  */
-exports.destroy = function (req, res) {
+ exports.destroy = function (req, res) {
   User.findByIdAndRemove(req.params.id, function(err, user) {
     if(err) return res.status(500).json(err);
     return res.sendStatus(204);
@@ -79,7 +79,7 @@ exports.destroy = function (req, res) {
 /**
  * Change a users password
  */
-exports.changePassword = function (req, res, next) {
+ exports.changePassword = function (req, res, next) {
   var userId = req.user._id;
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
@@ -103,7 +103,7 @@ exports.changePassword = function (req, res, next) {
 /**
  * Updates a users profile details
  */
-exports.updateProfile = function (req, res, next) {
+ exports.updateProfile = function (req, res, next) {
   var userId = req.user._id;
   var userUpdate = req.body.userUpdate;
 
@@ -128,15 +128,15 @@ exports.updateProfile = function (req, res, next) {
 /**
  * Get my info
  */
-exports.me = function (req, res, next) {
+ exports.me = function (req, res, next) {
   var userId = req.user._id;
   User.findOne({
     _id: userId
   }, '-salt -hashedPassword', function (err, user) { // don't ever give out the password or salt
-    if (err) return next(err);
-    if (!user) return res.sendStatus(401);
-    res.json(user);
-  });
+  if (err) return next(err);
+  if (!user) return res.sendStatus(401);
+  res.json(user);
+});
 };
 
 /**
@@ -148,7 +148,7 @@ exports.me = function (req, res, next) {
  *                     Using that we see if user already exists in department
  *                     or if Department already exists in the user
  */
-exports.addDepartment = function (req, res, next) {
+ exports.addDepartment = function (req, res, next) {
   User.findById(req.body.user, function (err, user) {
     Department.findById(req.body.department, function (err, department) {
       if(err) { 
@@ -185,7 +185,7 @@ exports.addDepartment = function (req, res, next) {
  *                   Using that we see if user already exists in subDepartment
  *                   or if SubDepartment already exists in the user
  */
-exports.addSubDepartment = function(req, res, next) {
+ exports.addSubDepartment = function(req, res, next) {
   User.findById(req.body.user, function (err, user) {
     SubDepartment.findById(req.body.subDepartment, function (err, subDepartment) {
       if(err) { 
@@ -220,7 +220,7 @@ exports.addSubDepartment = function(req, res, next) {
  * @param  {[type]} res [description]
  * @return {[type]}     [description]
  */
-exports.sendResetMail = function(req, res, next) {
+ exports.sendResetMail = function(req, res, next) {
   async.waterfall([
     function (done) {
       crypto.randomBytes(25, function (err, buf) {
@@ -254,9 +254,9 @@ exports.sendResetMail = function(req, res, next) {
         from: EMAIL,
         subject: 'Account Password Reset',
         text: 'You are receiving this because you have requested the reset of the password for your account.\n\n' +
-          'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-          'http://' + req.headers.host + '/resetPassword/' + token + '\n\n' +
-          'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+        'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+        'http://' + req.headers.host + '/resetPassword/' + token + '\n\n' +
+        'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       };
       smtpTransport.sendMail(mailOptions, function (err, info) {
         if(err) {
@@ -269,10 +269,10 @@ exports.sendResetMail = function(req, res, next) {
         }
       });      
     }
-  ], function (err) {
-    if(err) { return next(err); }
-    res.redirect('/forgotPassword');
-  });
+    ], function (err) {
+      if(err) { return next(err); }
+      res.redirect('/forgotPassword');
+    });
 };
 
 /**
@@ -282,7 +282,7 @@ exports.sendResetMail = function(req, res, next) {
  * @param  {[type]} res [description]
  * @return {[type]}     [description]
  */
-exports.resetPassword = function(req, res) {
+ exports.resetPassword = function(req, res) {
   console.log(req.params);
   console.log(req.body);
   User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function (err, user) {
@@ -306,7 +306,7 @@ exports.resetPassword = function(req, res) {
         from: EMAIL,
         subject: 'Your password has been changed',
         text: 'Hello,\n\n' +
-          'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+        'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
       };
       smtpTransport.sendMail(mailOptions, function (err, info) {
         if(err) {
@@ -326,16 +326,28 @@ exports.resetPassword = function(req, res) {
  * 
  * Authentication callback
  */
-exports.authCallback = function(req, res, next) {
+ exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
-
+/*
+filters for getting required data 
+MIGHT BE USEFUL LATER
+*/
 exports.filter=function(req,res,next){
-var query=req.body;
-var filter=query.filter;
-delete query.filter;
-User.find(query,filter,function(err,result){
-  if(err){return handleError(res,err);}
+  var query=req.body;
+  var filter=query.filter;
+  delete query.filter;
+  User.find(query,filter,function(err,result){
+    if(err){return handleError(res,err);}
     return res.json(result);
-});
+  });
 };
+
+exports.getCoords=function(req,res,next){
+  User.find({role:'coord'},'name _id',function(err,result){
+    if(err){return handleError(res,err);}
+    return res.json(result);
+  });
+};
+
+

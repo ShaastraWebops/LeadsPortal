@@ -22,4 +22,32 @@ var DealSchema = new Schema({
   }
 });
 
+// Validate empty name
+DealSchema
+  .path('title')
+  .validate(function(title) {
+    return name.length;
+  }, 'Name cannot be blank');
+
+// Need a Gen info
+DealSchema
+  .path('info')
+  .validate(function(info) {
+    return info.length;
+  }, 'info cannot be blank');
+
+//CompanyName
+DealSchema
+  .path('companyName')
+  .validate(function(cName) {
+    return cName.length;
+  }, 'Companyname cannot be blank');  
+
+//Assignees
+DealSchema
+  .path('assignees')
+  .validate(function(assign) {
+    return assign.length;
+  }, 'Should be assigned to someone');
+
 module.exports = mongoose.model('Deal', DealSchema);
