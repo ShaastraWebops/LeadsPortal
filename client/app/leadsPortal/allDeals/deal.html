@@ -1,48 +1,212 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div>
-  <h1>Welcome to Leads portal</h1>
-<div id="companyCard">					
-	<div class="panel panel-default">
-		<div class="panel-heading clearfix">
-			<h3 class="panel-title pull-left">{{deal.title}}</h3>
+	<h1>Welcome to Leads portal</h1>
+	<div id="companyCard">					
+		<div class="panel panel-default">
+			<div class="panel-heading clearfix">
+				<h3 class="panel-title pull-left">{{deal.title}}</h3>
 				<div class="btn-group pull-right visible-xs">
-					<button class="btn btn-primary" data-toggle="modal" href="#myModal">
+					<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
 						<i class="fa fa-pencil"></i>
-							<span>Edit</span>
+						<span>Edit</span>
 					</button>
 				</div>
-					<button class="btn btn-primary pull-right hidden-xs" data-toggle="modal" href="#myModal">
-						<i class="fa fa-pencil"></i>
-							<span>Edit</span>
-					</button>
-		</div>
+				<button class="btn btn-primary pull-right hidden-xs" data-toggle="modal" data-target="#myModal">
+					<i class="fa fa-pencil"></i>
+					<span>Edit</span>
+				</button>
+			</div>
+			<div class="list-group">
+				<div class="list-group-item">
+					<label class="control-label col-sm-2">Info</label>
+					{{deal.info}}
+				</div>
+				<div class="list-group-item">
+					<label class="control-label col-sm-2">Company Name</label>
+					{{deal.companyName}}
+				</div>
+				<div class="list-group-item">
+					<label class="control-label col-sm-2">POC Name</label>
+					{{deal.initialPointOfContactName}}
+				</div>
+				<div class="list-group-item">
+					<label class="control-label col-sm-2">POC Phone</label>
+					{{deal.initialPointOfContactNumber}}
+				</div>
+				<div class="list-group-item">
+					<label class="control-label col-sm-2">POC Email</label>
+					{{deal.initialPointOfContactEmail}}
+				</div>
+				<div class="list-group-item">
+					<label class="control-label col-sm-2">Assigned To</label>
+					{{deal.assignees}}
+				</div>
+				<div class="list-group-item">
+					<label class="control-label col-sm-2">Created On</label>
+					{{deal.createdOn}}
+				</div>
+				<div class="list-group-item">
+					<label class="control-label col-sm-2">Updated On</label>
+					{{deal.updatedOn}}
+				</div>
+				<div class="list-group-item">
 				<div class="list-group">
-					<div class="list-group-item">
-						<label class="control-label col-sm-2">Info</label>
-							{{deal.info}}
+				    <div class="list-group-item">
+					<label class="control-label col-sm-2">Updates</label>
+					<button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#updateModal">Add update</button><br>
 					</div>
+					<p ng-show="!(deal.updates.length)">No updates as off now</p>
+					<div ng-hide="!(deal.updates.length)" ng-repeat="update in deal.updates">
 					<div class="list-group-item">
-						<label class="control-label col-sm-2">Company Name</label>
-							{{deal.companyName}}
+
+                     <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal">Edit</button>
+                     </div>
+					</div><br>
+				</div>
+				</div>
+			</div>	
+		</div>				
+	</div>
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">{{deal.title}}</h4>
+				</div>
+				<div class="modal-body">
+					<div class="container">
+						<form class="form-horizontal" role="form">
+							<div class="form-group">
+								<label class="control-label col-sm-1" for="title">Title</label>
+								<div class="col-sm-5">
+									<input type="text" class="form-control" id="title" ng-model="deal.title"placeholder="Enter title">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-1" for="info">Info</label>
+								<div class="col-sm-5">          
+									<input type="text" class="form-control" id="info" ng-model="deal.info"placeholder="Enter Info">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-1" for="pocname">POC Name</label>
+								<div class="col-sm-5">          
+									<input type="text" class="form-control" id="pocname" ng-model="deal.initialPointOfContactName"placeholder="Enter Poc's name">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-1" for="pocphone">POC Phone</label>
+								<div class="col-sm-5">          
+									<input type="text" class="form-control" id="pocphone" ng-model="deal.initialPointOfContactNumber"placeholder="Enter Poc's Phone">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-1" for="pocemail">POC Email</label>
+								<div class="col-sm-5">          
+									<input type="email" class="form-control" id="pocemail" ng-model="deal.initialPointOfContactEmail"placeholder="Enter Poc' Email">
+								</div>
+							</div>
+							<div class="form-group" >
+								<label class="control-label col-sm-1" for="assign">Assignees</label>
+								<div class="col-sm-5"> 
+									<md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
+									<md-autocomplete
+									md-selected-item="selectedItem"
+									md-search-text="searchText"
+									md-items="item in coords"
+									md-item-text="item.name"
+									placeholder="Search for a guy">
+									<span md-highlight-text="searchText">{{item.name}}</span>
+								</md-autocomplete>
+								<md-chip-template>
+								<strong>{{$chip.name}}</strong>
+							</md-chip-template>
+						</md-chips>
 					</div>
-					<div class="list-group-item">
-						<label class="control-label col-sm-2">POC Name</label>
-							{{deal.initialPointOfContactName}}
-					</div>
-					<div class="list-group-item">
-						<label class="control-label col-sm-2">POC Phone</label>
-							{{deal.initialPointOfContactNumber}}
-					</div>
-					<div class="list-group-item">
-						<label class="control-label col-sm-2">POC Email</label>
-							{{deal.initialPointOfContactEmail}}
-					</div>
-					<div class="list-group-item">
-						<label class="control-label col-sm-2">Assigned To</label>
-							{{deal.assignees}}
-					</div>
-				</div>	
-			</div>				
+				</div>
+			</div>
 		</div>
-       
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-default">Edit</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>     
+		</div>				
+	</form>
+</div>
+
+</div>
+</div>
+	<div id="updateModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Add a Update</h4>
+				</div>
+				<div class="modal-body">
+					<div class="container">
+						<form class="form-horizontal" role="form">
+							<div class="form-group">
+								<label class="control-label col-sm-1" for="title">Title</label>
+								<div class="col-sm-5">
+									<input type="text" class="form-control" id="title" ng-model="update.title"placeholder="Enter title">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-1" for="summary">Summary</label>
+								<div class="col-sm-5">          
+									<input type="text" class="form-control" id="summary" ng-model="update.summary"placeholder="Enter Info">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-1" for="poc_name">POC Name</label>
+								<div class="col-sm-5">          
+									<input type="text" class="form-control" id="poc_name" ng-model="update.initialPointOfContactName"placeholder="Enter Info">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-1" for="poc_phone">POC Phone</label>
+								<div class="col-sm-5">          
+									<input type="text" class="form-control" id="poc_phone" ng-model="update.initialPointOfContactNumber"placeholder="Enter Info">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-1" for="poc_email">POC Email</label>
+								<div class="col-sm-5">          
+									<input type="email" class="form-control" id="poc_email" ng-model="upddate.initialPointOfContactEmail"placeholder="Enter Info">
+								</div>
+							</div>
+							<div class="form-group" >
+								<label class="control-label col-sm-1" for="assign">Assignees</label>
+								<div class="col-sm-5"> 
+									<md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
+									<md-autocomplete
+									md-selected-item="selectedItem"
+									md-search-text="searchText"
+									md-items="item in coords"
+									md-item-text="item.name"
+									placeholder="Search for a guy">
+									<span md-highlight-text="searchText">{{item.name}}</span>
+								</md-autocomplete>
+								<md-chip-template>
+								<strong>{{$chip.name}}</strong>
+							</md-chip-template>
+						</md-chips>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-default">Edit</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>     
+		</div>				
+	</form>
+</div>
+
+</div>
+</div>
 </div>

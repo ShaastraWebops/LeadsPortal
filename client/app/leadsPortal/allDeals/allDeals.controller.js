@@ -11,4 +11,5 @@ angular.module('erp2015App')
   				$scope.allDeals[i++].createdOn=item.createdOn.split('T')[0];
   			})
   		})
+
   });
