@@ -76,19 +76,20 @@ exports.destroy = function(req, res) {
 };
 // get the proper object for the mydeals page
 exports.allDealsPage=function(req,res){
-  var result=[];//var assigneesname;
+  var result=[];
  Deal.find(function (err, deals) {
     if(err) { return handleError(res, err); }
     else{
-      result= _.each(deals,function(deal){
-          var i=0;
+      _.each(deals,function(deal){
+        var assigneesname=[];
          _.each(deal.assignees,function(coord){
            User.findById(coord,function(err,user){
             if(err){return handleError(res,err);}
-            deal.assignees[i++]=user.name;
+            //deal.assignees[i++]=user.name;
+            assigneesname.push(user.name);
            })
          })
-         console.log(deal);
+         console.log(assigneesname);
       })
       }
     return res.json(200,result);

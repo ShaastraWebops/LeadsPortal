@@ -26,7 +26,7 @@ angular.module('erp2015App')
   			 });
   		},
   		createUpdate: function () {
-  			return $http.post('/api/updates').then(function (response) {
+  			return $http.post('/api/updates',data).then(function (response) {
   			 	return response.data;
   			});
   		},

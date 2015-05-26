@@ -53,9 +53,9 @@
 				<div class="list-group">
 				    <div class="list-group-item">
 					<label class="control-label col-sm-2">Updates</label>
+					<span ng-show="!(deal.updates.length)">No updates as off now</span>
 					<button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#updateModal">Add update</button><br>
 					</div>
-					<p ng-show="!(deal.updates.length)">No updates as off now</p>
 					<div ng-hide="!(deal.updates.length)" ng-repeat="update in deal.updates">
 					<div class="list-group-item">
 
@@ -179,25 +179,7 @@
 								<div class="col-sm-5">          
 									<input type="email" class="form-control" id="poc_email" ng-model="upddate.initialPointOfContactEmail"placeholder="Enter Info">
 								</div>
-							</div>
-							<div class="form-group" >
-								<label class="control-label col-sm-1" for="assign">Assignees</label>
-								<div class="col-sm-5"> 
-									<md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
-									<md-autocomplete
-									md-selected-item="selectedItem"
-									md-search-text="searchText"
-									md-items="item in coords"
-									md-item-text="item.name"
-									placeholder="Search for a guy">
-									<span md-highlight-text="searchText">{{item.name}}</span>
-								</md-autocomplete>
-								<md-chip-template>
-								<strong>{{$chip.name}}</strong>
-							</md-chip-template>
-						</md-chips>
-					</div>
-				</div>
+							</div>    
 			</div>
 		</div>
 		<div class="modal-footer">

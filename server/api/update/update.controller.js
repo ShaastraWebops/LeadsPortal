@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Update = require('./update.model');
+var Deal = require('../deal/deal.model');
 
 // Get list of updates
 exports.index = function(req, res) {
@@ -22,14 +23,25 @@ exports.show = function(req, res) {
 
 // Creates a new update in the DB.
 exports.create = function(req, res) {
+  req.body.createdOn=Date.now();
   Update.create(req.body, function(err, update) {
     if(err) { return handleError(res, err); }
-    return res.json(201, update);
+    else{
+     Deal.findById(req.body.deal,function(err,deal){
+       if(err) { return handleError(res, err); }
+       deal.updates.push(update.id);
+       deal.save(function (err){
+         if(err)  { return handleError(res, err); }
+       })
+     })
+     return res.json(201, update);
+    }
   });
 };
 
 // Updates an existing update in the DB.
 exports.update = function(req, res) {
+  req.body.updatedOn=Date.now();
   if(req.body._id) { delete req.body._id; }
   Update.findById(req.params.id, function (err, update) {
     if (err) { return handleError(res, err); }
