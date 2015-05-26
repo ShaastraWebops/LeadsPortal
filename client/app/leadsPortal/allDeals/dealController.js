@@ -1,17 +1,20 @@
 	'use strict';
 
-	angular.module('erp2015App')
-	.controller('dealController', function ($scope, Auth, LeadsPortalService,$stateParams,$http,$q,User) {
-		$scope.selectedCoords = [];
-		$scope.update={};
-		$scope.coordsIds=[];
+	angular.module('erp2015App').controller('dealController', function ($scope, Auth, LeadsPortalService, $stateParams, $http, $q) {
+	    $scope.selectedCoords = [];
+	    $scope.update = {};
+		$scope.coordsIds = [];
 		$http.get('/api/users/get/coords/')
 		.success(function (data) {
 			$scope.coords = data;
-			angular.forEach($scope.coords,function(item){
-				$scope.selectedCoords.push(item);
-			})
-		}).error(function (err){
+			console.log($scope.coords);
+			angular.forEach($scope.coords, function (item) {
+	           $scope.selectedCoords.push(item);
+	           console.log(item);
+			});
+			console.log($scope.selectedCoords);
+		})
+		.error(function (err) {
 			console.log(err);
 		});
 		$scope.deal={};
@@ -52,5 +55,4 @@
           });
       });
 		};
-
 	});

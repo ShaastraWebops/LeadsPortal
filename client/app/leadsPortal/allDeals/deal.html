@@ -43,11 +43,11 @@
 				</div>
 				<div class="list-group-item">
 					<label class="control-label col-sm-2">Created On</label>
-					{{deal.createdOn}}
+					{{deal.createdOn | date: 'medium'}}
 				</div>
 				<div class="list-group-item">
 					<label class="control-label col-sm-2">Updated On</label>
-					{{deal.updatedOn}}
+					{{deal.updatedOn | date: 'medium'}}
 				</div>
 				<div class="list-group-item">
 				<div class="list-group">

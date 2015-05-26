@@ -18,6 +18,6 @@ router.post('/addSubDepartment', auth.hasRole('core'), controller.addSubDepartme
 router.post('/forgotPassword', controller.sendResetMail);
 router.post('/resetPassword/:token', controller.resetPassword);
 router.post('/', controller.create);
-router.get('/get/coords/',auth.hasRole('core'),controller.getCoords);
+router.get('/get/coords/',auth.hasRole('core'), controller.getCoords);
 
 module.exports = router;

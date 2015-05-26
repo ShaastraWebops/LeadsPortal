@@ -18,7 +18,7 @@ angular.module('erp2015App')
   			console.log(message);
   		})
   		.error(function (err) {
-  			// od error handling here
+  			// do error handling here
   			console.log(err);
   		});
 
@@ -27,7 +27,7 @@ angular.module('erp2015App')
   			console.log(message);
   		})
   		.error(function (err) {
-  			// od error handling here
+  			// do error handling here
   			console.log(err);
   		});
 
@@ -36,7 +36,7 @@ angular.module('erp2015App')
   			console.log(message);
   		})
   		.error(function (err) {
-  			// od error handling here
+  			// do error handling here
   			console.log(err);
   		});
   });
