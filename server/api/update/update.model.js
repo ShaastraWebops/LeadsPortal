@@ -12,7 +12,9 @@ var UpdateSchema = new Schema({
   title: String,
   summary: String,
   createdOn: Date,
-  updatedOn: Date  
+  updatedOn: Date,
+  createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
+  lastEditedBy: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 module.exports = mongoose.model('Update', UpdateSchema);

@@ -16,6 +16,8 @@ var DealSchema = new Schema({
   result: Boolean, // success => 1, failure => 0
   createdOn: Date,
   updatedOn: Date,
+  createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
+  lastEditedBy: { type: Schema.Types.ObjectId, ref: 'User' },
   nextActiviy: {
   	aim: String,
   	date: Date
@@ -25,28 +27,28 @@ var DealSchema = new Schema({
 // Validate empty name
 DealSchema
   .path('title')
-  .validate(function(title) {
+  .validate(function (title) {
     return title.length;
   }, 'Name cannot be blank');
 
 // Need a Gen info
 DealSchema
   .path('info')
-  .validate(function(info) {
+  .validate(function (info) {
     return info.length;
   }, 'info cannot be blank');
 
 //CompanyName
 DealSchema
   .path('companyName')
-  .validate(function(cName) {
+  .validate(function (cName) {
     return cName.length;
   }, 'Companyname cannot be blank');  
 
 //Assignees
 DealSchema
   .path('assignees')
-  .validate(function(assign) {
+  .validate(function (assign) {
     return assign.length;
   }, 'Should be assigned to someone');
 

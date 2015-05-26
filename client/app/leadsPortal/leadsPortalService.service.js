@@ -25,8 +25,8 @@ angular.module('erp2015App')
   				return response.data;
   			 });
   		},
-  		createUpdate: function () {
-  			return $http.post('/api/updates',data).then(function (response) {
+  		createUpdate: function (data) {
+  			return $http.post('/api/updates', data).then(function (response) {
   			 	return response.data;
   			});
   		},
@@ -35,12 +35,12 @@ angular.module('erp2015App')
   				return response.data;
   			 });
   		},
-      getAllDealsObj: function(){
+      getAllDealsObj: function () {
         return $http.get('/api/deals/allDealsPage').then(function (response) {
           return response.data;
         })
       },
-      getDeal: function(dealId){
+      getDeal: function (dealId) {
         return $http.get('api/deals/' + dealId).then(function (response) {
           return response.data;
         });

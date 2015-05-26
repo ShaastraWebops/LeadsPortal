@@ -23,7 +23,9 @@ exports.show = function(req, res) {
 
 // Creates a new update in the DB.
 exports.create = function(req, res) {
-  req.body.createdOn=Date.now();
+  console.log(req.body);
+  req.body.createdBy = req.user._id;
+  req.body.createdOn = Date.now();
   Update.create(req.body, function(err, update) {
     if(err) { return handleError(res, err); }
     else{
