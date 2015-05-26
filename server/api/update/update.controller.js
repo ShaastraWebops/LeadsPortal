@@ -30,7 +30,7 @@ exports.create = function (req, res) {
   req.body.updatedOn = Date.now();
   // need to check for the permissions here
   // check if the current logged in user is assigned to tha deal or not. 
-  Update.create(req.body, function (err, update) {
+/*  Update.create(req.body, function (err, update) {
     if(err) { return handleError(res, err); }
     Deal.findById(req.body.deal, function (err, deal) {
       if(err) { return handleError(res, err); }
@@ -40,12 +40,29 @@ exports.create = function (req, res) {
       })
     })
     return res.json(201, update);
-  });
+  });*/
+  Deal.findById(req.body.deal,function(err,deal){
+    if(err){return handleError(res,err);}
+    if(deal.assignees.indexOf(req.user._id)!=-1 || req.user.role=='core')
+    {
+      Update.create(req.body,function(err,update){
+        if(err){return handleError(res,err);}
+        deal.updates.push(update._id);
+        deal.save(function(err,dealfin){
+         if(err){ return handleError(res,err);}
+         return res.json(201,dealfin);
+        })   
+      })
+    }
+    else
+      return res.sendStatus(403);
+  })
 };
 
 // Updates an existing update in the DB.
 exports.update = function (req, res) {
   req.body.updatedOn=Date.now();
+  req.body.lastEditedBy = req.user._id;
   if(req.body._id) { delete req.body._id; }
   Update.findById(req.params.id, function (err, update) {
     if (err) { return handleError(res, err); }

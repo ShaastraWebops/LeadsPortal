@@ -22,7 +22,7 @@ angular.module('erp2015App')
         authenticate: true
       }).state('deal',{
         url:'/deal/:id',
-        templateUrl:'app/leadsPortal/allDeals/deal.html',
+        templateUrl:'app/leadsPortal/deal/deal.html',
         controller:'dealController',
         authenticate:true
       });

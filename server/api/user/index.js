@@ -9,7 +9,7 @@ var router = express.Router();
 
 router.get('/', auth.hasRole('admin'), controller.index);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);
-router.get('/getCoords', auth.hasRole('core'), controller.getCoords);
+router.get('/get/coords', auth.hasRole('core'), controller.getCoords);
 router.get('/me', auth.isAuthenticated(), controller.me);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.put('/:id/updateProfile', auth.isAuthenticated(), controller.updateProfile);

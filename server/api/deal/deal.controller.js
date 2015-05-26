@@ -55,7 +55,8 @@ exports.create = function(req, res) {
 };
 // Updates an existing deal in the DB.
 exports.update = function(req, res) {
-  req.body.updatedOn=Date.now();
+  req.body.updatedOn = Date.now();
+  req.body.lastEditedBy = req.user._id;
   if(req.body._id) { delete req.body._id; }
   Deal.findById(req.params.id, function (err, deal) {
     if (err) { return handleError(res, err); }

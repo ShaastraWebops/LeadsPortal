@@ -8,5 +8,5 @@ module.exports = {
     uri: 'mongodb://localhost/erp2015-dev'
   },
 
-  seedDB: true
+  seedDB: false
 };

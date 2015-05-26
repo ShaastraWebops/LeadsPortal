@@ -4,18 +4,14 @@ angular.module('erp2015App').controller('dealController', function ($scope, Auth
     $scope.selectedCoords = [];
     $scope.update = {};
 	$scope.coordsIds = [];
-	$http.get('/api/users/getCoords')
-		.success(function (data) {
+	LeadsPortalService.getCoords()
+		.then(function (data) {
 			$scope.coords = data;
 			console.log($scope.coords);
 			$scope.selectedCoords = $scope.coords;
-			// angular.forEach($scope.coords, function (item) {
-	        // 		$scope.selectedCoords.push(item);
-	        //      console.log(item);
-			// });
 			console.log($scope.selectedCoords);
 		})
-		.error(function (err) {
+		.catch(function (err) {
 			// do some error handling here
 			console.log(err);
 		});
@@ -30,6 +26,7 @@ angular.module('erp2015App').controller('dealController', function ($scope, Auth
 			// do some error handling here
 			console.log(err);
 		});
+	});
 
 	// $scope.newUpdate = function (form) {
 	// 	$scope.submitted = true;
@@ -59,4 +56,4 @@ angular.module('erp2015App').controller('dealController', function ($scope, Auth
 	//         });
  //        });
 	// };
-});
+//});
