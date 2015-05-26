@@ -20,5 +20,10 @@ angular.module('erp2015App')
         templateUrl: 'app/leadsPortal/allDeals/allDeals.html',
         controller: 'AllDealsCtrl',
         authenticate: true
+      }).state('deal',{
+        url:'/deal/:id',
+        templateUrl:'app/leadsPortal/allDeals/deal.html',
+        controller:'dealController',
+        authenticate:true
       });
   });

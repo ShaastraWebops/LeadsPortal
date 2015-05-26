@@ -9,6 +9,7 @@ var router = express.Router();
 router.get('/', auth.hasRole('coord'), controller.index);
 router.get('/:id', auth.hasRole('coord'), controller.show);
 router.get('/myDeals', auth.hasRole('coord'), controller.myDeals);
+router.get('/all/DealsPage',controller.allDealsPage);
 
 
 router.post('/', auth.hasRole('core'), controller.create);

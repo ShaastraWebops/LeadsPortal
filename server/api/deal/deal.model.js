@@ -26,7 +26,7 @@ var DealSchema = new Schema({
 DealSchema
   .path('title')
   .validate(function(title) {
-    return name.length;
+    return title.length;
   }, 'Name cannot be blank');
 
 // Need a Gen info

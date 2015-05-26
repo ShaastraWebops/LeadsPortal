@@ -21,19 +21,29 @@ angular.module('erp2015App')
   			});
   		},
   		editDeal: function () {
-  			// return $http.post('/api/deals').then(function (response) {
-  			// 	return response.data;
-  			// });
+  			 return $http.post('/api/deals').then(function (response) {
+  				return response.data;
+  			 });
   		},
   		createUpdate: function () {
-  			// return $http.post('/api/updates').then(function (response) {
-  			// 	return response.data;
-  			// });
+  			return $http.post('/api/updates').then(function (response) {
+  			 	return response.data;
+  			});
   		},
   		editUpdate: function () {
-  			// return $http.put('/api/updates').then(function (response) {
-  			// 	return response.data;
-  			// });
-  		}
+  			 return $http.put('/api/updates').then(function (response) {
+  				return response.data;
+  			 });
+  		},
+      getAllDealsObj:function(){
+        return $http.get('/api/deals/allDealsPage').then(function(response){
+          return response.data;
+        })
+      },
+      getDeal:function(deal_id){
+        return $http.get('api/deals/'+deal_id).then(function(response){
+          return response.data;
+        })
+      }
   	};
   });

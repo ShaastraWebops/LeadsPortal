@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Deal = require('./deal.model');
+var User = require('../user/user.model');
 
 //Error handling
 var validationError = function (res, err) {
@@ -73,6 +74,27 @@ exports.destroy = function(req, res) {
     });
   });
 };
+// get the proper object for the mydeals page
+exports.allDealsPage=function(req,res){
+  var result=[];//var assigneesname;
+ Deal.find(function (err, deals) {
+    if(err) { return handleError(res, err); }
+    else{
+      result= _.each(deals,function(deal){
+          var i=0;
+         _.each(deal.assignees,function(coord){
+           User.findById(coord,function(err,user){
+            if(err){return handleError(res,err);}
+            deal.assignees[i++]=user.name;
+           })
+         })
+         console.log(deal);
+      })
+      }
+    return res.json(200,result);
+    
+  });
+}
 
 function handleError(res, err) {
   return res.send(500, err);

@@ -4,7 +4,7 @@
 <div id="companyCard">					
 	<div class="panel panel-default">
 		<div class="panel-heading clearfix">
-			<h3 class="panel-title pull-left">Title</h3>
+			<h3 class="panel-title pull-left">{{deal.title}}</h3>
 				<div class="btn-group pull-right visible-xs">
 					<button class="btn btn-primary" data-toggle="modal" href="#myModal">
 						<i class="fa fa-pencil"></i>
@@ -19,28 +19,27 @@
 				<div class="list-group">
 					<div class="list-group-item">
 						<label class="control-label col-sm-2">Info</label>
-							Gen Info
+							{{deal.info}}
 					</div>
 					<div class="list-group-item">
 						<label class="control-label col-sm-2">Company Name</label>
-							MRF
+							{{deal.companyName}}
 					</div>
 					<div class="list-group-item">
 						<label class="control-label col-sm-2">POC Name</label>
-							Raakesh
+							{{deal.initialPointOfContactName}}
 					</div>
 					<div class="list-group-item">
 						<label class="control-label col-sm-2">POC Phone</label>
-							0123456789
+							{{deal.initialPointOfContactNumber}}
 					</div>
 					<div class="list-group-item">
 						<label class="control-label col-sm-2">POC Email</label>
-							raakeshkamal@gmail.com
+							{{deal.initialPointOfContactEmail}}
 					</div>
 					<div class="list-group-item">
 						<label class="control-label col-sm-2">Assigned To</label>
-							Raakesh
-							Kamal
+							{{deal.assignees}}
 					</div>
 				</div>	
 			</div>				
