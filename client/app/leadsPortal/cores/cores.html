@@ -3,7 +3,7 @@
   <h1>Welcome to Leads portal</h1>
 <div class="container col-lg-9 col-lg-offset-1">
   <h2>Add a new deal</h2>
-  <form class="form-horizontal" role="form" name="form"ng-submit="newDeal(form)" novalidate>
+  <form class="form-horizontal" role="form" name="form" ng-submit="newDeal(form)" novalidate>
     <div class="form-group" ng-class="{ 'has-success': form.title.$valid && submitted,
                                             'has-error': form.title.$invalid && submitted }">
       <label class="control-label col-sm-2" for="title">Title</label>
@@ -67,8 +67,7 @@
         <input type="email" class="form-control" id="email" ng-model="deal.poc_email"placeholder="Email">
       </div>
     </div>
-    <div class="form-group" ng-class="{ 'has-success': form.assignees.$valid && submitted,
-                                            'has-error': form.assignees.$invalid && submitted }">
+    <div class="form-group" >
       <label class="control-label col-sm-2" for="assign">Assignees</label>
       <div class="col-sm-10"> 
           <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
@@ -85,12 +84,6 @@
 		    </md-chip-template>
 		  </md-chips>
       </div>
-       <span class="help-block" ng-show="form.assignees.$error.required && submitted">
-            Should be assigned to atleast one guy is required
-          </span>
-      <span class="help-block" ng-show="form.assignees.$error.mongoose">
-            {{ errors.assignees }}
-          </span>
     </div>
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">

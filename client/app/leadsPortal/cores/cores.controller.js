@@ -2,10 +2,10 @@
 
 angular.module('erp2015App')
 .controller('CoresCtrl', function ($scope, LeadsPortalService, $location, $http, $state,$q) {
-  $http.get('/api/users/get/coords/')
-  .success(function (data) {
+  LeadsPortalService.getCoords()
+  .then(function (data) {
     $scope.coords = data;
-  }).error(function (err){
+  },function (err){
      console.log(err);
   });
    $scope.selectedCoords = [];
@@ -16,6 +16,7 @@ angular.module('erp2015App')
     angular.forEach($scope.selectedCoords,function(item){
      $scope.coordsIds.push(item._id);
    })
+     if(form.$valid) {
     LeadsPortalService.createDeal({
      title:$scope.deal.title,
      info:$scope.deal.info,
@@ -38,6 +39,6 @@ angular.module('erp2015App')
             form[field].$setValidity('mongoose', false);
             $scope.errors[field] = error.message;
           });
-        });
+        });}
   };
 });

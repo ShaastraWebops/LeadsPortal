@@ -4,8 +4,8 @@
 	    $scope.selectedCoords = [];
 	    $scope.update = {};
 		$scope.coordsIds = [];
-		$http.get('/api/users/get/coords/')
-		.success(function (data) {
+		LeadsPortalService.getCoords()
+		.then(function (data) {
 			$scope.coords = data;
 			console.log($scope.coords);
 			angular.forEach($scope.coords, function (item) {
@@ -13,8 +13,7 @@
 	           console.log(item);
 			});
 			console.log($scope.selectedCoords);
-		})
-		.error(function (err) {
+		},function (err) {
 			console.log(err);
 		});
 		$scope.deal={};
@@ -39,7 +38,7 @@
 				pointOfContactEmail:$scope.update.poc_email,
 				assignees:$scope.coordsIds,
 				deal:$stateParams.id,
-				assignee:Auth.getCurrentUser()._id;
+				assignee:Auth.getCurrentUser()._id
 			})
 			.then( function(data) {
 				$state.go('deal');
