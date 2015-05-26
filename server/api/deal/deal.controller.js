@@ -44,7 +44,10 @@ exports.myDeals = function(req, res) {
 
 // Creates a new deal in the DB.
 exports.create = function(req, res) {
-  req.body.createdOn=Date.now();
+  req.body.createdOn = Date.now();
+  req.body.updatedOn = Date.now();
+  req.body.createdBy = req.user._id;
+  req.body.lastEditedBy = req.user._id;
   Deal.create(req.body, function(err, deal) {
      if (err) { console.log(err); return validationError(res, err); }
      return res.json(201, deal);

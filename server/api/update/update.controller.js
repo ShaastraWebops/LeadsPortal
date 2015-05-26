@@ -13,7 +13,7 @@ exports.index = function(req, res) {
 };
 
 // Get a single update
-exports.show = function(req, res) {
+exports.show = function (req, res) {
   Update.findById(req.params.id, function (err, update) {
     if(err) { return handleError(res, err); }
     if(!update) { return res.send(404); }
@@ -22,25 +22,29 @@ exports.show = function(req, res) {
 };
 
 // Creates a new update in the DB.
-exports.create = function(req, res) {
-  req.body.createdOn=Date.now();
-  Update.create(req.body, function(err, update) {
+exports.create = function (req, res) {
+  console.log(req.body);
+  req.body.createdBy = req.user._id;
+  req.body.lastEditedBy = req.user._id;
+  req.body.createdOn = Date.now();
+  req.body.updatedOn = Date.now();
+  // need to check for the permissions here
+  // check if the current logged in user is assigned to tha deal or not. 
+  Update.create(req.body, function (err, update) {
     if(err) { return handleError(res, err); }
-    else{
-     Deal.findById(req.body.deal,function(err,deal){
-       if(err) { return handleError(res, err); }
-       deal.updates.push(update.id);
-       deal.save(function (err){
-         if(err)  { return handleError(res, err); }
-       })
-     })
-     return res.json(201, update);
-    }
+    Deal.findById(req.body.deal, function (err, deal) {
+      if(err) { return handleError(res, err); }
+      deal.updates.push(update.id);
+      deal.save(function (err) {
+        if(err)  { return handleError(res, err); }
+      })
+    })
+    return res.json(201, update);
   });
 };
 
 // Updates an existing update in the DB.
-exports.update = function(req, res) {
+exports.update = function (req, res) {
   req.body.updatedOn=Date.now();
   if(req.body._id) { delete req.body._id; }
   Update.findById(req.params.id, function (err, update) {

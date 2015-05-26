@@ -18,19 +18,19 @@ angular.module('erp2015App')
    })
      if(form.$valid) {
     LeadsPortalService.createDeal({
-     title:$scope.deal.title,
-     info:$scope.deal.info,
-     companyName:$scope.deal.company,
-     initialPointOfContactName:$scope.deal.poc_name,
-     initialPointOfContactNumber:$scope.deal.poc_phone,
-     initialPointOfContactEmail:$scope.deal.poc_email,
-     assignees:$scope.coordsIds,
-     status:false
+      title: $scope.deal.title,
+      info: $scope.deal.info,
+      companyName: $scope.deal.company,
+      initialPointOfContactName: $scope.deal.poc_name,
+      initialPointOfContactNumber: $scope.deal.poc_phone,
+      initialPointOfContactEmail: $scope.deal.poc_email,
+      assignees: $scope.coordsIds,
+      status: false
    })
-    .then( function(data) {
+    .then(function (data) {
           $state.go('allDeals');
         })
-    .catch( function(err) {
+    .catch(function (err) {
           err = err.data;
           $scope.errors = {};
 

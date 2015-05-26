@@ -326,19 +326,19 @@ function handleError(res, err) {
  * 
  * Authentication callback
  */
- exports.authCallback = function(req, res, next) {
+ exports.authCallback = function (req, res, next) {
   res.redirect('/');
 };
 /*
 filters for getting required data 
 MIGHT BE USEFUL LATER
 */
-exports.filter=function(req,res,next){
-  var query=req.body;
-  var filter=query.filter;
+exports.filter = function (req, res, next) {
+  var query = req.body;
+  var filter = query.filter;
   delete query.filter;
-  User.find(query,filter,function(err,result){
-    if(err){return handleError(res,err);}
+  User.find(query, filter, function (err, result) {
+    if (err) { return handleError(res, err); }
     return res.json(result);
   });
 };

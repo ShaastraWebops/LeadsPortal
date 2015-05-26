@@ -53,7 +53,7 @@
 				<div class="list-group">
 				    <div class="list-group-item">
 					<label class="control-label col-sm-2">Updates</label>
-					<span ng-show="!(deal.updates.length)">No updates as off now</span>
+					<span ng-show="!(deal.updates.length)">No updates as of now</span>
 					<button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#updateModal">Add update</button><br>
 					</div>
 					<div ng-hide="!(deal.updates.length)" ng-repeat="update in deal.updates">
@@ -82,31 +82,31 @@
 							<div class="form-group">
 								<label class="control-label col-sm-1" for="title">Title</label>
 								<div class="col-sm-5">
-									<input type="text" class="form-control" id="title" ng-model="deal.title"placeholder="Enter title">
+									<input type="text" class="form-control" id="title" ng-model="deal.title" placeholder="Enter title">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-1" for="info">Info</label>
 								<div class="col-sm-5">          
-									<input type="text" class="form-control" id="info" ng-model="deal.info"placeholder="Enter Info">
+									<input type="text" class="form-control" id="info" ng-model="deal.info" placeholder="Enter Info">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-1" for="pocname">POC Name</label>
 								<div class="col-sm-5">          
-									<input type="text" class="form-control" id="pocname" ng-model="deal.initialPointOfContactName"placeholder="Enter Poc's name">
+									<input type="text" class="form-control" id="pocname" ng-model="deal.initialPointOfContactName" placeholder="Enter Poc's name">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-1" for="pocphone">POC Phone</label>
 								<div class="col-sm-5">          
-									<input type="text" class="form-control" id="pocphone" ng-model="deal.initialPointOfContactNumber"placeholder="Enter Poc's Phone">
+									<input type="text" class="form-control" id="pocphone" ng-model="deal.initialPointOfContactNumber" placeholder="Enter Poc's Phone">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-1" for="pocemail">POC Email</label>
 								<div class="col-sm-5">          
-									<input type="email" class="form-control" id="pocemail" ng-model="deal.initialPointOfContactEmail"placeholder="Enter Poc' Email">
+									<input type="email" class="form-control" id="pocemail" ng-model="deal.initialPointOfContactEmail" placeholder="Enter Poc's Email">
 								</div>
 							</div>
 							<div class="form-group" >
@@ -153,31 +153,32 @@
 							<div class="form-group">
 								<label class="control-label col-sm-1" for="title">Title</label>
 								<div class="col-sm-5">
-									<input type="text" class="form-control" id="title" ng-model="update.title"placeholder="Enter title">
+									<input type="text" class="form-control" id="title" ng-model="update.title" placeholder="Enter title">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-1" for="summary">Summary</label>
 								<div class="col-sm-5">          
-									<input type="text" class="form-control" id="summary" ng-model="update.summary"placeholder="Enter Info">
+									<textarea class="form-control" id="summary" ng-model="update.summary" placeholder="Enter Info">
+									</textarea>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-1" for="poc_name">POC Name</label>
 								<div class="col-sm-5">          
-									<input type="text" class="form-control" id="poc_name" ng-model="update.initialPointOfContactName"placeholder="Enter Info">
+									<input type="text" class="form-control" id="poc_name" ng-model="update.pointOfContactName" placeholder="Enter Name">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-1" for="poc_phone">POC Phone</label>
 								<div class="col-sm-5">          
-									<input type="text" class="form-control" id="poc_phone" ng-model="update.initialPointOfContactNumber"placeholder="Enter Info">
+									<input type="text" class="form-control" id="poc_phone" ng-model="update.pointOfContactNumber" placeholder="Enter Phone number">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-1" for="poc_email">POC Email</label>
 								<div class="col-sm-5">          
-									<input type="email" class="form-control" id="poc_email" ng-model="upddate.initialPointOfContactEmail"placeholder="Enter Info">
+									<input type="email" class="form-control" id="poc_email" ng-model="upddate.pointOfContactEmail" placeholder="Enter Email">
 								</div>
 							</div>    
 			</div>

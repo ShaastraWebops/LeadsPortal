@@ -1,11 +1,11 @@
 'use strict';
 
-	angular.module('erp2015App').controller('dealController', function ($scope, Auth, LeadsPortalService, $stateParams, $http, $q) {
-	    $scope.selectedCoords = [];
-	    $scope.update = {};
-		$scope.coordsIds = [];
-		LeadsPortalService.getCoords()
-		.then(function (data) {
+angular.module('erp2015App').controller('dealController', function ($scope, Auth, LeadsPortalService, $stateParams, $http, $q) {
+    $scope.selectedCoords = [];
+    $scope.update = {};
+	$scope.coordsIds = [];
+	$http.get('/api/users/getCoords')
+		.success(function (data) {
 			$scope.coords = data;
 			console.log($scope.coords);
 			$scope.selectedCoords = $scope.coords;
@@ -14,8 +14,9 @@
 	        //      console.log(item);
 			// });
 			console.log($scope.selectedCoords);
-		},function (err) {
 		})
+		.error(function (err) {
+			// do some error handling here
 			console.log(err);
 		});
 
@@ -25,28 +26,10 @@
 		.then(function (deal) {
 			$scope.deal = deal;
 		})
-		$scope.newDeal=function(form){
-			$scope.submitted = true;
-			angular.forEach($scope.selectedCoords,function(item){
-				$scope.coordsIds.push(item._id);
-			})
-			LeadsPortalService.createUpdate({
-				title:$scope.update.title,
-				summary:$scope.udpate.summary,
-				pointOfContactName:$scope.update.poc_name,
-				pointOfContactNumber:$scope.update.poc_phone,
-				pointOfContactEmail:$scope.update.poc_email,
-				assignees:$scope.coordsIds,
-				deal:$stateParams.id,
-				assignee:Auth.getCurrentUser()._id
-			})
-			.then( function(data) {
-				$state.go('deal');
-			})
-			.catch( function(err) {
-				err = err.data;
-				$scope.errors = {};
-			});
+		.catch(function (err) {
+			// do some error handling here
+			console.log(err);
+		});
 
 	// $scope.newUpdate = function (form) {
 	// 	$scope.submitted = true;
@@ -76,4 +59,4 @@
 	//         });
  //        });
 	// };
-//});
+});
