@@ -3,7 +3,7 @@
   <h1>Welcome to Leads portal</h1>
   <div class="list-group col-lg-8 col-lg-offset-2" ng-repeat="deal in allDeals">
    
-  <a class="list-group-item" href="deal/{{deal._id}}">
+  <a class="list-group-item" ui-sref="deal({id: deal._id})">
     <div class="row">
       <div class="col-sm-6">
         <i class="fa fa-3x fa-building-o pull-left"></i>
