@@ -1,17 +1,22 @@
 	'use strict';
 
 	angular.module('erp2015App')
-	.controller('dealController', function ($scope, Auth, LeadsPortalService,$stateParams,$http,$q) {
+	.controller('dealController', function ($scope, Auth, LeadsPortalService, $stateParams, $http, $q) {
 	    $scope.selectedCoords = [];
-	    $scope.update={};
-		$scope.coordsIds=[];
+	    $scope.update = {};
+		$scope.coordsIds = [];
 		$http.get('/api/users/get/coords/')
 		.success(function (data) {
 			$scope.coords = data;
-		angular.forEach($scope.coords,function(item){
-           $scope.selectedCoords.push(item);
+			console.log($scope.coords);
+			angular.forEach($scope.coords, function (item) {
+	           $scope.selectedCoords.push(item);
+	           console.log(item);
+			});
+			console.log($scope.selectedCoords);
 		})
-		}).error(function (err){
+		.error(function (err) {
+			// do some error handling here
 			console.log(err);
 		});
 		$scope.deal={};
@@ -19,8 +24,11 @@
 		LeadsPortalService.getDeal($stateParams.id)
 		.then(function (deal) {
 			$scope.deal = deal;
-			$scope.deal.createdOn=deal.createdOn.split('T')[0];
-			$scope.deal.updatedOn=deal.updatedOn.split('T')[0];
-		})
-
+		});
+		
+		Auth.isLoggedInAsync(function (user) {
+			console.log(user);
+		});
+		var user = Auth.getCurrentUser();
+		console.log(user);
 	});

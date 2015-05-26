@@ -343,9 +343,9 @@ exports.filter=function(req,res,next){
   });
 };
 
-exports.getCoords=function(req,res,next){
-  User.find({role:'coord'},'name _id',function(err,result){
-    if(err){return handleError(res,err);}
+exports.getCoords = function (req, res, next) {
+  User.find({ role:'coord' }, 'name _id', function (err, result) {
+    if (err) { return handleError(res, err); }
     return res.json(result);
   });
 };

@@ -35,15 +35,15 @@ angular.module('erp2015App')
   				return response.data;
   			 });
   		},
-      getAllDealsObj:function(){
-        return $http.get('/api/deals/allDealsPage').then(function(response){
+      getAllDealsObj: function(){
+        return $http.get('/api/deals/allDealsPage').then(function (response) {
           return response.data;
         })
       },
-      getDeal:function(deal_id){
-        return $http.get('api/deals/'+deal_id).then(function(response){
+      getDeal: function(dealId){
+        return $http.get('api/deals/' + dealId).then(function (response) {
           return response.data;
-        })
+        });
       }
   	};
   });

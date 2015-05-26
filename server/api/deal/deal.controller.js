@@ -19,7 +19,8 @@ exports.index = function(req, res) {
   Deal.find(function (err, deals) {
     if(err) { return handleError(res, err); }
     return res.json(200, deals);
-  });
+  })
+  .populate('assignees', '-salt -hashedPassword -lastSeen');
 };
 
 // Get a single deal
@@ -33,11 +34,12 @@ exports.show = function(req, res) {
 
 // Gets all deals assigned to a particular coordinator/core
 exports.myDeals = function(req, res) {
-  Deal.find({ assignees: req.user.id }, function (err, deals) {
+  Deal.find({ assignees: req.user._id }, function (err, deals) {
     if(err) { return handleError(res, err); }
     if(!deals) { return res.sendStatus(404); }
     return res.json(deals);
-  });
+  })
+  .populate('assignees', '-salt -hashedPassword -lastSeen');
 };
 
 // Creates a new deal in the DB.
@@ -74,6 +76,7 @@ exports.destroy = function(req, res) {
     });
   });
 };
+
 // get the proper object for the mydeals page
 exports.allDealsPage=function(req,res){
   var result=[];//var assigneesname;
