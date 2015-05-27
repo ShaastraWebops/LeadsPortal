@@ -1,7 +1,8 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var deepPopulate = require('mongoose-deep-populate');
+var Schema = mongoose.Schema;
 
 var DealSchema = new Schema({
   title: String,
@@ -23,6 +24,22 @@ var DealSchema = new Schema({
   	date: Date
   }
 });
+
+DealSchema.plugin(deepPopulate, {
+  whitelist: [
+    'updates.createdBy',
+    'updates.lastEditedBy'
+  ],
+  populate: {
+    'updates.createdBy': {
+      select: 'name rollNumber email phoneNumber'
+    },
+    'updates.lastEditedBy': {
+      select: 'name rollNumber email phoneNumber'
+    }
+  }
+});
+
 
 // Validate empty name
 DealSchema
