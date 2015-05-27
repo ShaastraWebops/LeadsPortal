@@ -46,7 +46,7 @@ angular.module('erp2015App')
         });
       },
       getCoords:function(){
-        return $http.get('/api/users/get/coords/').then(function(response){
+        return $http.get('/api/users/getCoords').then(function (response){
           return response.data;
         })
       }

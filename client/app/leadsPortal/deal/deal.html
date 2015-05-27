@@ -1,54 +1,77 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div>
 	<h1>Welcome to Leads portal</h1>
-	<div id="companyCard">					
-		<div class="panel panel-default">
-			<div class="panel-heading clearfix">
-				<h3 class="panel-title pull-left">{{deal.title}}</h3>
-				<div class="btn-group pull-right visible-xs">
-					<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-						<i class="fa fa-pencil"></i>
-						<span>Edit</span>
-					</button>
-				</div>
-				<button class="btn btn-primary pull-right hidden-xs" data-toggle="modal" data-target="#myModal">
-					<i class="fa fa-pencil"></i>
-					<span>Edit</span>
-				</button>
-			</div>
-			<div class="list-group">
-				<div class="list-group-item">
-					<label class="control-label col-sm-2">Info</label>
-					{{deal.info}}
-				</div>
-				<div class="list-group-item">
-					<label class="control-label col-sm-2">Company Name</label>
-					{{deal.companyName}}
-				</div>
-				<div class="list-group-item">
-					<label class="control-label col-sm-2">POC Name</label>
-					{{deal.initialPointOfContactName}}
-				</div>
-				<div class="list-group-item">
-					<label class="control-label col-sm-2">POC Phone</label>
-					{{deal.initialPointOfContactNumber}}
-				</div>
-				<div class="list-group-item">
-					<label class="control-label col-sm-2">POC Email</label>
-					{{deal.initialPointOfContactEmail}}
-				</div>
-				<div class="list-group-item">
-					<label class="control-label col-sm-2">Assigned To</label>
-					{{deal.assignees}}
-				</div>
-				<div class="list-group-item">
-					<label class="control-label col-sm-2">Created On</label>
-					{{deal.createdOn | date: 'medium'}}
-				</div>
-				<div class="list-group-item">
-					<label class="control-label col-sm-2">Updated On</label>
-					{{deal.updatedOn | date: 'medium'}}
-				</div>
+
+	<md-content>
+    	<md-card>
+	      	<div class="md-actions" layout="row" layout-align="end center">
+				<md-button class="md-primary" ng-click="modal()">Edit</md-button>
+	      	</div>
+      		<md-card-content>
+        		<h2 class="md-display-1"> Deal Details </h2>
+					<md-divider></md-divider>
+				    <md-list>
+					    <md-list-item class="md-3-line">
+					        <div class="md-list-item-text">
+						        <h3> Title </h3>
+						        <p>{{ deal.title }}</p>
+					        </div>
+					    </md-list-item>
+					    <md-list-item class="md-3-line">
+					        <div class="md-list-item-text">
+						        <h3> Info </h3>
+						        <p>{{ deal.info }}</p>
+					        </div>
+					    </md-list-item>
+					    <md-list-item class="md-3-line">
+					        <div class="md-list-item-text">
+						        <h3> Company Name </h3>
+						        <p>{{ deal.companyName }}</p>
+					        </div>
+					    </md-list-item>
+					    <md-list-item class="md-3-line">
+					        <div class="md-list-item-text">
+						        <h3> PoC's Name </h3>
+						        <p>{{ deal.initialPointOfContactName }}</p>
+					        </div>
+					    </md-list-item>
+					    <md-list-item class="md-3-line">
+					        <div class="md-list-item-text">
+						        <h3> PoC's Email Id </h3>
+						        <p>{{ deal.initialPointOfContactEmail }}</p>
+					        </div>
+					    </md-list-item>
+					    <md-list-item class="md-3-line">
+					        <div class="md-list-item-text">
+						        <h3> PoC's Phone Number </h3>
+						        <p>{{ deal.initialPointOfContactNumber }}</p>
+					        </div>
+					    </md-list-item>
+					    <md-list-item class="md-3-line">
+					        <div class="md-list-item-text">
+						        <h3> Assingned to </h3>
+						        <p>{{ deal.assignees }}</p>
+					        </div>
+					    </md-list-item>
+					    <md-list-item class="md-3-line">
+					        <div class="md-list-item-text">
+						        <h3> Created On </h3>
+						        <p>{{ deal.createdOn | date: 'medium' }}</p>
+					        </div>
+					    </md-list-item>
+					    <md-list-item class="md-3-line">
+					        <div class="md-list-item-text">
+						        <h3> Last Updated On </h3>
+						        <p>{{ deal.updatedOn | date: 'medium' }}</p>
+					        </div>
+					    </md-list-item>
+				    </md-list>
+      		</md-card-content>
+    	</md-card>
+    </md-content>
+
+
+
 				<div class="list-group-item">
 				<div class="list-group">
 				    <div class="list-group-item">
@@ -67,77 +90,30 @@
 			</div>	
 		</div>				
 	</div>
-	<div id="myModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
 
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">{{deal.title}}</h4>
-				</div>
-				<div class="modal-body">
-					<div class="container">
-						<form class="form-horizontal" name="form" role="form" ng-submit="updateDeal(form)">
-							<div class="form-group">
-								<label class="control-label col-sm-1" for="title">Title</label>
-								<div class="col-sm-5">
-									<input type="text" class="form-control" id="title" ng-model="deal.title" placeholder="Enter title">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-1" for="info">Info</label>
-								<div class="col-sm-5">          
-									<input type="text" class="form-control" id="info" ng-model="deal.info" placeholder="Enter Info">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-1" for="pocname">POC Name</label>
-								<div class="col-sm-5">          
-									<input type="text" class="form-control" id="pocname" ng-model="deal.initialPointOfContactName" placeholder="Enter Poc's name">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-1" for="pocphone">POC Phone</label>
-								<div class="col-sm-5">          
-									<input type="text" class="form-control" id="pocphone" ng-model="deal.initialPointOfContactNumber" placeholder="Enter Poc's Phone">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-1" for="pocemail">POC Email</label>
-								<div class="col-sm-5">          
-									<input type="email" class="form-control" id="pocemail" ng-model="deal.initialPointOfContactEmail" placeholder="Enter Poc's Email">
-								</div>
-							</div>
-							<div class="form-group" >
-								<label class="control-label col-sm-1" for="assign">Assignees</label>
-								<div class="col-sm-5"> 
-									<md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
-									<md-autocomplete
-									md-selected-item="selectedItem"
-									md-search-text="searchText"
-									md-items="item in coords"
-									md-item-text="item.name"
-									placeholder="Search for a guy">
-									<span md-highlight-text="searchText">{{item.name}}</span>
-								</md-autocomplete>
-								<md-chip-template>
-								<strong>{{$chip.name}}</strong>
-							</md-chip-template>
-						</md-chips>
+	<md-content>
+    	<md-card>
+      		<md-card-content>
+        		<h2 class="md-display-1"> Updates </h2>
+					<md-divider></md-divider>
+					<!-- <span ng-show="!(deal.updates.length)">No updates as of now</span> -->
+					<div ng-hide="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;">
+						<md-whiteframe class="md-whiteframe-z1" style="background:#fff; margin:20px; padding: 20px;" layout layout-align="left center">
+						    <span>No updates as of now</span>
+						</md-whiteframe>
 					</div>
-				</div>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button type="submit" class="btn btn-default">Edit</button>
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>     
-		</div>				
-	</form>
-</div>
+					<div ng-show="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;" ng-repeat="update in deal.updates">
+						<md-whiteframe class="md-whiteframe-z1" style="background:#fff; margin:20px; padding: 20px;" layout layout-align="left center">
+						    <span>{{update}}</span>
+						</md-whiteframe>
+					</div>
 
-</div>
-</div>
+			</md-card-content>
+		</md-card>
+	<md-content>
+
+
+
 	<div id="updateModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 

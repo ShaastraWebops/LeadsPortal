@@ -12,6 +12,7 @@ angular.module('erp2015App', [
   'permission',
   'ngFacebook',
   'ngMaterial',
+  'ngMdIcons'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

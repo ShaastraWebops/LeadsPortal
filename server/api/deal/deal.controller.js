@@ -20,7 +20,8 @@ exports.index = function(req, res) {
     if(err) { return handleError(res, err); }
     return res.json(200, deals);
   })
-  .populate('assignees', '-salt -hashedPassword -lastSeen');
+  .populate('assignees', '-salt -hashedPassword -lastSeen -provider')
+  .populate('updates');
 };
 
 // Get a single deal
@@ -29,7 +30,9 @@ exports.show = function(req, res) {
     if(err) { return handleError(res, err); }
     if(!deal) { return res.sendStatus(404); }
     return res.json(deal);
-  });
+  })
+  .populate('assignees', '-salt -hashedPassword -lastSeen -provider')
+  .populate('updates');
 };
 
 // Gets all deals assigned to a particular coordinator/core
@@ -39,7 +42,8 @@ exports.myDeals = function(req, res) {
     if(!deals) { return res.sendStatus(404); }
     return res.json(deals);
   })
-  .populate('assignees', '-salt -hashedPassword -lastSeen');
+  .populate('assignees', '-salt -hashedPassword -lastSeen -provider')
+  .populate('updates');
 };
 
 // Creates a new deal in the DB.

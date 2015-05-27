@@ -1,15 +1,16 @@
 'use strict';
 
-angular.module('erp2015App').controller('dealController', function ($scope, $state,Auth, LeadsPortalService, $stateParams, $http, $q) {
+angular.module('erp2015App')
+  .controller('dealController', function ($scope, $state, Auth, LeadsPortalService, $stateParams, $http, $q, $mdDialog) {
     $scope.selectedCoords = [];
     $scope.update = {};
 	$scope.coordsIds = [];
 	LeadsPortalService.getCoords()
 		.then(function (data) {
 			$scope.coords = data;
-			console.log($scope.coords);
-			$scope.selectedCoords = $scope.coords;
-			console.log($scope.selectedCoords);
+			// console.log($scope.coords);
+			// $scope.selectedCoords = $scope.coords;
+			// console.log($scope.selectedCoords);
 		})
 		.catch(function (err) {
 			// do some error handling here
@@ -55,4 +56,43 @@ angular.module('erp2015App').controller('dealController', function ($scope, $sta
 	         });*/
          });
     };
+
+    // $scope.modal = function () {
+    // 	console.log('came');
+    // 	dealEditModal($scope.deal).then(function() {
+    // 		console.log('yeahh');
+    // 	}, function() {
+    // 		console.log('loll');
+    // 	});
+    // };
+
+    $scope.modal = function () {
+    	$mdDialog.show({
+    		controller: DealEditModalCtrl,
+    		templateUrl: '/app/leadsPortal/deal/dealEditModal.tmpl.html',
+    		locals: {
+    			DealPassed: $scope.deal,
+    			CoordsPassed: $scope.coords
+    		}
+    	})
+    	.then(function (response) {
+    		console.log(response);
+    	}, function () {
+    		console.log('Cancelled');
+    	});
+    };
+    function DealEditModalCtrl($scope, $mdDialog, DealPassed, CoordsPassed) {
+    	$scope.editDeal = DealPassed;
+    	$scope.coords = CoordsPassed;
+    	$scope.selectedCoords = [];
+		$scope.cancel = function() {
+			$mdDialog.cancel();
+		};
+		$scope.save = function () {
+			// do the saving part here
+
+
+			$mdDialog.hide('Clicked Save');
+		};    	
+    }
 });
