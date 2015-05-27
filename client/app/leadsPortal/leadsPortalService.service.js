@@ -35,11 +35,6 @@ angular.module('erp2015App')
   				return response.data;
   			 });
   		},
-      getAllDealsObj: function () {
-        return $http.get('/api/deals/allDealsPage').then(function (response) {
-          return response.data;
-        })
-      },
       getDeal: function (dealId) {
         return $http.get('api/deals/' + dealId).then(function (response) {
           return response.data;

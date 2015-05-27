@@ -23,7 +23,8 @@
     "angular-material": "~0.9.4",
     "angular-tags": "~0.2.10",
     "angular-material-icons": "~0.4.0",
-    "svg-morpheus": "~0.1.8"
+    "svg-morpheus": "~0.1.8",
+    "angular-truncate": "*"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",
@@ -32,6 +33,7 @@
   "resolutions": {
     "angular-bootstrap": "~0.13.0",
     "angular-socket-io": "~0.7.0",
-    "bootstrap": "~3.3.4"
+    "bootstrap": "~3.3.4",
+    "angular": ">=1.2.*"
   }
 }

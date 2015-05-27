@@ -28,7 +28,7 @@
 					    	<ng-md-icon icon="description" style="fill:#00A2FF" size="32" class="md-avatar" alt="deal-summary-img"></ng-md-icon>
 					        <div class="md-list-item-text">
 						        <h3> Info </h3>
-						        <p>{{ deal.info }}haksdhadaslkdjsakjfhaskfjalksfhalsfjaslkdfhasdjkfhsajkflhsakfjhsdfjkhakfjhasjkdlhaskdfjhaslkfhaskjdfhsaldfkjhaslfkjhsdaflkjashdfkasjdhflasujhaskjfdkjfhasjkdfhasdkljfhsadfkjhsdfkjashdfkjsadhfklajsdfhsdkjfhsadlkjfhasdklfhsdflkjasdhfkajsdhfasdkfjhasdkfjhsdaflasdjfhasdkjfasdhf</p>
+						        <p>{{ deal.info }}</p>
 					        </div>
 					    </md-list-item>
 
@@ -115,7 +115,7 @@
     	<md-card>
       		<md-card-content style="word-break:break-all">
 		      	<div class="md-actions" layout="row" layout-align="end center">
-					<md-button class="md-raised md-accent" ng-click="updateCreateModal()">
+					<md-button class="md-raised md-primary" ng-click="updateCreateModal()">
 						Create Update
 					</md-button>
 		      	</div>
@@ -129,13 +129,13 @@
 					</div>
 					<div ng-show="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;" ng-repeat="update in deal.updates">
 				      	<div class="md-actions" layout="row" layout-align="end center">
-							<md-button class="md-raised md-primary" ng-click="updateModal(update)">
+							<md-button class="md-raised md-primary md-hue-3" ng-click="updateModal(update)">
 								Edit this Update
 							</md-button>
 				      	</div>						
-						<md-whiteframe class="md-whiteframe-z2" style="background:#fff; margin:20px; padding: 20px;" layout layout-align="left center">
+						<md-whiteframe class="md-whiteframe-z2" style="background:#fff; padding: 20px;" layout layout-align="left center">
 						    <!-- <span>{{ update.title }}</span> -->
-						    <md-list>
+						    <md-list style="width:100%;">
 							    <md-list-item class="md-3-line">
 							    	<ng-md-icon icon="subject" style="fill:#00517F" size="32" class="md-avatar" alt="update-title-img"></ng-md-icon>
 							        <div class="md-list-item-text">
@@ -150,7 +150,7 @@
 							    	<ng-md-icon icon="description" style="fill:#00A2FF" size="32" class="md-avatar" alt="update-summary-img"></ng-md-icon>
 							        <div class="md-list-item-text">
 								        <h3> Summary </h3>
-								        <p>{{ update.summary }}haksdhadaslkdjsakjfhaskfjalksfhalsfjaslkdfhasdjkfhsajkflhsakfjhsdfjkhakfjhasjkdlhaskdfjhaslkfhaskjdfhsaldfkjhaslfkjhsdaflkjashdfkasjdhflasujhaskjfdkjfhasjkdfhasdkljfhsadfkjhsdfkjashdfkjsadhfklajsdfhsdkjfhsadlkjfhasdklfhsdflkjasdhfkajsdhfasdkfjhasdkfjhsdaflasdjfhasdkjfasdhf</p>
+								        <p>{{ update.summary }}</p>
 							        </div>
 							    </md-list-item>
 
