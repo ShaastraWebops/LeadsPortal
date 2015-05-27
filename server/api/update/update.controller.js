@@ -23,40 +23,30 @@ exports.show = function (req, res) {
 
 // Creates a new update in the DB.
 exports.create = function (req, res) {
-  console.log(req.body);
   req.body.createdBy = req.user._id;
   req.body.lastEditedBy = req.user._id;
   req.body.createdOn = Date.now();
   req.body.updatedOn = Date.now();
-  // need to check for the permissions here
-  // check if the current logged in user is assigned to tha deal or not. 
-/*  Update.create(req.body, function (err, update) {
-    if(err) { return handleError(res, err); }
-    Deal.findById(req.body.deal, function (err, deal) {
-      if(err) { return handleError(res, err); }
-      deal.updates.push(update.id);
-      deal.save(function (err) {
-        if(err)  { return handleError(res, err); }
-      })
-    })
-    return res.json(201, update);
-  });*/
-  Deal.findById(req.body.deal,function(err,deal){
-    if(err){return handleError(res,err);}
-    if(deal.assignees.indexOf(req.user._id)!=-1 || req.user.role=='core')
-    {
-      Update.create(req.body,function(err,update){
-        if(err){return handleError(res,err);}
+
+  Deal.findById(req.body.deal, function (err, deal) {
+    if(err) { return handleError(res,err); }
+    if(deal.assignees.indexOf(req.user._id) != -1 || req.user.role === 'core' || req.user.role === 'admin') {
+      req.body.assignees = deal.assignees;
+    
+      console.log(req.body);
+    
+      Update.create(req.body, function (err, update) {
+        if(err) { return handleError(res,err); }
         deal.updates.push(update._id);
-        deal.save(function(err,dealfin){
-         if(err){ return handleError(res,err);}
-         return res.json(201,dealfin);
-        })   
-      })
+        deal.save(function (err, dealfin) {
+         if(err) { return handleError(res,err); }
+         return res.json(201, dealfin);
+        });
+      });
     }
     else
       return res.sendStatus(403);
-  })
+  });
 };
 
 // Updates an existing update in the DB.

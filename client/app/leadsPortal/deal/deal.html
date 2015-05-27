@@ -9,72 +9,94 @@
 					Edit Deal
 				</md-button>
 	      	</div>
-      		<md-card-content>
+      		<md-card-content style="word-break:break-all">
         		<h2 class="md-display-1"> Deal Details </h2>
 					<md-divider></md-divider>
 				    <md-list>
 					    <md-list-item class="md-3-line">
+					    	<ng-md-icon icon="subject" style="fill:#2196F3" class="md-avatar" alt="deal-title-img"></ng-md-icon>
 					        <div class="md-list-item-text">
 						        <h3> Title </h3>
 						        <p>{{ deal.title }}</p>
 					        </div>
 					    </md-list-item>
 					    <md-list-item class="md-3-line">
+					    	<ng-md-icon icon="description" style="fill:#689F38" class="md-avatar" alt="deal-summary-img"></ng-md-icon>
 					        <div class="md-list-item-text">
 						        <h3> Info </h3>
-						        <p>{{ deal.info }}</p>
+						        <p>{{ deal.info }}haksdhadaslkdjsakjfhaskfjalksfhalsfjaslkdfhasdjkfhsajkflhsakfjhsdfjkhakfjhasjkdlhaskdfjhaslkfhaskjdfhsaldfkjhaslfkjhsdaflkjashdfkasjdhflasujhaskjfdkjfhasjkdfhasdkljfhsadfkjhsdfkjashdfkjsadhfklajsdfhsdkjfhsadlkjfhasdklfhsdflkjasdhfkajsdhfasdkfjhasdkfjhsdaflasdjfhasdkjfasdhf</p>
 					        </div>
 					    </md-list-item>
-					    <md-list-item class="md-3-line">
-					        <div class="md-list-item-text">
-						        <h3> Company Name </h3>
-						        <p>{{ deal.companyName }}</p>
-					        </div>
-					    </md-list-item>
-					    <md-list-item class="md-3-line">
-					        <div class="md-list-item-text">
-						        <h3> PoC's Name </h3>
-						        <p>{{ deal.initialPointOfContactName }}</p>
-					        </div>
-					    </md-list-item>
-					    <md-list-item class="md-3-line">
-					        <div class="md-list-item-text">
-						        <h3> PoC's Email Id </h3>
-						        <p>{{ deal.initialPointOfContactEmail }}</p>
-					        </div>
-					    </md-list-item>
-					    <md-list-item class="md-3-line">
-					        <div class="md-list-item-text">
-						        <h3> PoC's Phone Number </h3>
-						        <p>{{ deal.initialPointOfContactNumber }}</p>
-					        </div>
-					    </md-list-item>
-					    <md-list-item class="md-3-line">
-					        <div class="md-list-item-text">
-						        <h3> Assingned to </h3>
-						        <p>{{ deal.assignees }}</p>
-					        </div>
-					    </md-list-item>
-					    <md-list-item class="md-3-line">
-					        <div class="md-list-item-text">
-						        <h3> Created On </h3>
-						        <p>{{ deal.createdOn | date: 'medium' }}</p>
-					        </div>
-					    </md-list-item>
-					    <md-list-item class="md-3-line">
-					        <div class="md-list-item-text">
-						        <h3> Last Updated On </h3>
-						        <p>{{ deal.updatedOn | date: 'medium' }}</p>
-					        </div>
-					    </md-list-item>
+					    <div layout="row">
+						    <md-list-item class="md-3-line">
+						    	<ng-md-icon icon="work" style="fill:#D500F9" class="md-avatar" alt="deal-company-img"></ng-md-icon>
+						        <div class="md-list-item-text">
+							        <h3> Company Name </h3>
+							        <p>{{ deal.companyName }}</p>
+						        </div>
+						    </md-list-item>
+						    <md-list-item class="md-3-line">
+						    	<ng-md-icon icon="account_box" style="fill:#795548" class="md-avatar" alt="deal-PoC-name-img"></ng-md-icon>
+						        <div class="md-list-item-text">
+							        <h3> PoC's Name </h3>
+							        <p>{{ deal.initialPointOfContactName }}</p>
+						        </div>
+						    </md-list-item>
+					    </div>
+					    <div layout="row">
+						    <md-list-item class="md-3-line">
+						    	<ng-md-icon icon="email" style="fill:#651FFF" class="md-avatar" alt="deal-PoC-email-img"></ng-md-icon>
+						        <div class="md-list-item-text">
+							        <h3> PoC's Email Id </h3>
+							        <p>{{ deal.initialPointOfContactEmail }}</p>
+						        </div>
+						    </md-list-item>
+						    <md-list-item class="md-3-line">
+						    	<ng-md-icon icon="phone" style="fill:#FF3D00" class="md-avatar" alt="deal-PoC-number-img"></ng-md-icon>
+						        <div class="md-list-item-text">
+							        <h3> PoC's Phone Number </h3>
+							        <p>{{ deal.initialPointOfContactNumber }}</p>
+						        </div>
+						    </md-list-item>
+					    </div>
+					    <div layout="row">
+						    <md-list-item class="md-3-line">
+						    	<ng-md-icon icon="schedule" style="fill:#00695C" class="md-avatar" alt="deal-created-date-img"></ng-md-icon>
+						        <div class="md-list-item-text">
+							        <h3> Created On </h3>
+							        <p>{{ deal.createdOn | date: 'medium' }}</p>
+						        </div>
+						    </md-list-item>
+						    <md-list-item class="md-3-line">
+						    	<ng-md-icon icon="schedule" style="fill:#00695C" class="md-avatar" alt="deal-last-updated-img"></ng-md-icon>
+						        <div class="md-list-item-text">
+							        <h3> Last Updated On </h3>
+							        <p>{{ deal.updatedOn | date: 'medium' }}</p>
+						        </div>
+						    </md-list-item>
+					    </div>
 				    </md-list>
+				    <md-list>
+			    		<h1 class="md-headline">Assigned to</h1>
+			    		<div layout="row">
+						    <md-list-item class="md-3-line" ng-repeat="person in deal.assignees">
+						    	<ng-md-icon icon="assignment_ind" style="fill:#00695C" size="48" class="md-avatar" alt="deal-assignee-img"></ng-md-icon>
+						        <div class="md-list-item-text">
+							        <h3>{{ person.name }}</h3>
+							        <p>{{ person.email }}</p>
+							        <p>{{ person.rollNumber }}</p>
+							        <p>{{ person.phoneNumber }}</p>
+						        </div>
+						    </md-list-item>
+			    		</div>
+					</md-list>
       		</md-card-content>
     	</md-card>
     </md-content>
 
 	<md-content>
     	<md-card>
-      		<md-card-content>
+      		<md-card-content style="word-break:break-all">
 		      	<div class="md-actions" layout="row" layout-align="end center">
 					<md-button class="md-raised md-accent" ng-click="updateCreateModal()">
 						Create Update
@@ -98,64 +120,8 @@
 						    <span>{{update}}</span>
 						</md-whiteframe>
 					</div>
-
 			</md-card-content>
 		</md-card>
 	<md-content>
 
-
-
-	<div id="updateModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Add a Update</h4>
-				</div>
-				<form class="form-horizontal" name="form" role="form" ng-submit="newUpdate(form)">
-				<div class="modal-body">
-					<div class="container">
-							<div class="form-group">
-								<label class="control-label col-sm-1" for="title">Title</label>
-								<div class="col-sm-5">
-									<input type="text" class="form-control" id="title" ng-model="update.title" placeholder="Enter title">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-1" for="summary">Summary</label>
-								<div class="col-sm-5">          
-									<textarea class="form-control" id="summary" ng-model="update.summary" placeholder="Enter Info">
-									</textarea>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-1" for="poc_name">POC Name</label>
-								<div class="col-sm-5">          
-									<input type="text" class="form-control" id="poc_name" ng-model="update.pointOfContactName" placeholder="Enter Name">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-1" for="poc_phone">POC Phone</label>
-								<div class="col-sm-5">          
-									<input type="number" class="form-control" id="poc_phone" ng-model="update.pointOfContactNumber" placeholder="Enter Phone number">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-1" for="poc_email">POC Email</label>
-								<div class="col-sm-5">          
-									<input type="email" class="form-control" id="poc_email" ng-model="update.pointOfContactEmail" placeholder="Enter Email">
-								</div>
-							</div>    
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button type="submit" class="btn btn-default">Add</button>
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>     
-		</div>
-		</form>
-</div>
-</div>
-</div>
 </div>

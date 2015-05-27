@@ -28,12 +28,11 @@ angular.module('erp2015App')
 			console.log(err);
 		});
 
-	 $scope.newUpdate = function (form) {
+	$scope.newUpdate = function (form) {
 	 	$scope.submitted = true;
 	 	angular.forEach($scope.selectedCoords, function (item) {
 	 		$scope.coordsIds.push(item._id);
 	 	});
-	 	console.log('there');
 	 	LeadsPortalService.createUpdate({
 	 		title: $scope.update.title,
 	 		summary: $scope.update.summary,
@@ -142,7 +141,7 @@ angular.module('erp2015App')
     		console.log('Cancel creating update');
     	});
     };
-    function UpdateCreateModalCtrl($scope, $mdDialog, DealPassed) {
+    function UpdateCreateModalCtrl($scope, $stateParams, $mdDialog, DealPassed) {
     	$scope.deal = DealPassed;
     	$scope.newUpdate = {};
 		$scope.cancel = function() {
@@ -150,8 +149,29 @@ angular.module('erp2015App')
 		};
 		$scope.save = function () {
 			// do the saving part here
-
-
+            $scope.submitted = true;
+            console.log('there');
+            LeadsPortalService.createUpdate({
+                title: $scope.newUpdate.title,
+                summary: $scope.newUpdate.summary,
+                pointOfContactName: $scope.newUpdate.pointOfContactName,
+                pointOfContactNumber: $scope.newUpdate.pointOfContactNumber,
+                pointOfContactEmail: $scope.newUpdate.pointOfContactEmail,
+                deal: $stateParams.id
+            })
+            .then(function (data) {
+                $state.go('deal');
+            })
+            .catch(function (err) {
+                err = err.data;
+                $scope.errors = {};
+                 // Update validity of form fields that match the mongoose errors
+    /*           angular.forEach(err.errors, function (error, field) {
+                    form[field].$setValidity('mongoose', false);
+                    $scope.errors[field] = error.message;
+                 });*/
+            });
+            
 			$mdDialog.hide('Save created update');
 		};    	
     }
