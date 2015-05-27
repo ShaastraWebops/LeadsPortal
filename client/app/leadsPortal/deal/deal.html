@@ -5,7 +5,9 @@
 	<md-content>
     	<md-card>
 	      	<div class="md-actions" layout="row" layout-align="end center">
-				<md-button class="md-primary" ng-click="modal()">Edit</md-button>
+				<md-button class="md-raised md-primary" ng-click="dealModal()">
+					Edit Deal
+				</md-button>
 	      	</div>
       		<md-card-content>
         		<h2 class="md-display-1"> Deal Details </h2>
@@ -70,30 +72,14 @@
     	</md-card>
     </md-content>
 
-
-
-				<div class="list-group-item">
-				<div class="list-group">
-				    <div class="list-group-item">
-					<label class="control-label col-sm-2">Updates</label>
-					<span ng-show="!(deal.updates.length)">No updates as of now</span>
-					<button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#updateModal">Add update</button><br>
-					</div>
-					<div ng-hide="!(deal.updates.length)" ng-repeat="update in deal.updates">
-					<div class="list-group-item">
-
-                     <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal">Edit</button>
-                     </div>
-					</div><br>
-				</div>
-				</div>
-			</div>	
-		</div>				
-	</div>
-
 	<md-content>
     	<md-card>
       		<md-card-content>
+		      	<div class="md-actions" layout="row" layout-align="end center">
+					<md-button class="md-raised md-accent" ng-click="updateCreateModal()">
+						Create Update
+					</md-button>
+		      	</div>
         		<h2 class="md-display-1"> Updates </h2>
 					<md-divider></md-divider>
 					<!-- <span ng-show="!(deal.updates.length)">No updates as of now</span> -->
@@ -103,6 +89,11 @@
 						</md-whiteframe>
 					</div>
 					<div ng-show="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;" ng-repeat="update in deal.updates">
+				      	<div class="md-actions" layout="row" layout-align="end center">
+							<md-button class="md-raised md-primary" ng-click="updateModal(update)">
+								Edit this Update
+							</md-button>
+				      	</div>						
 						<md-whiteframe class="md-whiteframe-z1" style="background:#fff; margin:20px; padding: 20px;" layout layout-align="left center">
 						    <span>{{update}}</span>
 						</md-whiteframe>

@@ -66,7 +66,8 @@ angular.module('erp2015App')
     // 	});
     // };
 
-    $scope.modal = function () {
+    // modal for editing the deal
+    $scope.dealModal = function () {
     	$mdDialog.show({
     		controller: DealEditModalCtrl,
     		templateUrl: '/app/leadsPortal/deal/dealEditModal.tmpl.html',
@@ -78,7 +79,7 @@ angular.module('erp2015App')
     	.then(function (response) {
     		console.log(response);
     	}, function () {
-    		console.log('Cancelled');
+    		console.log('Cancel editing deal');
     	});
     };
     function DealEditModalCtrl($scope, $mdDialog, DealPassed, CoordsPassed) {
@@ -92,7 +93,66 @@ angular.module('erp2015App')
 			// do the saving part here
 
 
-			$mdDialog.hide('Clicked Save');
+			$mdDialog.hide('Save edited deal');
+		};    	
+    }
+
+    // modal for editing the update 
+    $scope.updateModal = function (update) {
+    	$mdDialog.show({
+    		controller: UpdateEditModalCtrl,
+    		templateUrl: '/app/leadsPortal/deal/updateEditModal.tmpl.html',
+    		locals: {
+    			DealPassed: $scope.deal,
+    			UpdatePassed: update
+    		}
+    	})
+    	.then(function (response) {
+    		console.log(response);
+    	}, function () {
+    		console.log('Cancel editing update');
+    	});
+    };
+    function UpdateEditModalCtrl($scope, $mdDialog, DealPassed, UpdatePassed) {
+    	$scope.deal = DealPassed;
+    	$scope.editUpdate = UpdatePassed;
+		$scope.cancel = function() {
+			$mdDialog.cancel();
+		};
+		$scope.save = function () {
+			// do the saving part here
+
+
+			$mdDialog.hide('Save edited update');
+		};    	
+    }
+
+    // modal for creating an update 
+    $scope.updateCreateModal = function () {
+    	$mdDialog.show({
+    		controller: UpdateCreateModalCtrl,
+    		templateUrl: '/app/leadsPortal/deal/updateCreateModal.tmpl.html',
+    		locals: {
+    			DealPassed: $scope.deal,
+    		}
+    	})
+    	.then(function (response) {
+    		console.log(response);
+    	}, function () {
+    		console.log('Cancel creating update');
+    	});
+    };
+    function UpdateCreateModalCtrl($scope, $mdDialog, DealPassed) {
+    	$scope.deal = DealPassed;
+    	$scope.newUpdate = {};
+		$scope.cancel = function() {
+			$mdDialog.cancel();
+		};
+		$scope.save = function () {
+			// do the saving part here
+
+
+			$mdDialog.hide('Save created update');
 		};    	
     }
 });

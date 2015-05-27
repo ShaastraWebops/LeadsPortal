@@ -1,58 +1,40 @@
-<md-dialog aria-label="Edit Deal Details" style="width:80%">
+<md-dialog aria-label="Edit Update Details" style="width:80%">
   <form>
   <md-dialog-content>
     <div layout="column">
 
       <md-toolbar class="md-primary">
         <h1 class="md-toolbar-tools">
-          Edit Deal Details
+          Edit Update Details
         </h1>
       </md-toolbar>
 
       <md-content layout-padding class="autoScroll">
         <md-input-container>
-          <label>Deal Title</label>      
+          <label>Update Title</label>      
           <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
-          <input ng-model="editDeal.title" type="text">
+          <input ng-model="editUpdate.title" type="text">
         </md-input-container>
         <md-input-container>
-          <label>Deal Info</label>      
+          <label>Update Summary</label>      
           <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
-          <input ng-model="editDeal.info" type="text">
-        </md-input-container>
-        <md-input-container>
-          <label>Company Name</label>      
-          <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
-          <input ng-model="editDeal.companyName" type="text">
+          <input ng-model="editUpdate.summary" type="text">
         </md-input-container>
         <md-input-container>
           <label>PoC's Name</label>      
           <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
-          <input ng-model="editDeal.initialPointOfContactName" type="text">
+          <input ng-model="editUpdate.pointOfContactName" type="text">
         </md-input-container>
         <md-input-container>
           <label>PoC's Number</label>      
           <!-- <ng-md-icon icon="call" style="fill:#ff0000"></ng-md-icon> -->
-          <input ng-model="editDeal.initialPointOfContactNumber" type="text">
+          <input ng-model="editUpdate.pointOfContactNumber" type="text">
         </md-input-container>
         <md-input-container>
           <label>PoC's Email</label>      
           <!-- <ng-md-icon icon="email" style="fill:#a9f114"></ng-md-icon> -->
-          <input ng-model="editDeal.initialPointOfContactEmail" type="email">
+          <input ng-model="editUpdate.pointOfContactEmail" type="email">
         </md-input-container>
-        <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
-          <md-autocomplete
-              md-selected-item="selectedItem"
-              md-search-text="searchText"
-              md-items="item in coords"
-              md-item-text="item.name"
-              placeholder="Assign a Team Member">
-            <span md-highlight-text="searchText">{{item.name}}</span>
-          </md-autocomplete>
-          <md-chip-template>
-            <strong>{{$chip.name}}</strong>
-          </md-chip-template>
-        </md-chips>
       </md-content>
 
     </div>
