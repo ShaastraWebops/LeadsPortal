@@ -161,6 +161,10 @@ angular.module('erp2015App')
         return currentUser.role === 'admin';
       },
 
+      isCore: function() {
+        return (currentUser.role === 'core' || currentUser.role === 'admin');
+      },
+
       /**
        * Get auth token
        */

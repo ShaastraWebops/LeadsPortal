@@ -1,94 +1,92 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div>
-  <h1>Welcome to Leads portal</h1>
-<div class="container col-lg-9 col-lg-offset-1">
-  <h2>Create a new deal</h2>
-  <form class="form-horizontal" role="form" name="form" ng-submit="newDeal(form)" novalidate>
-    <div class="form-group" ng-class="{ 'has-success': form.title.$valid && submitted,
-                                            'has-error': form.title.$invalid && submitted }">
-      <label class="control-label col-sm-2" for="title">Title</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" name="title" ng-model="deal.title"id="title"placeholder="Title"
-                 required
-                 mongoose-error>
-      </div>
-       <span class="help-block" ng-show="form.title.$error.required && submitted">
-            A Title is required
-          </span>
-      <span class="help-block" ng-show="form.title.$error.mongoose">
-            {{ errors.title }}
-          </span>
-    </div>
-    <div class="form-group" ng-class="{ 'has-success': form.info.$valid && submitted,
-                                            'has-error': form.info.$invalid && submitted }">
-      <label class="control-label col-sm-2" for="info">Info</label>
-      <div class="col-sm-10">
-        <textarea class="form-control" name="info"ng-model="deal.info"id="info"rows="3"
-                 required
-                 mongoose-error></textarea>
-      </div>
-       <span class="help-block" ng-show="form.info.$error.required && submitted">
-            General info is required
-          </span>
-      <span class="help-block" ng-show="form.info.$error.mongoose">
-            {{ errors.info }}
-          </span>
-    </div>
-    <div class="form-group" ng-class="{ 'has-success': form.company.$valid && submitted,
-                                            'has-error': form.company.$invalid && submitted }">
-      <label class="control-label col-sm-2" for="company">Company Name</label>
-      <div class="col-sm-10"> 
-        <input type="text" name="company"class="form-control" ng-model="deal.company"id="company" placeholder="Company Name"
-                 required
-                 mongoose-error>
-      </div>
-       <span class="help-block" ng-show="form.company.$error.required && submitted">
-            Respective company name is required
-          </span>
-      <span class="help-block" ng-show="form.company.$error.mongoose">
-            {{ errors.companyName }}
-          </span>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="pocname">POC Name</label>
-      <div class="col-sm-10"> 
-        <input type="text" class="form-control" id="pocname" ng-model="deal.poc_name"placeholder="Poc Name">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="phone">POC Phone</label>
-      <div class="col-sm-10"> 
-        <input type="number" class="form-control" id="phone" ng-model="deal.poc_phone"placeholder="Phone">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="email">POC Email</label>
-      <div class="col-sm-10"> 
-        <input type="email" class="form-control" id="email" ng-model="deal.poc_email"placeholder="Email">
-      </div>
-    </div>
-    <div class="form-group" >
-      <label class="control-label col-sm-2" for="assign">Assignees</label>
-      <div class="col-sm-10"> 
-          <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
-         	<md-autocomplete
-		        md-selected-item="selectedItem"
-		        md-search-text="searchText"
-		        md-items="item in coords"
-		        md-item-text="item.name"
-		        placeholder="Search for a guy">
-		      <span md-highlight-text="searchText">{{item.name}}</span>
-		    </md-autocomplete>
-		    <md-chip-template>
-		      <strong>{{$chip.name}}</strong>
-		    </md-chip-template>
-		  </md-chips>
-      </div>
-    </div>
-    <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-10">
-        <md-button type="submit" class="md-raised md-accent">Create</md-button>
-      </div>
-    </div>
-  </form>
-</div> 	
+
+<div style="padding-left: 15%; padding-right: 15%">
+
+  <md-toolbar class="md-primary">
+    <h1 class="md-toolbar-tools">
+      Create a new Deal
+    </h1>
+  </md-toolbar>
+
+  <md-content layout-padding>
+    <form name="form" ng-submit="newDeal(form)" novalidate>
+
+      <md-input-container>
+        <label>Title</label>
+        <input name="title" ng-model="deal.title" ng-required="true" mongoose-error />
+        <div ng-messages="form.title.$error">
+          <div ng-message="required && submitted">This is required.</div>
+        </div>
+        <div ng-messages="form.title.$error">
+          <div ng-message="mongoose && submitted">{{ errors.title }}</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Deal Info</label>
+        <textarea required name="info" ng-model="deal.info" mongoose-error></textarea>
+        <div ng-messages="deal.info.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+        <div ng-messages="form.info.$error">
+          <div ng-message="mongoose && submitted">{{ errors.info }}</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Company Name</label>
+        <input required name="companyName" ng-model="deal.companyName" mongoose-error />
+        <div ng-messages="form.companyName.$error">
+          <div ng-message="required && submitted">This is required.</div>
+        </div>
+        <div ng-messages="form.companyName.$error">
+          <div ng-message="mongoose && submitted">{{ errors.companyName }}</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>PoC Name</label>
+        <input required name="initialPointOfContactName" ng-model="deal.initialPointOfContactName" mongoose-error />
+        <div ng-messages="form.initialPointOfContactName.$error">
+          <div ng-message="required && submitted">This is required.</div>
+        </div>
+        <div ng-messages="form.initialPointOfContactName.$error">
+          <div ng-message="mongoose && submitted">{{ errors.initialPointOfContactName }}</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>PoC Phone Number</label>
+        <input required name="initialPointOfContactNumber" ng-model="deal.initialPointOfContactNumber" mongoose-error />
+        <div ng-messages="form.initialPointOfContactNumber.$error">
+          <div ng-message="required && submitted">This is required.</div>
+        </div>
+        <div ng-messages="form.initialPointOfContactNumber.$error">
+          <div ng-message="mongoose && submitted">{{ errors.initialPointOfContactNumber }}</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>PoC Email</label>
+        <input required name="initialPointOfContactEmail" ng-model="deal.initialPointOfContactEmail" mongoose-error />
+        <div ng-messages="form.initialPointOfContactEmail.$error">
+          <div ng-message="required && submitted">This is required.</div>
+        </div>
+        <div ng-messages="form.initialPointOfContactEmail.$error">
+          <div ng-message="mongoose && submitted">{{ errors.initialPointOfContactEmail }}</div>
+        </div>
+      </md-input-container>
+        <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
+          <md-autocomplete
+            md-selected-item="selectedItem"
+            md-search-text="searchText"
+            md-items="item in coords"
+            md-item-text="item.name"
+            placeholder="Assign a team member">
+              <span md-highlight-text="searchText">{{item.name}}</span>
+          </md-autocomplete>
+          <md-chip-template>
+            <strong>{{$chip.name}}</strong>
+          </md-chip-template>
+        </md-chips>
+
+      <md-button type="submit" class="md-raised md-primary">Create</md-button>
+    </form>
+  </md-content>  
+
+</div>

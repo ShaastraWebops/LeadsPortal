@@ -1,7 +1,11 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div>
-	<h1>Welcome to Leads portal</h1>
 
+<div style="padding-left: 10%; padding-right: 10%;">
+	<md-toolbar class="md-primary">
+		<h1 class="md-toolbar-tools">
+			Deal - {{ deal.title }}
+		</h1>
+	</md-toolbar>
 	<md-content>
 	 <!-- style="background-image: url('/assets/images/leads-portal-background-one.png');" -->
     	<md-card>
@@ -75,16 +79,24 @@
 
 					    <div layout="row">
 						    <md-list-item class="md-3-line">
-						    	<ng-md-icon icon="schedule" style="fill:#1F5C7F" size="32" class="md-avatar" alt="deal-created-date-img"></ng-md-icon>
+						    	<ng-md-icon icon="today" style="fill:#1F5C7F" size="48" class="md-avatar" alt="deal-created-date-img"></ng-md-icon>
 						        <div class="md-list-item-text">
-							        <h3> Created On </h3>
+							        <h3> Created </h3>
+							        <p>{{ deal.createdBy.name }}</p>
+							        <p>{{ deal.createdBy.email }}</p>
+							        <p>{{ deal.createdBy.rollNumber }}</p>
+							        <p>{{ deal.createdBy.phoneNumber }}</p>
 							        <p>{{ deal.createdOn | date: 'medium' }}</p>
 						        </div>
 						    </md-list-item>
 						    <md-list-item class="md-3-line">
-						    	<ng-md-icon icon="schedule" style="fill:#0082CC" size="32" class="md-avatar" alt="deal-last-updated-img"></ng-md-icon>
+						    	<ng-md-icon icon="schedule" style="fill:#0082CC" size="48" class="md-avatar" alt="deal-last-updated-img"></ng-md-icon>
 						        <div class="md-list-item-text">
 							        <h3> Last Updated On </h3>
+							        <p>{{ deal.lastEditedBy.name }}</p>
+							        <p>{{ deal.lastEditedBy.email }}</p>
+							        <p>{{ deal.lastEditedBy.rollNumber }}</p>
+							        <p>{{ deal.lastEditedBy.phoneNumber }}</p>
 							        <p>{{ deal.updatedOn | date: 'medium' }}</p>
 						        </div>
 						    </md-list-item>
@@ -129,11 +141,11 @@
 					</div>
 					<div ng-show="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;" ng-repeat="update in deal.updates">
 				      	<div class="md-actions" layout="row" layout-align="end center">
-							<md-button class="md-raised md-primary md-hue-3" ng-click="updateModal(update)">
+							<md-button class="md-raised md-primary md-hue-1" ng-click="updateModal(update)">
 								Edit this Update
 							</md-button>
 				      	</div>						
-						<md-whiteframe class="md-whiteframe-z2" style="background:#fff; padding: 20px;" layout layout-align="left center">
+						<md-whiteframe class="md-whiteframe-z4" style="background:#fff; padding: 20px;" layout layout-align="left center">
 						    <!-- <span>{{ update.title }}</span> -->
 						    <md-list style="width:100%;">
 							    <md-list-item class="md-3-line">
@@ -145,6 +157,7 @@
 							    </md-list-item>		
 
 								<md-divider md-inset ng-if="$last"></md-divider>
+								<md-divider md-inset ng-if="!$last"></md-divider>
 		
 							    <md-list-item class="md-3-line">
 							    	<ng-md-icon icon="description" style="fill:#00A2FF" size="32" class="md-avatar" alt="update-summary-img"></ng-md-icon>
@@ -155,6 +168,7 @@
 							    </md-list-item>
 
 								<md-divider md-inset ng-if="$last"></md-divider>
+								<md-divider md-inset ng-if="!$last"></md-divider>
 
 							    <div layout="row">
 								    <md-list-item class="md-3-line">
@@ -181,6 +195,7 @@
 							    </div>
 
 								<md-divider md-inset ng-if="$last"></md-divider>
+								<md-divider md-inset ng-if="!$last"></md-divider>
 
 							    <div layout="row">
 								    <md-list-item class="md-3-line">
@@ -207,6 +222,8 @@
 							</md-list>
 						</md-whiteframe>
 						<md-divider ng-if="!$last"></md-divider>
+						<md-divider md-inset ng-if="!$last"></md-divider>
+
 					</div>
 			</md-card-content>
 		</md-card>

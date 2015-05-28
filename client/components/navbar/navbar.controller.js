@@ -10,6 +10,7 @@ angular.module('erp2015App')
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
+    $scope.isCore = Auth.isCore;
     $scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.logout = function() {

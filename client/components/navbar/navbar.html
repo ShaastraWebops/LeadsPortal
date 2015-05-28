@@ -8,18 +8,20 @@
         <span class="icon-bar"></span>
       </button>
       <div>
-        <a href="/coordPortal/dashboard" class="navbar-brand" height="60px" style="padding-top: 0px;"><img src="../../assets/images/shaastra-logo.png" height="50px">Leads Portal Shaastra 2016</a>
+        <a href="/" class="navbar-brand" height="60px" style="padding-top: 0px;"><img src="../../assets/images/shaastra-logo.png" height="50px">Leads Portal Shaastra 2016</a>
       </div>
     </div>
     <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav">
+        <li ng-show="isCore()" ng-class="{active: isActive('/cores')}"><a ui-sref="leadsPortalAdmin"><span class="glyphicon glyphicon-th-large"></span> Cores</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
         <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
         <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
         
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/coordPortal/dashboard')}"><a href="/coordPortal/dashboard"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/coordPortal/editProfile')}"><a ng-href="/coordPortal/editProfile"><span class="glyphicon glyphicon-edit"></span> Edit Profile</a></li>
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/dashboard')}"><a ui-sref="leadsPortalDashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/allDeals')}"><a ui-sref="allDeals"><span class="glyphicon glyphicon-tasks"></span> View All deals</a></li>
 
         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
       </ul>
