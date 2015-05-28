@@ -1,5 +1,41 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="col-md-12">
-This is the dashboard view.
+<div style="padding-left: 10%; padding-right: 10%">
+  <md-toolbar class="md-theme-light">
+    <h2 class="md-toolbar-tools">
+      <span>List of all My Deals</span>
+    </h2>
+  </md-toolbar>
+  <md-content>
+    <md-card ng-repeat="deal in myDeals">
+      <md-card-content layout="column">
+        <div layout="row">
+          <md-list-item class="md-3-line">
+            <ng-md-icon icon="toc" style="fill:#00A2FF" size="48" class="md-avatar" alt="deal-title-img"></ng-md-icon>
+              <div class="md-list-item-text">
+                <h3>{{ deal.title | characters:30 :false }}</h3>
+                <p>{{ deal.info | characters:80 :false }}</p>
+              </div>
+          </md-list-item>
+          <md-list-item class="md-3-line">
+            <ng-md-icon icon="today" style="fill:#0082CC" size="32" class="md-avatar" alt="deal-created-img"></ng-md-icon>
+              <div class="md-list-item-text">
+                <h3> Created On </h3>
+                <p>{{ deal.createdOn | date: 'medium' }}</p>
+              </div>
+          </md-list-item>
+          <md-list-item class="md-3-line">
+            <ng-md-icon icon="schedule" style="fill:#00517F" size="32" class="md-avatar" alt="deal-last-updated-img"></ng-md-icon>
+              <div class="md-list-item-text">
+                <h3> Latest Activity </h3>
+                <p>{{ deal.updatedOn | date: 'medium' }}</p>
+              </div>
+          </md-list-item>
+        </div>
+      </md-card-content>
+      <div class="md-actions" layout="row" layout-align="end center">
+        <md-button ui-sref="deal({id: deal._id})" class="md-raised md-primary md-hue-3">View Deal</md-button>
+      </div>
+    </md-card>
+  </md-content>
 </div>

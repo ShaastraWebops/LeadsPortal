@@ -29,6 +29,21 @@ exports.index = function(req, res) {
   });
 };
 
+// Gets all deals assigned to a particular coordinator/core
+exports.myDeals = function(req, res) {
+  console.log('this is working')
+  Deal.find({ assignees: { "$in" : [req.user._id]} })
+  .populate('assignees', '-salt -hashedPassword -lastSeen -provider')
+  .deepPopulate('updates.createdBy updates.lastEditedBy')
+  .populate('createdBy', '-salt -hashedPassword -lastSeen -provider')
+  .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider')
+  .exec(function (err, deals) {
+    if(err) { return handleError(res, err); }
+    if(!deals) { return res.sendStatus(404); }
+    return res.json(deals);
+  });    
+};
+
 // Get a single deal
 exports.show = function(req, res) {
   Deal.findById(req.params.id)
@@ -43,19 +58,6 @@ exports.show = function(req, res) {
   });  
 };
 
-// Gets all deals assigned to a particular coordinator/core
-exports.myDeals = function(req, res) {
-  Deal.find({ assignees: req.user._id })
-  .populate('assignees', '-salt -hashedPassword -lastSeen -provider')
-  .deepPopulate('updates.createdBy updates.lastEditedBy')
-  .populate('createdBy', '-salt -hashedPassword -lastSeen -provider')
-  .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider')
-  .exec(function (err, deals) {
-    if(err) { return handleError(res, err); }
-    if(!deals) { return res.sendStatus(404); }
-    return res.json(deals);
-  });    
-};
 
 // Creates a new deal in the DB.
 exports.create = function(req, res) {
