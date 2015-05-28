@@ -2,7 +2,8 @@
 ## Leads portal for Spons department, Shaastra 2016
 - After cloning the repo, ```cd``` into this ditectory and then execute ```npm install && bower install``` through terminal.
 - If you don't have ```npm``` installed, then first you need to install ```nvm```,
-  * If you are on linux, execute ```curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.25.3/install.sh | bash``` from the terminal.
+  * If you are on linux, execute 
+  ```curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.25.3/install.sh | bash``` from the terminal.
   * If you are on windows, you need to install it from [here](https://github.com/coreybutler/nvm-windows).
 - Change the ```nodejs``` version by executing ```nvm install 0.10.35 && nvm use 0.10.35```.
 - Then run ```npm install -g bower grunt grunt-cli express yo```.
