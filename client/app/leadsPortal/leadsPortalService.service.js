@@ -33,7 +33,7 @@ angular.module('erp2015App')
   		editUpdate: function (data, updateId) {
   			 return $http.put('/api/updates/' + updateId, data).then(function (response) {
   				return response.data;
-  			 });
+  			});
   		},
       getDeal: function (dealId) {
         return $http.get('api/deals/' + dealId).then(function (response) {

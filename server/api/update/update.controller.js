@@ -55,7 +55,8 @@ exports.update = function (req, res) {
     Update.findById(req.params.id, function (err, update) {
       if (err) { return handleError(res, err); }
       if(!update) { return res.send(404); }
-      if(req.user.role == 'core' || (req.user.role == 'coord' && update.assignees.indexOf(req.user._id)>-1)){
+      if(req.user.role === 'core' || req.user.role === 'admin' || 
+        (req.user.role === 'coord' && update.assignees.indexOf(req.user._id)>-1)) {
           var updated = _.merge(update, req.body);
           updated.save(function (err) {
             if (err) { return handleError(res, err); }
