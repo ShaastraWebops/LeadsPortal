@@ -48,18 +48,20 @@ exports.create = function (req, res) {
 };
 
 // Updates an existing update in the DB.
-exports.update = function (req, res) {
-  req.body.updatedOn=Date.now();
-  req.body.lastEditedBy = req.user._id;
-  if(req.body._id) { delete req.body._id; }
-  Update.findById(req.params.id, function (err, update) {
-    if (err) { return handleError(res, err); }
-    if(!update) { return res.send(404); }
-    var updated = _.merge(update, req.body);
-    updated.save(function (err) {
+exports.update = function (req, res) { 
+    req.body.updatedOn=Date.now();
+    req.body.lastEditedBy = req.user._id;
+    if(req.body._id) { delete req.body._id; }
+    Update.findById(req.params.id, function (err, update) {
       if (err) { return handleError(res, err); }
-      return res.json(200, update);
-    });
+      if(!update) { return res.send(404); }
+      if(req.user.role == 'core' || (req.user.role == 'coord' && update.assignees.indexOf(req.user._id)>-1)){
+          var updated = _.merge(update, req.body);
+          updated.save(function (err) {
+            if (err) { return handleError(res, err); }
+            return res.json(200, update);     
+        });
+      }
   });
 };
 

@@ -83,9 +83,24 @@ angular.module('erp2015App')
 		};
 		$scope.save = function () {
 			// do the saving part here
-
-
-			$mdDialog.hide('Save edited update');
+            // console.log(UpdatePassed);
+            console.log('saving edited update');
+            LeadsPortalService.editUpdate({
+                title: $scope.editUpdate.title,
+                summary: $scope.editUpdate.summary,
+                pointOfContactName: $scope.editUpdate.pointOfContactName,
+                pointOfContactNumber: $scope.editUpdate.pointOfContactNumber,
+                pointOfContactEmail: $scope.editUpdate.pointOfContactEmail,
+                deal: $stateParams.id,
+            },UpdatePassed._id)
+            .then(function (data) {
+                $state.go('deal');
+            })
+            .catch(function (err) {
+                err = err.data;
+                $scope.errors = {};
+            });
+            $mdDialog.hide('Save edited update');
 		};    	
     }
 
