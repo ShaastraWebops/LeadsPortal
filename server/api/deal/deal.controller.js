@@ -1,17 +1,17 @@
 'use strict';
 
 var _ = require('lodash');
+var underscore = require('underscore');
 var deepPopulate = require('mongoose-deep-populate');
 var Deal = require('./deal.model');
 var User = require('../user/user.model');
-var underscore = require('underscore');
 
 //Error handling
 var validationError = function (res, err) {
   return res.status(422).json(err);
 };
 
-function handleError(res, err) {
+function handleError (res, err) {
   return res.status(500).json(err);
 };
 
@@ -57,7 +57,6 @@ exports.show = function(req, res) {
   });  
 };
 
-
 // Creates a new deal in the DB.
 exports.create = function(req, res) {
   req.body.createdOn = Date.now();
@@ -65,18 +64,16 @@ exports.create = function(req, res) {
   req.body.createdBy = req.user._id;
   req.body.lastEditedBy = req.user._id;
   req.body.assignees = underscore.uniq(req.body.assignees);
-  User.find({'_id':{$in:req.body.assignees}},function(err,users){
-    if(err)
-      res.sendStatus(400);
-    else
-    {
-      Deal.create(req.body, function(err, deal) {
-       if (err) { console.log(err); return validationError(res, err); }
-       return res.json(201, deal);
-     });
-    }
-  })
+  User.count({ '_id' : { $in : req.body.assignees } }, function (err, count) {
+    if(err) { return handleError(res, err); }
+    if(count != req.body.assignees.length) { res.sendStatus(400); }
+    Deal.create(req.body, function (err, deal) {
+      if (err) { return handleError(res, err); }
+      return res.json(201, deal);
+    });
+  });
 };
+
 // Updates an existing deal in the DB.
 exports.update = function(req, res) {
   req.body.updatedOn = Date.now();
@@ -85,17 +82,18 @@ exports.update = function(req, res) {
   Deal.findById(req.params.id, function (err, deal) {
     if (err) { return handleError(res, err); }
     if(!deal) { return res.sendStatus(404); }
-    req.body.assignees = underscore.union(req.body.assignees,deal.assignees);
-    var updated = _.merge(deal, req.body);
-    User.find({'_id':{$in:req.body.assignees}},function(err,users){
-      if(err)
-        res.sendStatus(400);
-      else
-        updated.save(function (err) {
-          if (err) { return handleError(res, err); }
-          return res.json(200, deal);
-        });
-    })
+
+    req.body.assignees = underscore.uniq(req.body.assignees);
+    User.count({ '_id' : { $in : req.body.assignees } }, function (err, count) {
+      if(err) { return handleError(res, err); }
+      if(count != req.body.assignees.length) { res.sendStatus(400); }
+
+      var updated = _.merge(deal, req.body);
+      updated.save(function (err) {
+        if (err) { return handleError(res, err); }
+        return res.json(200, deal);
+      });
+    });
   });
 };
 
@@ -104,13 +102,9 @@ exports.destroy = function(req, res) {
   Deal.findById(req.params.id, function (err, deal) {
     if(err) { return handleError(res, err); }
     if(!deal) { return res.sendStatus(404); }
-    deal.remove(function(err) {
+    deal.remove(function (err) {
       if(err) { return handleError(res, err); }
       return res.sendStatus(204);
     });
   });
 };
-
-function handleError(res, err) {
-  return res.send(500, err);
-}
