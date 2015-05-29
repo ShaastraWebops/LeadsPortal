@@ -4,6 +4,7 @@ var _ = require('lodash');
 var deepPopulate = require('mongoose-deep-populate');
 var Deal = require('./deal.model');
 var User = require('../user/user.model');
+var underscore = require('underscore');
 
 //Error handling
 var validationError = function (res, err) {
@@ -64,6 +65,7 @@ exports.create = function(req, res) {
   req.body.updatedOn = Date.now();
   req.body.createdBy = req.user._id;
   req.body.lastEditedBy = req.user._id;
+  req.body.assignees = underscore.uniq(req.body.assignees);
   Deal.create(req.body, function(err, deal) {
      if (err) { console.log(err); return validationError(res, err); }
      return res.json(201, deal);
@@ -77,6 +79,7 @@ exports.update = function(req, res) {
   Deal.findById(req.params.id, function (err, deal) {
     if (err) { return handleError(res, err); }
     if(!deal) { return res.sendStatus(404); }
+    req.body.assignees = underscore.union(req.body.assignees,deal.assignees);
     var updated = _.merge(deal, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
