@@ -31,7 +31,6 @@ exports.index = function(req, res) {
 
 // Gets all deals assigned to a particular coordinator/core
 exports.myDeals = function(req, res) {
-  console.log('this is working')
   Deal.find({ assignees: { "$in" : [req.user._id]} })
   .populate('assignees', '-salt -hashedPassword -lastSeen -provider')
   .deepPopulate('updates.createdBy updates.lastEditedBy')

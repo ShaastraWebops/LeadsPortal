@@ -10,7 +10,7 @@
 	 <!-- style="background-image: url('/assets/images/leads-portal-background-one.png');" -->
     	<md-card>
 	      	<div class="md-actions" layout="row" layout-align="end center">
-				<md-button class="md-raised md-primary" ng-click="dealModal()">
+				<md-button class="md-raised md-primary" ng-click="dealEditModal()">
 					Edit Deal
 				</md-button>
 	      	</div>
@@ -141,7 +141,7 @@
 					</div>
 					<div ng-show="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;" ng-repeat="update in deal.updates">
 				      	<div class="md-actions" layout="row" layout-align="end center">
-							<md-button class="md-raised md-primary md-hue-1" ng-click="updateModal(update)">
+							<md-button class="md-raised md-primary md-hue-1" ng-click="updateEditModal(update)">
 								Edit this Update
 							</md-button>
 				      	</div>						

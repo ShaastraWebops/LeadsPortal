@@ -28,45 +28,8 @@ angular.module('erp2015App')
 			console.log(err);
 		});
 
-	$scope.newUpdate = function (form) {
-	 	$scope.submitted = true;
-	 	angular.forEach($scope.selectedCoords, function (item) {
-	 		$scope.coordsIds.push(item._id);
-	 	});
-	 	LeadsPortalService.createUpdate({
-	 		title: $scope.update.title,
-	 		summary: $scope.update.summary,
-	 		pointOfContactName: $scope.update.poc_name,
-	 		pointOfContactNumber: $scope.update.poc_phone,
-	 		pointOfContactEmail: $scope.update.poc_email,
-	 		assignees: Auth.getCurrentUser()._id,
-	 		deal: $stateParams.id
-	 	})
-	 	.then(function (data) {
-	 		$state.go('deal');
-	 	})
-	 	.catch(function (err) {
-	 		err = err.data;
-	 		$scope.errors = {};
-	         // Update validity of form fields that match the mongoose errors
-/*	         angular.forEach(err.errors, function (error, field) {
-	         	form[field].$setValidity('mongoose', false);
-	           	$scope.errors[field] = error.message;
-	         });*/
-         });
-    };
-
-    // $scope.modal = function () {
-    // 	console.log('came');
-    // 	dealEditModal($scope.deal).then(function() {
-    // 		console.log('yeahh');
-    // 	}, function() {
-    // 		console.log('loll');
-    // 	});
-    // };
-
     // modal for editing the deal
-    $scope.dealModal = function () {
+    $scope.dealEditModal = function () {
     	$mdDialog.show({
     		controller: DealEditModalCtrl,
     		templateUrl: '/app/leadsPortal/deal/dealEditModal.tmpl.html',
@@ -97,7 +60,7 @@ angular.module('erp2015App')
     }
 
     // modal for editing the update 
-    $scope.updateModal = function (update) {
+    $scope.updateEditModal = function (update) {
     	$mdDialog.show({
     		controller: UpdateEditModalCtrl,
     		templateUrl: '/app/leadsPortal/deal/updateEditModal.tmpl.html',

@@ -33,8 +33,6 @@ exports.create = function (req, res) {
     if(deal.assignees.indexOf(req.user._id) != -1 || req.user.role === 'core' || req.user.role === 'admin') {
       req.body.assignees = deal.assignees;
     
-      console.log(req.body);
-    
       Update.create(req.body, function (err, update) {
         if(err) { return handleError(res,err); }
         deal.updates.push(update._id);
