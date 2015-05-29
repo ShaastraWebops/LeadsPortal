@@ -49,7 +49,7 @@ exports.create = function (req, res) {
 
 // Updates an existing update in the DB.
 exports.update = function (req, res) { 
-    req.body.updatedOn=Date.now();
+    req.body.updatedOn = Date.now();
     req.body.lastEditedBy = req.user._id;
     if(req.body._id) { delete req.body._id; }
     Update.findById(req.params.id, function (err, update) {

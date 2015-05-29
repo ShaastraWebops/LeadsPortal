@@ -11,7 +11,6 @@ router.get('/', auth.hasRole('coord'), controller.index);
 router.get('/:id', auth.hasRole('coord'), controller.show);
 router.post('/', auth.hasRole('coord'), controller.create);
 router.put('/:id', auth.hasRole('coord'), controller.update);
-router.patch('/:id', auth.hasRole('coord'), controller.update);
 router.delete('/:id', auth.hasRole('coord'), controller.destroy);
 
 module.exports = router;

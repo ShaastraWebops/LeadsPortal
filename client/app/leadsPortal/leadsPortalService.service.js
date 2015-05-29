@@ -30,8 +30,8 @@ angular.module('erp2015App')
   			 	return response.data;
   			});
   		},
-  		editUpdate: function (data,updateId) {
-  			 return $http.put('/api/updates/' + updateId,data).then(function (response) {
+  		editUpdate: function (data, updateId) {
+  			 return $http.put('/api/updates/' + updateId, data).then(function (response) {
   				return response.data;
   			 });
   		},
