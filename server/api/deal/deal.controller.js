@@ -14,20 +14,6 @@ var validationError = function (res, err) {
 function handleError(res, err) {
   return res.status(500).json(err);
 };
-function validateIds(assignees){
-    var userList=[];
-  User.find({},'_id').exec(function(err,users){
-    //userList=users;
-    underscore.forEach(users,function(user){
-      userList.push(user._id);
-    });
-    underscore.forEach(assignees,function(assignee){
-      if(userList.indexOf(assignee)==-1)
-        return false;
-    })
-  });
-  return true;
-}
 
 // Get list of deals
 exports.index = function(req, res) {
@@ -79,15 +65,17 @@ exports.create = function(req, res) {
   req.body.createdBy = req.user._id;
   req.body.lastEditedBy = req.user._id;
   req.body.assignees = underscore.uniq(req.body.assignees);
-  if(validateIds(req.body.assignees))
-  {
-  Deal.create(req.body, function(err, deal) {
-   if (err) { console.log(err); return validationError(res, err); }
-   return res.json(201, deal);
- });
-  }
-  else 
-    res.sendStatus(400);
+  User.find({'_id':{$in:req.body.assignees}},function(err,users){
+    if(err)
+      res.sendStatus(400);
+    else
+    {
+      Deal.create(req.body, function(err, deal) {
+       if (err) { console.log(err); return validationError(res, err); }
+       return res.json(201, deal);
+     });
+    }
+  })
 };
 // Updates an existing deal in the DB.
 exports.update = function(req, res) {
@@ -99,15 +87,15 @@ exports.update = function(req, res) {
     if(!deal) { return res.sendStatus(404); }
     req.body.assignees = underscore.union(req.body.assignees,deal.assignees);
     var updated = _.merge(deal, req.body);
-    if(validateIds(req.body.assignees))
-    {
-      updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, deal);
-    });
-    }
-    else
-      res.sendStatus(400);
+    User.find({'_id':{$in:req.body.assignees}},function(err,users){
+      if(err)
+        res.sendStatus(400);
+      else
+        updated.save(function (err) {
+          if (err) { return handleError(res, err); }
+          return res.json(200, deal);
+        });
+    })
   });
 };
 
