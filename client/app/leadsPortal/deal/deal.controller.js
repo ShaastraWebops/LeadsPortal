@@ -67,7 +67,7 @@ angular.module('erp2015App')
                 assignees: $scope.coordIds
             })
             .then(function (data) {
-                $state.go(deal);
+                $state.go('deal');
             });
 
 			$mdDialog.hide('Save edited deal');
