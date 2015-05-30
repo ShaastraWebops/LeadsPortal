@@ -4,6 +4,8 @@ angular.module('erp2015App')
   .controller('dealController', function ($scope, $state, Auth, LeadsPortalService, $stateParams, $http, $q, $mdDialog) {
     $scope.selectedCoords = [];
     $scope.update = {};
+    $scope.showButton = false;
+
 	LeadsPortalService.getCoords()
 		.then(function (data) {
 			$scope.coords = data;
@@ -18,6 +20,21 @@ angular.module('erp2015App')
 	LeadsPortalService.getDeal($stateParams.id)
 		.then(function (deal) {
 			$scope.deal = deal;
+
+            // showing editDeal, createUpdate, editUpdate button only to permitted users
+            Auth.isLoggedInAsync(function (loggedIn) {
+                if(Auth.getCurrentUser().role == 'admin' || Auth.getCurrentUser().role == 'core') {
+                    $scope.showButton = true;                    
+                } else if (Auth.getCurrentUser().role == 'coord') {
+                    var len = deal.assignees.length;
+                    for (var i=0; i<len; i++) {
+                        if(Auth.getCurrentUser()._id == deal.assignees[i]._id)
+                            $scope.showButton = true;                    
+                    }
+                } else {
+                    $scope.showButton = false;                    
+                }
+            });
 		})
 		.catch(function (err) {
 			// do some error handling here
