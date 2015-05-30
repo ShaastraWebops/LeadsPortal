@@ -3,13 +3,14 @@
 angular.module('erp2015App')
   .controller('AdminCtrl', function ($scope, $state, $http, Auth, User) {
 
-    if (Auth.getCurrentUser().role === 'admin'){
-      console.log('ok!')
+    Auth.isLoggedInAsync(function (loggedIn) {
+      if (Auth.getCurrentUser().role === 'admin') {
+        console.log('ok!')
+      } else {
+        $state.go('leadsPortalDashboard');
+      }
     }
-    else{
-      $state.go('coordPortalDashboardCtrl');
-    }
-
+    
     // Use the User $resource to fetch all users
     $scope.users = User.query();
 

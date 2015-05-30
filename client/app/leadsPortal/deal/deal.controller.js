@@ -23,12 +23,12 @@ angular.module('erp2015App')
 
             // showing editDeal, createUpdate, editUpdate button only to permitted users
             Auth.isLoggedInAsync(function (loggedIn) {
-                if(Auth.getCurrentUser().role == 'admin' || Auth.getCurrentUser().role == 'core') {
+                if(Auth.getCurrentUser().role === 'admin' || Auth.getCurrentUser().role === 'core') {
                     $scope.showButton = true;                    
-                } else if (Auth.getCurrentUser().role == 'coord') {
+                } else if (Auth.getCurrentUser().role === 'coord') {
                     var len = deal.assignees.length;
                     for (var i=0; i<len; i++) {
-                        if(Auth.getCurrentUser()._id == deal.assignees[i]._id)
+                        if(Auth.getCurrentUser()._id === deal.assignees[i]._id)
                             $scope.showButton = true;                    
                     }
                 } else {
