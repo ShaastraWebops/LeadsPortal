@@ -87,8 +87,8 @@ exports.update = function(req, res) {
     User.count({ '_id' : { $in : req.body.assignees } }, function (err, count) {
       if(err) { return handleError(res, err); }
       if(count != req.body.assignees.length) { res.sendStatus(400); }
-
-      var updated = _.merge(deal, req.body);
+      
+      var updated = _.extend(deal, req.body);
       updated.save(function (err) {
         if (err) { return handleError(res, err); }
         return res.json(200, deal);

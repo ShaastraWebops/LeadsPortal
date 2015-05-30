@@ -20,8 +20,8 @@ angular.module('erp2015App')
   				return response.data;
   			});
   		},
-  		editDeal: function () {
-  			 return $http.post('/api/deals').then(function (response) {
+  		editDeal: function (data) {
+  			 return $http.put('/api/deals/' + data._id, data).then(function (response) {
   				return response.data;
   			 });
   		},

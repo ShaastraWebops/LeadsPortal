@@ -4,13 +4,9 @@ angular.module('erp2015App')
   .controller('dealController', function ($scope, $state, Auth, LeadsPortalService, $stateParams, $http, $q, $mdDialog) {
     $scope.selectedCoords = [];
     $scope.update = {};
-	$scope.coordsIds = [];
 	LeadsPortalService.getCoords()
 		.then(function (data) {
 			$scope.coords = data;
-			// console.log($scope.coords);
-			// $scope.selectedCoords = $scope.coords;
-			// console.log($scope.selectedCoords);
 		})
 		.catch(function (err) {
 			// do some error handling here
@@ -44,16 +40,35 @@ angular.module('erp2015App')
     		console.log('Cancel editing deal');
     	});
     };
-    function DealEditModalCtrl($scope, $mdDialog, DealPassed, CoordsPassed) {
+    function DealEditModalCtrl($scope, $state, $mdDialog, DealPassed, CoordsPassed) {
     	$scope.editDeal = DealPassed;
     	$scope.coords = CoordsPassed;
-    	$scope.selectedCoords = [];
-		$scope.cancel = function() {
-			$mdDialog.cancel();
-		};
-		$scope.save = function () {
-			// do the saving part here
+        $scope.selectedCoords = DealPassed.assignees;
 
+
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+        $scope.save = function () {
+            // do the saving part here
+            $scope.coordIds = [];
+            angular.forEach($scope.selectedCoords, function (item) {
+              $scope.coordIds.push(item._id);
+            });
+
+            LeadsPortalService.editDeal({
+                _id: $scope.editDeal._id,
+                title: $scope.editDeal.title,
+                info: $scope.editDeal.info,
+                companyName: $scope.editDeal.companyName,
+                initialPointOfContactName: $scope.editDeal.initialPointOfContactName,
+                initialPointOfContactNumber: $scope.editDeal.initialPointOfContactNumber,
+                initialPointOfContactEmail: $scope.editDeal.initialPointOfContactEmail,
+                assignees: $scope.coordIds
+            })
+            .then(function (data) {
+                $state.go(deal);
+            });
 
 			$mdDialog.hide('Save edited deal');
 		};    	
