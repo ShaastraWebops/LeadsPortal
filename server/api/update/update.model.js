@@ -14,7 +14,9 @@ var UpdateSchema = new Schema({
   createdOn: Date,
   updatedOn: Date,
   createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
-  lastEditedBy: { type: Schema.Types.ObjectId, ref: 'User' }
+  lastEditedBy: { type: Schema.Types.ObjectId, ref: 'User' },
+  nextActivityAim: String,
+  nextActivityDate: Date
 });
 
 module.exports = mongoose.model('Update', UpdateSchema);

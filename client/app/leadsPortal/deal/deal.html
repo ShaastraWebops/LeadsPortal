@@ -39,7 +39,7 @@
 						<md-divider md-inset ng-if="!$last"></md-divider>
                            
                            <md-list-item class="md-3-line">
-					    	<ng-md-icon icon="poll" style="fill:#0082CC" size="32" class="md-avatar" alt="deal-summary-img"></ng-md-icon>
+					    	<ng-md-icon icon="poll" style="fill:#0082CC" size="32" class="md-avatar" alt="deal-vertical-img"></ng-md-icon>
 					        <div class="md-list-item-text">
 						        <h3> Vertical </h3>
 						        <p>{{ deal.vertical }}</p>
@@ -200,6 +200,26 @@
 								        <div class="md-list-item-text">
 									        <h3> PoC Number </h3>
 									        <p>{{ update.pointOfContactNumber }}</p>
+								        </div>
+								    </md-list-item>						    	
+							    </div>
+
+								<md-divider md-inset ng-if="$last"></md-divider>
+								<md-divider md-inset ng-if="!$last"></md-divider>
+
+							    <div layout="row">
+								    <md-list-item class="md-3-line">
+								    	<ng-md-icon icon="sort" style="fill:#00517F" size="48" class="md-avatar" alt="next-activity-aim-details-img"></ng-md-icon>
+								        <div class="md-list-item-text">
+									        <h3> Next Activity </h3>
+									        <p>{{ update.nextActivityAim }}</p>
+								        </div>
+								    </md-list-item>						    	
+								    <md-list-item class="md-3-line">
+								    	<ng-md-icon icon="today" style="fill:#00517F" size="48" class="md-avatar" alt="next-activity-date-details-img"></ng-md-icon>
+								        <div class="md-list-item-text">
+									        <h3> Date </h3>
+									        <p>{{ update.nextActivityDate | date: 'fullDate' }}</p>
 								        </div>
 								    </md-list-item>						    	
 							    </div>

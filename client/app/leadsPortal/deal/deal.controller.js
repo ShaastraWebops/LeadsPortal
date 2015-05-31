@@ -124,6 +124,8 @@ angular.module('erp2015App')
                 pointOfContactName: $scope.editUpdate.pointOfContactName,
                 pointOfContactNumber: $scope.editUpdate.pointOfContactNumber,
                 pointOfContactEmail: $scope.editUpdate.pointOfContactEmail,
+                nextActivityAim: $scope.editUpdate.nextActivityAim,
+                nextActivityDate: $scope.editUpdate.nextActivityDate,
                 deal: $stateParams.id,
             },UpdatePassed._id)
             .then(function (data) {
@@ -168,10 +170,13 @@ angular.module('erp2015App')
                 pointOfContactName: $scope.newUpdate.pointOfContactName,
                 pointOfContactNumber: $scope.newUpdate.pointOfContactNumber,
                 pointOfContactEmail: $scope.newUpdate.pointOfContactEmail,
+                nextActivityAim: $scope.newUpdate.nextActivityAim,
+                nextActivityDate: $scope.newUpdate.nextActivityDate,
                 deal: $stateParams.id
             })
             .then(function (data) {
                 $state.go('deal');
+                console.log(data);
             })
             .catch(function (err) {
                 err = err.data;

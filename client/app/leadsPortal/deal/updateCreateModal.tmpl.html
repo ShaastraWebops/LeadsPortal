@@ -35,6 +35,16 @@
           <!-- <ng-md-icon icon="email" style="fill:#a9f114"></ng-md-icon> -->
           <input ng-model="newUpdate.pointOfContactEmail" type="email">
         </md-input-container>
+        <div layout layout-sm="column">
+        <md-input-container style="width:80%">
+            <label>Next Activity</label>
+            <input ng-model="newUpdate.nextActivityAim" type="text">
+          </md-input-container>
+        <md-input-container flex>
+          <label>Date</label>
+          <input ng-model="newUpdate.nextActivityDate" type="date">
+        </md-input-container>
+      </div>
       </md-content>
 
     </div>

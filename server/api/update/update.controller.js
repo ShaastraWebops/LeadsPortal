@@ -32,13 +32,12 @@ exports.create = function (req, res) {
     if(err) { return handleError(res,err); }
     if(deal.assignees.indexOf(req.user._id) != -1 || req.user.role === 'core' || req.user.role === 'admin') {
       req.body.assignees = deal.assignees;
-    
       Update.create(req.body, function (err, update) {
         if(err) { return handleError(res,err); }
         deal.updates.push(update._id);
         deal.save(function (err, dealfin) {
          if(err) { return handleError(res,err); }
-         return res.json(201, dealfin);
+         return res.sendStatus(200);
         });
       });
     }
