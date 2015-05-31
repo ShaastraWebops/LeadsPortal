@@ -88,6 +88,9 @@ exports.update = function(req, res) {
       if(err) { return handleError(res, err); }
       if(count != req.body.assignees.length) { res.sendStatus(400); }
 
+      // if user logged in is coord, he should not be able to un-assign or assign people for that deal
+      if(req.user.role === 'coord') { req.body.assignees = deal.assignees; }
+
       if(req.user.role === 'core' || req.user.role === 'admin' || 
         (req.user.role === 'coord' && deal.assignees.indexOf(req.user._id)>-1)) {      
         var updated = _.extend(deal, req.body);
@@ -95,8 +98,9 @@ exports.update = function(req, res) {
           if (err) { return handleError(res, err); }
           return res.json(200, deal);
         });
+      } else { 
+        res.sendStatus(403);
       }
-      res.sendStatus(403);
     });
   });
 };
