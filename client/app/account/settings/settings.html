@@ -1,39 +1,41 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <h1>Change Password</h1>
-    </div>
-    <div class="col-sm-12">
-      <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
+<div style="padding-left: 35%; padding-right: 35%; padding-top: 5%">
 
-        <div class="form-group">
-          <label>Current Password</label>
+  <md-toolbar class="md-primary">
+    <h1 class="md-toolbar-tools">
+      Change Password
+    </h1>
+  </md-toolbar>
 
-          <input type="password" name="password" class="form-control" ng-model="user.oldPassword"
+  <md-content layout-padding>
+    <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
+
+      <md-input-container>
+        <label>Current Password</label>
+
+        <input type="password" name="password" ng-model="user.oldPassword"
                  mongoose-error/>
-          <p class="help-block" ng-show="form.password.$error.mongoose">
+        <p style="color:red" ng-show="form.password.$error.mongoose">
               {{ errors.other }}
-          </p>
-        </div>
+        </p>
+      </md-input-container>
 
-        <div class="form-group">
-          <label>New Password</label>
+      <md-input-container>
+        <label>New Password</label>
 
-          <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword"
+        <input type="password" name="newPassword" ng-model="user.newPassword"
                  ng-minlength="3"
                  required/>
-          <p class="help-block"
+        <p style="color:red"
              ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
-            Password must be at least 3 characters.
-          </p>
-        </div>
+          Password must be at least 3 characters.
+        </p>
+      </md-input-container>
 
-        <p class="help-block"> {{ message }} </p>
+      <p style="color:red"> {{ message }} </p>
 
-        <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
-      </form>
-    </div>
+      <md-button class="md-raised md-primary" type="submit">Save changes</md-button>
+    </form>
   </div>
 </div>
