@@ -23,6 +23,7 @@ angular.module('erp2015App')
         title: $scope.deal.title,
         info: $scope.deal.info,
         companyName: $scope.deal.companyName,
+        vertical: $scope.deal.vertical,
         initialPointOfContactName: $scope.deal.initialPointOfContactName,
         initialPointOfContactNumber: $scope.deal.initialPointOfContactNumber,
         initialPointOfContactEmail: $scope.deal.initialPointOfContactEmail,

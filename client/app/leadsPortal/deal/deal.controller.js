@@ -78,6 +78,7 @@ angular.module('erp2015App')
                 title: $scope.editDeal.title,
                 info: $scope.editDeal.info,
                 companyName: $scope.editDeal.companyName,
+                vertical: $scope.editDeal.vertical,
                 initialPointOfContactName: $scope.editDeal.initialPointOfContactName,
                 initialPointOfContactNumber: $scope.editDeal.initialPointOfContactNumber,
                 initialPointOfContactEmail: $scope.editDeal.initialPointOfContactEmail,

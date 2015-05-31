@@ -19,6 +19,7 @@ var DealSchema = new Schema({
   updatedOn: Date,
   createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
   lastEditedBy: { type: Schema.Types.ObjectId, ref: 'User' },
+  vertical: String,
   nextActiviy: {
   	aim: String,
   	date: Date

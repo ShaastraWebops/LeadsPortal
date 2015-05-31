@@ -42,6 +42,10 @@
         </div>
       </md-input-container>
       <md-input-container>
+        <label>Vertical</label>
+        <input required name="vertical" ng-model="deal.vertical">
+      </md-input-container>
+      <md-input-container>
         <label>PoC Name</label>
         <input required name="initialPointOfContactName" ng-model="deal.initialPointOfContactName" mongoose-error />
         <div ng-messages="form.initialPointOfContactName.$error">
