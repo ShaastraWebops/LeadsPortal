@@ -61,48 +61,28 @@ angular.module('erp2015App', [
     };
   })
 
-  .run(function ($rootScope, $location, Auth, Permission) {
+  .run(function ($rootScope, $location, $state, Auth) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {
         if (next.authenticate && !loggedIn) {
           $location.url('/login');
         }
+        if (next.access) {
+          var permissions = next.access;
+          var userRole = Auth.getCurrentUser().role;
+          if (permissions.except) {
+            if (permissions.except.indexOf(userRole) > -1) {
+              if (permissions.redirectUnauthorized) { $state.go(permissions.redirectUnauthorized); }
+              else { $state.go('403'); }
+            }
+          } else if (permissions.allow) {
+            if (permissions.allow.indexOf(userRole) < 0) {
+              if (permissions.redirectUnauthorized) { $state.go(permissions.redirectUnauthorized); }
+              else { $state.go('403'); }
+            }
+          }
+        }
       });
     });
   });
-    /**
-     * Defining all roles
-     */
-  //   Permission
-  //     .defineRole('anonymous', function(stateParams) {
-  //       Auth.isLoggedInAsync(function(success) {
-  //         var currUser = Auth.getCurrentUser();
-  //         if(currUser) {
-  //           return true;
-  //         }
-  //         return false;
-  //       });
-  //     })
-  //     .defineRole('user', function(stateParams) {
-  //       Auth.isLoggedInAsync(function (success) {
-  //         var currUser = Auth.getCurrentUser();
-  //         if(currUser.role === 'user') {
-  //           return true;
-  //         }
-  //       });
-  //       return false;        
-  //     })
-  //     .defineRole('core', function(stateParams) {
-  //       Auth.isLoggedInAsync(function (success) {
-  //         var currUser = Auth.getCurrentUser();
-  //         if(currUser.role === 'core') {
-  //           return true;
-  //         }
-  //       });
-  //       return false;        
-  //     })
-  //     .defineRole('admin', function(stateParams) {
-  //       return Auth.isAdmin();       
-  //     })
-  // });

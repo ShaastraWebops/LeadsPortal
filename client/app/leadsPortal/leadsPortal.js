@@ -13,7 +13,11 @@ angular.module('erp2015App')
         url: '/cores',
         templateUrl: 'app/leadsPortal/cores/cores.html',
         controller: 'CoresCtrl',
-        authenticate: true
+        authenticate: true,
+        access: {
+          except: ['coord'],
+          redirectUnauthorized: 'leadsPortalDashboard'
+        }        
       })
       .state('allDeals', {
         url: '/allDeals',
