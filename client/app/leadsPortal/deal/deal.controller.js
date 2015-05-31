@@ -157,6 +157,9 @@ angular.module('erp2015App')
     function UpdateCreateModalCtrl($scope, $stateParams, $mdDialog, DealPassed) {
     	$scope.deal = DealPassed;
     	$scope.newUpdate = {};
+        $scope.newUpdate.pointOfContactName = DealPassed.initialPointOfContactName;
+        $scope.newUpdate.pointOfContactEmail = DealPassed.initialPointOfContactEmail;
+        $scope.newUpdate.pointOfContactNumber = DealPassed.initialPointOfContactNumber;
 		$scope.cancel = function() {
 			$mdDialog.cancel();
 		};
