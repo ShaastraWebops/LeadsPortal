@@ -50,14 +50,14 @@ DealSchema
   .path('info')
   .validate(function (info) {
     return info.length;
-  }, 'info cannot be blank');
+  }, 'Info cannot be blank');
 
 //CompanyName
 DealSchema
   .path('companyName')
   .validate(function (cName) {
     return cName.length;
-  }, 'Companyname cannot be blank');  
+  }, 'Company Name cannot be blank');  
 
 //Assignees
 DealSchema

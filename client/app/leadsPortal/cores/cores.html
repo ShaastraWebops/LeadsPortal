@@ -14,80 +14,69 @@
       <md-input-container>
         <label>Title</label>
         <input name="title" ng-model="deal.title" ng-required="true" mongoose-error />
-        <div ng-messages="form.title.$error">
-          <div ng-message="required && submitted">This is required.</div>
-        </div>
-        <div ng-messages="form.title.$error">
-          <div ng-message="mongoose && submitted">{{ errors.title }}</div>
-        </div>
       </md-input-container>
+      <div style="color:red">
+        <span ng-show="form.title.$error.required && submitted">
+          Title is required.
+        </span>
+        <span>{{ errors.other }}</sapn>
+      </div>
+
       <md-input-container>
         <label>Deal Info</label>
         <textarea required name="info" ng-model="deal.info" mongoose-error></textarea>
-        <div ng-messages="deal.info.$error">
-          <div ng-message="required">This is required.</div>
-        </div>
-        <div ng-messages="form.info.$error">
-          <div ng-message="mongoose && submitted">{{ errors.info }}</div>
-        </div>
       </md-input-container>
+      <div style="color:red">
+        <span ng-show="form.info.$error.required && submitted">
+          Title is required.
+        </span>
+        <span>{{ errors.other }}</sapn>
+      </div>
+
       <md-input-container>
         <label>Company Name</label>
         <input required name="companyName" ng-model="deal.companyName" mongoose-error />
-        <div ng-messages="form.companyName.$error">
-          <div ng-message="required && submitted">This is required.</div>
-        </div>
-        <div ng-messages="form.companyName.$error">
-          <div ng-message="mongoose && submitted">{{ errors.companyName }}</div>
-        </div>
       </md-input-container>
+      <div style="color:red">
+        <span ng-show="form.companyName.$error.required && submitted">
+          Title is required.
+        </span>
+        <span>{{ errors.other }}</sapn>
+      </div>
+
       <md-input-container>
         <label>Vertical</label>
-        <input required name="vertical" ng-model="deal.vertical">
+        <input name="vertical" ng-model="deal.vertical">
       </md-input-container>
+
       <md-input-container>
         <label>PoC Name</label>
-        <input required name="initialPointOfContactName" ng-model="deal.initialPointOfContactName" mongoose-error />
-        <div ng-messages="form.initialPointOfContactName.$error">
-          <div ng-message="required && submitted">This is required.</div>
-        </div>
-        <div ng-messages="form.initialPointOfContactName.$error">
-          <div ng-message="mongoose && submitted">{{ errors.initialPointOfContactName }}</div>
-        </div>
+        <input name="initialPointOfContactName" ng-model="deal.initialPointOfContactName">
       </md-input-container>
+
       <md-input-container>
         <label>PoC Phone Number</label>
-        <input required name="initialPointOfContactNumber" ng-model="deal.initialPointOfContactNumber" mongoose-error />
-        <div ng-messages="form.initialPointOfContactNumber.$error">
-          <div ng-message="required && submitted">This is required.</div>
-        </div>
-        <div ng-messages="form.initialPointOfContactNumber.$error">
-          <div ng-message="mongoose && submitted">{{ errors.initialPointOfContactNumber }}</div>
-        </div>
+        <input name="initialPointOfContactNumber" ng-model="deal.initialPointOfContactNumber">
       </md-input-container>
+
       <md-input-container>
         <label>PoC Email</label>
-        <input required name="initialPointOfContactEmail" ng-model="deal.initialPointOfContactEmail" mongoose-error />
-        <div ng-messages="form.initialPointOfContactEmail.$error">
-          <div ng-message="required && submitted">This is required.</div>
-        </div>
-        <div ng-messages="form.initialPointOfContactEmail.$error">
-          <div ng-message="mongoose && submitted">{{ errors.initialPointOfContactEmail }}</div>
-        </div>
+        <input name="initialPointOfContactEmail" ng-model="deal.initialPointOfContactEmail">
       </md-input-container>
-        <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
-          <md-autocomplete
-            md-selected-item="selectedItem"
-            md-search-text="searchText"
-            md-items="item in coords"
-            md-item-text="item.name"
-            placeholder="Assign a team member">
-              <span md-highlight-text="searchText">{{item.name}}</span>
-          </md-autocomplete>
-          <md-chip-template>
-            <strong>{{$chip.name}}</strong>
-          </md-chip-template>
-        </md-chips>
+
+      <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
+        <md-autocomplete
+          md-selected-item="selectedItem"
+          md-search-text="searchText"
+          md-items="item in coords"
+          md-item-text="item.name"
+          placeholder="Assign a team member">
+            <span md-highlight-text="searchText">{{item.name}}</span>
+        </md-autocomplete>
+        <md-chip-template>
+          <strong>{{$chip.name}}</strong>
+        </md-chip-template>
+      </md-chips>
 
       <md-button type="submit" class="md-raised md-primary">Create</md-button>
     </form>

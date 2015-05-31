@@ -3,6 +3,7 @@
 angular.module('erp2015App')
 .controller('CoresCtrl', function ($scope, LeadsPortalService, $location, $http, $state, $q) {
   $scope.submitted = false;
+
   LeadsPortalService.getCoords()
   .then(function (data) {
     $scope.coords = data;
@@ -34,14 +35,15 @@ angular.module('erp2015App')
             $state.go('allDeals');
       })
       .catch(function (err) {
-        err = err.data;
-        $scope.errors = {};
+        console.log(err);
+        // err = err.data;
+        // $scope.errors = {};
 
-        // Update validity of form fields that match the mongoose errors
-        angular.forEach(err.errors, function (error, field) {
-          form[field].$setValidity('mongoose', false);
-          $scope.errors[field] = error.message;
-        });
+        // // Update validity of form fields that match the mongoose errors
+        // angular.forEach(err.errors, function (error, field) {
+        //   form[field].$setValidity('mongoose', false);
+        //   $scope.errors[field] = error.message;
+        // });
       });
     }
   };
