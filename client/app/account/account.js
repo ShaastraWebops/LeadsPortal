@@ -18,5 +18,15 @@ angular.module('erp2015App')
         templateUrl: 'app/account/settings/settings.html',
         controller: 'SettingsCtrl',
         authenticate: true
-      });
+      })
+      .state('forgotPassword', {
+        url: '/forgotPassword',
+        templateUrl: 'app/account/password/forgotPassword.html',
+        controller: 'ForgotPasswordCtrl'
+      })
+      .state('resetPassword', {
+        url: '/resetPassword/:token',
+        templateUrl: 'app/account/password/resetPassword.html',
+        controller: 'ResetPasswordCtrl'
+      });                  
   });
