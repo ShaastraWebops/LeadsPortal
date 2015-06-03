@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('erp2015App')
-  .controller('dealController', function ($scope, $state, Auth, LeadsPortalService, $stateParams, $http, $q, $mdDialog) {
+  .controller('dealController', function ($scope, $state, $window, Auth, LeadsPortalService, $stateParams, $http, $mdDialog) {
     $scope.selectedCoords = [];
     $scope.update = {};
     $scope.showButton = false;
@@ -155,6 +155,7 @@ angular.module('erp2015App')
     	})
     	.then(function (response) {
     		console.log(response);
+            $window.location.reload();
     	}, function () {
     		console.log('Cancel creating update');
     	});
@@ -171,7 +172,6 @@ angular.module('erp2015App')
 		$scope.save = function () {
 			// do the saving part here
             $scope.submitted = true;
-            console.log('there');
             LeadsPortalService.createUpdate({
                 title: $scope.newUpdate.title,
                 summary: $scope.newUpdate.summary,
