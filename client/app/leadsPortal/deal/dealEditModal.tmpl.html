@@ -45,7 +45,7 @@
           <!-- <ng-md-icon icon="email" style="fill:#a9f114"></ng-md-icon> -->
           <input ng-model="editDeal.initialPointOfContactEmail" type="email">
         </md-input-container>
-        <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
+        <md-chips ng-hide="isCoord" ng-model="selectedCoords" md-autocomplete-snap md-require-match>
           <md-autocomplete
               md-selected-item="selectedItem"
               md-search-text="searchText"

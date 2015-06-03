@@ -31,7 +31,6 @@ exports.create = function (req, res) {
   Deal.findById(req.body.deal, function (err, deal) {
     if(err) { return handleError(res,err); }
     if(deal.assignees.indexOf(req.user._id) != -1 || req.user.role === 'core' || req.user.role === 'admin') {
-      req.body.assignees = deal.assignees;
       Update.create(req.body, function (err, update) {
         if(err) { return handleError(res,err); }
         deal.updates.push(update._id);
@@ -48,20 +47,24 @@ exports.create = function (req, res) {
 
 // Updates an existing update in the DB.
 exports.update = function (req, res) { 
-    req.body.updatedOn = Date.now();
-    req.body.lastEditedBy = req.user._id;
-    if(req.body._id) { delete req.body._id; }
-    Update.findById(req.params.id, function (err, update) {
+  req.body.updatedOn = Date.now();
+  req.body.lastEditedBy = req.user._id;
+  if(req.body._id) { delete req.body._id; }
+  Update.findById(req.params.id, function (err, update) {
+    if (err) { return handleError(res, err); }
+    if(!update) { return res.send(404); }
+    Deal.findById(update.deal, function (err, deal) {
       if (err) { return handleError(res, err); }
-      if(!update) { return res.send(404); }
+      if(!deal) { return res.send(404); }
       if(req.user.role === 'core' || req.user.role === 'admin' || 
-        (req.user.role === 'coord' && update.assignees.indexOf(req.user._id)>-1)) {
+        (req.user.role === 'coord' && deal.assignees.indexOf(req.user._id)>-1)) {
           var updated = _.merge(update, req.body);
           updated.save(function (err) {
             if (err) { return handleError(res, err); }
             return res.json(200, update);     
         });
       }
+    });
   });
 };
 

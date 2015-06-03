@@ -93,8 +93,8 @@ exports.update = function(req, res) {
 
       if(req.user.role === 'core' || req.user.role === 'admin' || 
         (req.user.role === 'coord' && deal.assignees.indexOf(req.user._id)>-1)) {      
-        var updated = _.extend(deal, req.body);
-        updated.save(function (err) {
+        var updatedDeal = _.extend(deal, req.body);
+        updatedDeal.save(function (err) {
           if (err) { return handleError(res, err); }
           return res.json(200, deal);
         });

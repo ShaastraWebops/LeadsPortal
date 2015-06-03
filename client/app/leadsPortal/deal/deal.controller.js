@@ -57,11 +57,16 @@ angular.module('erp2015App')
     		console.log('Cancel editing deal');
     	});
     };
-    function DealEditModalCtrl($scope, $state, $mdDialog, DealPassed, CoordsPassed) {
+    function DealEditModalCtrl($scope, $state, $mdDialog, DealPassed, CoordsPassed, Auth) {
     	$scope.editDeal = DealPassed;
     	$scope.coords = CoordsPassed;
         $scope.selectedCoords = DealPassed.assignees;
+        $scope.isCoord = true;
 
+        Auth.isLoggedInAsync(function (loggedIn) {
+            if(Auth.getCurrentUser().role === 'coord') { $scope.isCoord = true; }
+            else $scope.isCoord = false;
+        });
 
         $scope.cancel = function() {
             $mdDialog.cancel();

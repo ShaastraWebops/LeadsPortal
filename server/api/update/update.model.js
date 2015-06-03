@@ -4,7 +4,6 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var UpdateSchema = new Schema({
-  assignees: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   deal: { type: Schema.Types.ObjectId, ref: 'Deal' },	
   pointOfContactName: String,
   pointOfContactNumber: String,
