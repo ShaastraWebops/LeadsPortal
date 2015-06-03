@@ -7,7 +7,6 @@ angular.module('erp2015App', [
   'btford.socket-io',
   'ui.router',
   'ngFileUpload',
-  'ui.bootstrap',
   'smart-table',
   'permission',
   'ngFacebook',
