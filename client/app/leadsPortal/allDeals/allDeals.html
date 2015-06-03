@@ -7,7 +7,7 @@
     </h2>
   </md-toolbar>
   <md-content>
-    <md-card ng-repeat="deal in allDeals">
+    <md-card ng-repeat="deal in allDeals | orderBy: 'createdOn':true">
       <md-card-content layout="column">
         <div layout="row">
           <md-list-item class="md-3-line">
