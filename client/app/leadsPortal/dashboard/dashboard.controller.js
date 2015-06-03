@@ -5,7 +5,6 @@ angular.module('erp2015App')
     	$scope.myDeals = [];  
     	LeadsPortalService.getDealsAssigned()
     		.then(function (deals) {
-    			console.log(deals);
     			$scope.myDeals = deals;
     		});
   });

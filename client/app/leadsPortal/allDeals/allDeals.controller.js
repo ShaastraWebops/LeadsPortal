@@ -5,7 +5,6 @@ angular.module('erp2015App')
     	$scope.allDeals = [];
     	LeadsPortalService.getAllDeals()
     		.then(function (allDeals) {
-          console.log(allDeals);
     			$scope.allDeals = allDeals;
     		});
   });

@@ -121,8 +121,6 @@ angular.module('erp2015App')
 		};
 		$scope.save = function () {
 			// do the saving part here
-            // console.log(UpdatePassed);
-            console.log('saving edited update');
             LeadsPortalService.editUpdate({
                 title: $scope.editUpdate.title,
                 summary: $scope.editUpdate.summary,
@@ -184,7 +182,6 @@ angular.module('erp2015App')
             })
             .then(function (data) {
                 $state.go('deal');
-                console.log(data);
             })
             .catch(function (err) {
                 err = err.data;

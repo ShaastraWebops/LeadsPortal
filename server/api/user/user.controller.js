@@ -37,16 +37,14 @@ function handleError(res, err) {
 /**
  * Creates a new user
  */
- exports.create = function (req, res, next) {
-  console.log('asdasdasdasd');
-  console.log(req.body);
+ exports.create = function (req, res, next) {  
   var newUser = new User(req.body);
   newUser.role = 'user';
   newUser.provider = 'local';
   newUser.createdOn = Date.now();
   newUser.updatedOn = Date.now();
   newUser.save(function (err, user) {
-    if (err) { console.log(err); return validationError(res, err); }
+    if (err) { return validationError(res, err); }
     var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
     res.json({ token: token });
   });
@@ -84,8 +82,7 @@ function handleError(res, err) {
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
 
-  console.log(req.params);
-  console.log(req.user._id);
+  
 
   User.findById(userId, function (err, user) {
     if(user.authenticate(oldPass)) {
@@ -260,11 +257,8 @@ function handleError(res, err) {
       };
       smtpTransport.sendMail(mailOptions, function (err, info) {
         if(err) {
-          console.log('Error Occurred');
-          console.log(err);
           return res.sendStatus(500);
         } else {
-          console.log(info);
           res.sendStatus(200);
         }
       });      
@@ -283,8 +277,6 @@ function handleError(res, err) {
  * @return {[type]}     [description]
  */
  exports.resetPassword = function(req, res) {
-  console.log(req.params);
-  console.log(req.body);
   User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function (err, user) {
     if(err) { return handleError(res, err); }
     if(!user) { return res.sendStatus(404); }
@@ -310,11 +302,8 @@ function handleError(res, err) {
       };
       smtpTransport.sendMail(mailOptions, function (err, info) {
         if(err) {
-          console.log('Error Occurred');
-          console.log(err);
           return res.sendStatus(500);
         } else {
-          console.log(info);
           res.sendStatus(200);
         }
       });      
