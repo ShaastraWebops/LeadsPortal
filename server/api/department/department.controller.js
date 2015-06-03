@@ -57,5 +57,5 @@ exports.destroy = function(req, res) {
 };
 
 function handleError(res, err) {
-  return res.sendStatus(500, err);
+  return res.status(500).send(err);
 }
