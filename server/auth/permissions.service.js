@@ -31,7 +31,7 @@ function isAuthenticated() {
     .use(function(req, res, next) {
       User.findById(req.user._id, function (err, user) {
         if (err) return next(err);
-        if (!user) return res.send(401);
+        if (!user) return res.sendStatus(401);
 
         user.lastSeen = Date.now();
         user.save(function(err) {
@@ -52,7 +52,7 @@ function hasRoleInDepartment() {
     .use(isAuthenticated())
     .use(function meetsRequirements(req, res, next) {
       console.log(req.user);
-      if (req.user.department.indexOf(req.body.department) == -1) return res.send(403);
+      if (req.user.department.indexOf(req.body.department) == -1) return res.sendStatus(403);
       next();
     });
 }
@@ -62,7 +62,7 @@ function hasRoleInSubDepartment() {
     .use(isAuthenticated())
     .use(function meetsRequirements(req, res, next) {
       console.log(req.user);
-      if (req.user.subDepartment.indexOf(req.body.subDepartment) == -1) return res.send(403);
+      if (req.user.subDepartment.indexOf(req.body.subDepartment) == -1) return res.sendStatus(403);
       next();
     });
 }
@@ -79,7 +79,7 @@ function signToken(id) {
  * Set token cookie directly for oAuth strategies
  */
 function setTokenCookie(req, res) {
-  if (!req.user) return res.json(404, { message: 'Something went wrong, please try again.'});
+  if (!req.user) return res.status(404).json({ message: 'Something went wrong, please try again.'});
   var token = signToken(req.user._id, req.user.role);
   res.cookie('token', JSON.stringify(token));
   res.redirect('/');

@@ -83,10 +83,10 @@ exports.destroy = function (req, res) {
 //     console.log(fields);
 //     console.log(files);
 //     console.log(err);
-//     res.json(200, files);
+//     res.status(200).json(files);
 //   });
 // };
 
 function handleError(res, err) {
-  return res.send(500, err);
+  return res.status(500).send(err);
 }

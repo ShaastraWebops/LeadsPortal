@@ -28,7 +28,7 @@ function handleError(res, err) {
  */
  exports.index = function (req, res) {
   User.find({}, '-salt -hashedPassword -lastSeen', function (err, users) {
-    if(err) return res.json(500, err);
+    if(err) return res.status(500).json(err);
     res.status(200).json(users);
   })
   .populate('department', 'name');

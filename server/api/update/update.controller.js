@@ -8,7 +8,7 @@ var Deal = require('../deal/deal.model');
 exports.index = function(req, res) {
   Update.find(function (err, updates) {
     if(err) { return handleError(res, err); }
-    return res.json(200, updates);
+    return res.status(200).json(updates);
   });
 };
 
@@ -16,7 +16,7 @@ exports.index = function(req, res) {
 exports.show = function (req, res) {
   Update.findById(req.params.id, function (err, update) {
     if(err) { return handleError(res, err); }
-    if(!update) { return res.send(404); }
+    if(!update) { return res.sendStatus(404); }
     return res.json(update);
   });
 };
@@ -52,16 +52,16 @@ exports.update = function (req, res) {
   if(req.body._id) { delete req.body._id; }
   Update.findById(req.params.id, function (err, update) {
     if (err) { return handleError(res, err); }
-    if(!update) { return res.send(404); }
+    if(!update) { return res.sendStatus(404); }
     Deal.findById(update.deal, function (err, deal) {
       if (err) { return handleError(res, err); }
-      if(!deal) { return res.send(404); }
+      if(!deal) { return res.sendStatus(404); }
       if(req.user.role === 'core' || req.user.role === 'admin' || 
         (req.user.role === 'coord' && deal.assignees.indexOf(req.user._id)>-1)) {
           var updated = _.merge(update, req.body);
           updated.save(function (err) {
             if (err) { return handleError(res, err); }
-            return res.json(200, update);     
+            return res.status(200).json(update);     
         });
       }
     });
@@ -72,14 +72,14 @@ exports.update = function (req, res) {
 exports.destroy = function(req, res) {
   Update.findById(req.params.id, function (err, update) {
     if(err) { return handleError(res, err); }
-    if(!update) { return res.send(404); }
+    if(!update) { return res.sendStatus(404); }
     update.remove(function(err) {
       if(err) { return handleError(res, err); }
-      return res.send(204);
+      return res.sendStatus(204);
     });
   });
 };
 
 function handleError(res, err) {
-  return res.send(500, err);
+  return res.status(500).send(err);
 }

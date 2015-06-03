@@ -25,7 +25,7 @@ exports.index = function(req, res) {
   .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider')
   .exec(function (err, deals) {
     if(err) { return handleError(res, err); }
-    return res.json(200, deals);
+    return res.status(200).json(deals);
   });
 };
 
@@ -69,7 +69,7 @@ exports.create = function(req, res) {
     if(count != req.body.assignees.length) { res.sendStatus(400); }
     Deal.create(req.body, function (err, deal) {
       if (err) { return handleError(res, err); }
-      return res.json(201, deal);
+      return res.status(201).json(deal);
     });
   });
 };
@@ -96,7 +96,7 @@ exports.update = function(req, res) {
         var updatedDeal = _.extend(deal, req.body);
         updatedDeal.save(function (err) {
           if (err) { return handleError(res, err); }
-          return res.json(200, deal);
+          return res.status(200).json(deal);
         });
       } else { 
         res.sendStatus(403);
