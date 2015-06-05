@@ -1,22 +1,23 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div style="padding-left: 10%; padding-right: 10%;">
-	<md-toolbar class="md-primary">
-		<h1 class="md-toolbar-tools">
-			Deal - {{ deal.title }}
-		</h1>
-	</md-toolbar>
-	<md-content>
-	 <!-- style="background-image: url('/assets/images/leads-portal-background-one.png');" -->
-    	<md-card>
-	      	<div class="md-actions" layout="row" layout-align="end center">
-				<md-button class="md-raised md-primary" ng-click="dealEditModal()" ng-show="showButton">
-					Edit Deal
-				</md-button>
-	      	</div>
-      		<md-card-content style="word-break:break-all">
-        		<h2 class="md-display-1"> Deal Details </h2>
-					<md-divider></md-divider>
+<div class="deals">
+	<div class="makeCenter">
+		<div class="md-whiteframe-z1">
+			<md-toolbar class="md-primary">
+				<h1 class="md-toolbar-tools">
+					{{ deal.title }}
+				</h1>
+			</md-toolbar>
+			<md-content>
+		   	<md-card>
+		     	<div class="md-actions" layout="row" layout-align="end center">
+						<md-button class="md-raised md-primary" ng-click="dealEditModal()" ng-show="showButton">
+							Edit Deal
+						</md-button>
+			   	</div>
+		   		<md-card-content style="word-break:break-all">
+		     		<h2 class="md-display-1"> Deal Details </h2>
+						<md-divider></md-divider>
 				    <md-list>
 					    <md-list-item class="md-3-line">
 					    	<ng-md-icon icon="subject" style="fill:#00517F" size="32" class="md-avatar" alt="deal-title-img"></ng-md-icon>
@@ -26,7 +27,7 @@
 					        </div>
 					    </md-list-item>
 
-						<md-divider md-inset ng-if="!$last"></md-divider>
+							<md-divider md-inset ng-if="!$last"></md-divider>
 
 					    <md-list-item class="md-3-line">
 					    	<ng-md-icon icon="description" style="fill:#00A2FF" size="32" class="md-avatar" alt="deal-summary-img"></ng-md-icon>
@@ -36,9 +37,9 @@
 					        </div>
 					    </md-list-item>
 
-						<md-divider md-inset ng-if="!$last"></md-divider>
-                           
-                           <md-list-item class="md-3-line">
+							<md-divider md-inset ng-if="!$last"></md-divider>
+		                           
+		          <md-list-item class="md-3-line">
 					    	<ng-md-icon icon="poll" style="fill:#0082CC" size="32" class="md-avatar" alt="deal-vertical-img"></ng-md-icon>
 					        <div class="md-list-item-text">
 						        <h3> Vertical </h3>
@@ -46,7 +47,7 @@
 					        </div>
 					    </md-list-item>
 
-						<md-divider md-inset ng-if="!$last"></md-divider>
+							<md-divider md-inset ng-if="!$last"></md-divider>
 
 					    <div layout="row">
 						    <md-list-item class="md-3-line">
@@ -66,7 +67,7 @@
 						    </md-list-item>
 					    </div>
 
-						<md-divider md-inset ng-if="!$last"></md-divider>
+							<md-divider md-inset ng-if="!$last"></md-divider>
 
 					    <div layout="row">
 						    <md-list-item class="md-3-line">
@@ -85,7 +86,7 @@
 						    </md-list-item>
 					    </div>
 
-						<md-divider md-inset ng-if="!$last"></md-divider>
+							<md-divider md-inset ng-if="!$last"></md-divider>
 
 					    <div layout="row">
 						    <md-list-item class="md-3-line">
@@ -113,7 +114,7 @@
 					    </div>
 				    </md-list>
 
-					<md-divider md-inset ng-if="!$last"></md-divider>
+						<md-divider md-inset ng-if="!$last"></md-divider>
 
 				    <md-list>
 			    		<h1 class="md-headline">Assigned to</h1>
@@ -128,34 +129,34 @@
 						        </div>
 						    </md-list-item>
 			    		</div>
-					</md-list>
-      		</md-card-content>
-    	</md-card>
-    </md-content>
+						</md-list>
+		 			</md-card-content>
+		 		</md-card>
+		  </md-content>
 
-	<md-content>
-    	<md-card>
-      		<md-card-content style="word-break:break-all">
-		      	<div class="md-actions" layout="row" layout-align="end center">
-					<md-button class="md-raised md-primary" ng-click="updateCreateModal()" ng-show="showButton">
-						Create Update
-					</md-button>
-		      	</div>
-        		<h2 class="md-display-1"> Updates </h2>
-					<md-divider></md-divider>
-					<!-- <span ng-show="!(deal.updates.length)">No updates as of now</span> -->
-					<div ng-hide="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;">
-						<md-whiteframe class="md-whiteframe-z1" style="background:#fff; margin:20px; padding: 20px;" layout layout-align="left center">
-						    <span>No updates as of now</span>
-						</md-whiteframe>
-					</div>
-					<div ng-show="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;" ng-repeat="update in deal.updates | orderBy: 'createdOn':true">
-				      	<div class="md-actions" layout="row" layout-align="end center">
-							<md-button class="md-raised md-primary md-hue-1" ng-click="updateEditModal(update)" ng-show="showButton">
-								Edit this Update
+			<md-content>
+		    <md-card>
+		    	<md-card-content style="word-break:break-all">
+				   	<div class="md-actions" layout="row" layout-align="end center">
+							<md-button class="md-raised md-primary" ng-click="updateCreateModal()" ng-show="showButton">
+								Create Update
 							</md-button>
-				      	</div>						
-						<md-whiteframe class="md-whiteframe-z4" style="background:#fff; padding: 20px;" layout layout-align="left center">
+				   	</div>
+		     		<h2 class="md-display-1"> Updates </h2>
+						<md-divider></md-divider>
+						<!-- <span ng-show="!(deal.updates.length)">No updates as of now</span> -->
+						<div ng-hide="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;">
+							<md-whiteframe class="md-whiteframe-z1" style="background:#fff; margin:20px; padding: 20px;" layout layout-align="left center">
+							    <span>No updates as of now</span>
+							</md-whiteframe>
+						</div>
+						<div ng-show="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;" ng-repeat="update in deal.updates | orderBy: 'createdOn':true">
+			      	<div class="md-actions" layout="row" layout-align="end center">
+								<md-button class="md-raised md-primary md-hue-1" ng-click="updateEditModal(update)" ng-show="showButton">
+									Edit this Update
+								</md-button>
+			      	</div>						
+							<md-whiteframe class="md-whiteframe-z4" style="background:#fff; padding: 20px;" layout layout-align="left center">
 						    <!-- <span>{{ update.title }}</span> -->
 						    <md-list style="width:100%;">
 							    <md-list-item class="md-3-line">
@@ -166,9 +167,9 @@
 							        </div>
 							    </md-list-item>		
 
-								<md-divider md-inset ng-if="$last"></md-divider>
-								<md-divider md-inset ng-if="!$last"></md-divider>
-		
+									<md-divider md-inset ng-if="$last"></md-divider>
+									<md-divider md-inset ng-if="!$last"></md-divider>
+				
 							    <md-list-item class="md-3-line">
 							    	<ng-md-icon icon="description" style="fill:#00A2FF" size="32" class="md-avatar" alt="update-summary-img"></ng-md-icon>
 							        <div class="md-list-item-text">
@@ -177,8 +178,8 @@
 							        </div>
 							    </md-list-item>
 
-								<md-divider md-inset ng-if="$last"></md-divider>
-								<md-divider md-inset ng-if="!$last"></md-divider>
+									<md-divider md-inset ng-if="$last"></md-divider>
+									<md-divider md-inset ng-if="!$last"></md-divider>
 
 							    <div layout="row">
 								    <md-list-item class="md-3-line">
@@ -204,8 +205,8 @@
 								    </md-list-item>						    	
 							    </div>
 
-								<md-divider md-inset ng-if="$last"></md-divider>
-								<md-divider md-inset ng-if="!$last"></md-divider>
+									<md-divider md-inset ng-if="$last"></md-divider>
+									<md-divider md-inset ng-if="!$last"></md-divider>
 
 							    <div layout="row">
 								    <md-list-item class="md-3-line">
@@ -224,8 +225,8 @@
 								    </md-list-item>						    	
 							    </div>
 
-								<md-divider md-inset ng-if="$last"></md-divider>
-								<md-divider md-inset ng-if="!$last"></md-divider>
+									<md-divider md-inset ng-if="$last"></md-divider>
+									<md-divider md-inset ng-if="!$last"></md-divider>
 
 							    <div layout="row">
 								    <md-list-item class="md-3-line">
@@ -249,14 +250,17 @@
 								        </div>
 								    </md-list-item>						    	
 							    </div>
-							</md-list>
-						</md-whiteframe>
-						<md-divider ng-if="!$last"></md-divider>
-						<md-divider md-inset ng-if="!$last"></md-divider>
+								</md-list>
+							</md-whiteframe>
 
-					</div>
-			</md-card-content>
-		</md-card>
-	<md-content>
+							<md-divider ng-if="!$last"></md-divider>
+							<md-divider md-inset ng-if="!$last"></md-divider>
 
+						</div>
+					</md-card-content>
+				</md-card>
+			<md-content>
+
+		</div>
+	</div>
 </div>

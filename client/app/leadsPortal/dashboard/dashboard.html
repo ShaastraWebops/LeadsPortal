@@ -1,41 +1,80 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div style="padding-left: 10%; padding-right: 10%">
-  <md-toolbar class="md-theme-light">
-    <h2 class="md-toolbar-tools">
-      <span>List of all My Deals</span>
-    </h2>
-  </md-toolbar>
-  <md-content>
-    <md-card ng-repeat="deal in myDeals">
-      <md-card-content layout="column">
-        <div layout="row">
-          <md-list-item class="md-3-line">
-            <ng-md-icon icon="toc" style="fill:#00A2FF" size="48" class="md-avatar" alt="deal-title-img"></ng-md-icon>
-              <div class="md-list-item-text">
-                <h3>{{ deal.title | characters:30 :false }}</h3>
-                <p>{{ deal.info | characters:80 :false }}</p>
-              </div>
-          </md-list-item>
-          <md-list-item class="md-3-line">
-            <ng-md-icon icon="today" style="fill:#0082CC" size="32" class="md-avatar" alt="deal-created-img"></ng-md-icon>
-              <div class="md-list-item-text">
-                <h3> Created On </h3>
-                <p>{{ deal.createdOn | date: 'medium' }}</p>
-              </div>
-          </md-list-item>
-          <md-list-item class="md-3-line">
-            <ng-md-icon icon="schedule" style="fill:#00517F" size="32" class="md-avatar" alt="deal-last-updated-img"></ng-md-icon>
-              <div class="md-list-item-text">
-                <h3> Latest Activity </h3>
-                <p>{{ deal.updatedOn | date: 'medium' }}</p>
-              </div>
-          </md-list-item>
-        </div>
-      </md-card-content>
-      <div class="md-actions" layout="row" layout-align="end center">
-        <md-button ui-sref="deal({id: deal._id})" class="md-raised md-primary md-hue-3">View Deal</md-button>
-      </div>
-    </md-card>
-  </md-content>
+<div class="dashboard">
+  <div class="makeCenter">
+    <div class="md-whiteframe-z1">
+      <md-toolbar class="md-theme-light">
+        <h2 class="md-toolbar-tools">
+          <span>List of all deals assigned to you</span>
+        </h2>
+      </md-toolbar>
+      <md-content>
+
+<!-- 
+        <md-card ng-repeat="deal in myDeals">
+          <md-card-content layout="column">
+            <div layout="row">
+              <md-list-item class="md-3-line">
+                <ng-md-icon icon="toc" style="fill:#00A2FF" size="48" class="md-avatar" alt="deal-title-img"></ng-md-icon>
+                  <div class="md-list-item-text">
+                    <h3>{{ deal.title | characters:30 :false }}</h3>
+                    <p>{{ deal.info | characters:80 :false }}</p>
+                  </div>
+              </md-list-item>
+              <md-list-item class="md-3-line">
+                <ng-md-icon icon="today" style="fill:#0082CC" size="32" class="md-avatar" alt="deal-created-img"></ng-md-icon>
+                  <div class="md-list-item-text">
+                    <h3> Created On </h3>
+                    <p>{{ deal.createdOn | date: 'medium' }}</p>
+                  </div>
+              </md-list-item>
+              <md-list-item class="md-3-line">
+                <ng-md-icon icon="schedule" style="fill:#00517F" size="32" class="md-avatar" alt="deal-last-updated-img"></ng-md-icon>
+                  <div class="md-list-item-text">
+                    <h3> Latest Activity </h3>
+                    <p>{{ deal.updatedOn | date: 'medium' }}</p>
+                  </div>
+              </md-list-item>
+            </div>
+          </md-card-content>
+          <div class="md-actions" layout="row" layout-align="end center">
+            <md-button ui-sref="deal({id: deal._id})" class="md-raised md-primary md-hue-3">View Deal</md-button>
+          </div>
+        </md-card>
+ -->
+
+        <md-list>
+          <div ng-repeat="deal in myDeals | orderBy: 'updatedOn':true">
+            <md-list-item ng-click="gotoDeal(deal)">
+                <ng-md-icon icon="dns" style="fill:#00A2FF" size="32" class="md-avatar" alt="deal-title-img"></ng-md-icon>
+                <div layout="row" layout-margin layout-fill layout-padding>
+                  <div flex="33">
+                    <div class="md-list-item-text">
+                      <h6 class="md-title">Title</h6>
+                      <h5>{{ deal.title | characters:20 :false }}</h5>
+                    </div>
+                  </div>
+
+                  <div flex="33">
+                    <div class="md-list-item-text">
+                      <h6 class="md-title">Created on</h6>
+                      <h5>{{ deal.createdOn | date: 'medium' }}</h5>
+                    </div>
+                  </div>
+
+                  <div flex="33">
+                    <div class="md-list-item-text">
+                      <h6 class="md-title">Updated on</h6>
+                      <h5>{{ deal.updatedOn | date: 'medium' }}</h5>
+                    </div>
+                  </div>
+                </div>
+            </md-list-item>
+            <md-divider></md-divider>
+          </div>
+        </md-list>
+
+      </md-content>
+    </div>
+  </div>
 </div>
