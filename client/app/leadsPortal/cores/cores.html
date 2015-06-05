@@ -1,85 +1,89 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div style="padding-left: 15%; padding-right: 15%">
+<div class="cores">
+  <div class="makeCenter">
+    <div class="md-whiteframe-z1">
 
-  <md-toolbar class="md-primary">
-    <h1 class="md-toolbar-tools">
-      Create a new Deal
-    </h1>
-  </md-toolbar>
+      <md-toolbar class="md-primary">
+        <h1 class="md-toolbar-tools">
+          Create a new Deal
+        </h1>
+      </md-toolbar>
 
-  <md-content layout-padding>
-    <form name="form" ng-submit="newDeal(form)" novalidate>
+      <md-content layout-padding>
+        <form name="form" ng-submit="newDeal(form)" novalidate>
 
-      <md-input-container>
-        <label>Title</label>
-        <input name="title" ng-model="deal.title" ng-required="true" mongoose-error />
-      </md-input-container>
-      <div style="color:red">
-        <span ng-show="form.title.$error.required && submitted">
-          Title is required.
-        </span>
-        <span>{{ errors.other }}</sapn>
-      </div>
+          <md-input-container>
+            <label>Title</label>
+            <input name="title" ng-model="deal.title" ng-required="true" mongoose-error />
+          </md-input-container>
+          <div style="color:red">
+            <span ng-show="form.title.$error.required && submitted">
+              Title is required.
+            </span>
+            <span>{{ errors.other }}</sapn>
+          </div>
 
-      <md-input-container>
-        <label>Deal Info</label>
-        <textarea required name="info" ng-model="deal.info" mongoose-error></textarea>
-      </md-input-container>
-      <div style="color:red">
-        <span ng-show="form.info.$error.required && submitted">
-          Title is required.
-        </span>
-        <span>{{ errors.other }}</sapn>
-      </div>
+          <md-input-container>
+            <label>Deal Info</label>
+            <textarea required name="info" ng-model="deal.info" mongoose-error></textarea>
+          </md-input-container>
+          <div style="color:red">
+            <span ng-show="form.info.$error.required && submitted">
+              Title is required.
+            </span>
+            <span>{{ errors.other }}</sapn>
+          </div>
 
-      <md-input-container>
-        <label>Company Name</label>
-        <input required name="companyName" ng-model="deal.companyName" mongoose-error />
-      </md-input-container>
-      <div style="color:red">
-        <span ng-show="form.companyName.$error.required && submitted">
-          Title is required.
-        </span>
-        <span>{{ errors.other }}</sapn>
-      </div>
+          <md-input-container>
+            <label>Company Name</label>
+            <input required name="companyName" ng-model="deal.companyName" mongoose-error />
+          </md-input-container>
+          <div style="color:red">
+            <span ng-show="form.companyName.$error.required && submitted">
+              Title is required.
+            </span>
+            <span>{{ errors.other }}</sapn>
+          </div>
 
-      <md-input-container>
-        <label>Vertical</label>
-        <input name="vertical" ng-model="deal.vertical">
-      </md-input-container>
+          <md-input-container>
+            <label>Vertical</label>
+            <input name="vertical" ng-model="deal.vertical">
+          </md-input-container>
 
-      <md-input-container>
-        <label>PoC Name</label>
-        <input name="initialPointOfContactName" ng-model="deal.initialPointOfContactName">
-      </md-input-container>
+          <md-input-container>
+            <label>PoC Name</label>
+            <input name="initialPointOfContactName" ng-model="deal.initialPointOfContactName">
+          </md-input-container>
 
-      <md-input-container>
-        <label>PoC Phone Number</label>
-        <input name="initialPointOfContactNumber" ng-model="deal.initialPointOfContactNumber">
-      </md-input-container>
+          <md-input-container>
+            <label>PoC Phone Number</label>
+            <input name="initialPointOfContactNumber" ng-model="deal.initialPointOfContactNumber">
+          </md-input-container>
 
-      <md-input-container>
-        <label>PoC Email</label>
-        <input name="initialPointOfContactEmail" ng-model="deal.initialPointOfContactEmail">
-      </md-input-container>
+          <md-input-container>
+            <label>PoC Email</label>
+            <input name="initialPointOfContactEmail" ng-model="deal.initialPointOfContactEmail">
+          </md-input-container>
 
-      <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
-        <md-autocomplete
-          md-selected-item="selectedItem"
-          md-search-text="searchText"
-          md-items="item in coords"
-          md-item-text="item.name"
-          placeholder="Assign a team member">
-            <span md-highlight-text="searchText">{{item.name}}</span>
-        </md-autocomplete>
-        <md-chip-template>
-          <strong>{{$chip.name}}</strong>
-        </md-chip-template>
-      </md-chips>
+          <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
+            <md-autocomplete
+              md-selected-item="selectedItem"
+              md-search-text="searchText"
+              md-items="item in coords"
+              md-item-text="item.name"
+              placeholder="Assign a team member">
+                <span md-highlight-text="searchText">{{item.name}}</span>
+            </md-autocomplete>
+            <md-chip-template>
+              <strong>{{$chip.name}}</strong>
+            </md-chip-template>
+          </md-chips>
 
-      <md-button type="submit" class="md-raised md-primary">Create</md-button>
-    </form>
-  </md-content>  
+          <md-button type="submit" class="md-raised md-primary">Create</md-button>
+        </form>
+      </md-content>  
 
+    </div>
+  </div>
 </div>
