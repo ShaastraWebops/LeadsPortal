@@ -6,14 +6,14 @@ var request = require('supertest');
 
 describe('GET /api/uploads', function() {
 
-  it('should respond with JSON array', function(done) {
+  it('should send 404 not found', function(done) {
     request(app)
       .get('/api/uploads')
-      .expect(200)
-      .expect('Content-Type', /json/)
+      .expect(404)
+      // .expect('Content-Type', /json/)
       .end(function(err, res) {
         if (err) return done(err);
-        res.body.should.be.instanceof(Array);
+        // res.body.should.be.instanceof(Array);
         done();
       });
   });
