@@ -1,75 +1,75 @@
 <md-dialog aria-label="Edit Deal Details" style="width:80%;">
   <form>
-  <md-dialog-content>
-    <div layout="column" class="deals">
-      <div class="md-whiteframe-z1">
-        <md-toolbar class="md-primary">
-          <h1 class="md-toolbar-tools">
-            Edit Deal Details
-          </h1>
-        </md-toolbar>
+    <md-dialog-content>
+      <div layout="column" class="deals">
+        <div class="md-whiteframe-z1">
+          <md-toolbar class="md-primary">
+            <h1 class="md-toolbar-tools">
+              Edit Deal Details
+            </h1>
+          </md-toolbar>
 
-        <md-content layout-padding>
-          <md-input-container>
-            <label>Deal Title</label>      
-            <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
-            <input ng-model="editDeal.title" type="text">
-          </md-input-container>
-          <md-input-container>
-            <label>Deal Info</label>      
-            <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
-            <textarea ng-model="editDeal.info"></textarea>
-          </md-input-container>
-          <md-input-container>
-            <label>Vertical</label>      
-            <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
-            <textarea ng-model="editDeal.vertical"></textarea>
-          </md-input-container>
-          <md-input-container>
-            <label>Company Name</label>      
-            <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
-            <input ng-model="editDeal.companyName" type="text">
-          </md-input-container>
-          <md-input-container>
-            <label>PoC's Name</label>      
-            <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
-            <input ng-model="editDeal.initialPointOfContactName" type="text">
-          </md-input-container>
-          <md-input-container>
-            <label>PoC's Number</label>      
-            <!-- <ng-md-icon icon="call" style="fill:#ff0000"></ng-md-icon> -->
-            <input ng-model="editDeal.initialPointOfContactNumber" type="text">
-          </md-input-container>
-          <md-input-container>
-            <label>PoC's Email</label>      
-            <!-- <ng-md-icon icon="email" style="fill:#a9f114"></ng-md-icon> -->
-            <input ng-model="editDeal.initialPointOfContactEmail" type="email">
-          </md-input-container>
-          <md-chips ng-hide="isCoord" ng-model="selectedCoords" md-autocomplete-snap md-require-match>
-            <md-autocomplete
-                md-selected-item="selectedItem"
-                md-search-text="searchText"
-                md-items="item in coords"
-                md-item-text="item.name"
-                placeholder="Assign a Team Member">
-              <span md-highlight-text="searchText">{{item.name}}</span>
-            </md-autocomplete>
-            <md-chip-template>
-              <strong>{{$chip.name}}</strong>
-            </md-chip-template>
-          </md-chips>
-        </md-content>
+          <md-content layout-padding>
+            <md-input-container>
+              <label>Deal Title</label>      
+              <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
+              <input ng-model="editDeal.title" type="text">
+            </md-input-container>
+            <md-input-container>
+              <label>Deal Info</label>      
+              <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
+              <textarea ng-model="editDeal.info"></textarea>
+            </md-input-container>
+            <md-input-container>
+              <label>Vertical</label>      
+              <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
+              <textarea ng-model="editDeal.vertical"></textarea>
+            </md-input-container>
+            <md-input-container>
+              <label>Company Name</label>      
+              <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
+              <input ng-model="editDeal.companyName" type="text">
+            </md-input-container>
+            <md-input-container>
+              <label>PoC's Name</label>      
+              <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
+              <input ng-model="editDeal.initialPointOfContactName" type="text">
+            </md-input-container>
+            <md-input-container>
+              <label>PoC's Number</label>      
+              <!-- <ng-md-icon icon="call" style="fill:#ff0000"></ng-md-icon> -->
+              <input ng-model="editDeal.initialPointOfContactNumber" type="text">
+            </md-input-container>
+            <md-input-container>
+              <label>PoC's Email</label>      
+              <!-- <ng-md-icon icon="email" style="fill:#a9f114"></ng-md-icon> -->
+              <input ng-model="editDeal.initialPointOfContactEmail" type="email">
+            </md-input-container>
+            <md-chips ng-hide="isCoord" ng-model="selectedCoords" md-autocomplete-snap md-require-match>
+              <md-autocomplete
+                  md-selected-item="selectedItem"
+                  md-search-text="searchText"
+                  md-items="item in coords"
+                  md-item-text="item.name"
+                  placeholder="Assign a Team Member">
+                <span md-highlight-text="searchText">{{item.name}}</span>
+              </md-autocomplete>
+              <md-chip-template>
+                <strong>{{$chip.name}}</strong>
+              </md-chip-template>
+            </md-chips>
+          </md-content>
 
+        </div>
       </div>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+      <md-button ng-click="cancel()" class="md-raised">
+        Discard changes
+      </md-button>
+      <md-button ng-click="save()" class="md-raised md-primary">
+        Save
+      </md-button>
     </div>
-  </md-dialog-content>
-  <div class="md-actions" layout="row">
-    <md-button ng-click="cancel()" class="md-raised">
-      Discard changes
-    </md-button>
-    <md-button ng-click="save()" class="md-raised md-primary">
-      Save
-    </md-button>
-  </div>
   </form>
 </md-dialog>

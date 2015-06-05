@@ -1,63 +1,63 @@
 <md-dialog aria-label="Edit Update Details" style="width:80%">
   <form>
-  <md-dialog-content>
-    <div layout="column" class="deals">
-      <div class="md-whiteframe-z1">
+    <md-dialog-content>
+      <div layout="column" class="deals">
+        <div class="md-whiteframe-z1">
 
-        <md-toolbar class="md-primary">
-          <h1 class="md-toolbar-tools">
-            Edit Update Details
-          </h1>
-        </md-toolbar>
+          <md-toolbar class="md-primary">
+            <h1 class="md-toolbar-tools">
+              Edit Update Details
+            </h1>
+          </md-toolbar>
 
-        <md-content layout-padding class="autoScroll">
-          <md-input-container>
-            <label>Update Title</label>      
-            <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
-            <input ng-model="editUpdate.title" type="text">
-          </md-input-container>
-          <md-input-container>
-            <label>Update Summary</label>      
-            <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
-            <textarea ng-model="editUpdate.summary"></textarea>
-          </md-input-container>
-          <md-input-container>
-            <label>PoC's Name</label>      
-            <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
-            <input ng-model="editUpdate.pointOfContactName" type="text">
-          </md-input-container>
-          <md-input-container>
-            <label>PoC's Number</label>      
-            <!-- <ng-md-icon icon="call" style="fill:#ff0000"></ng-md-icon> -->
-            <input ng-model="editUpdate.pointOfContactNumber" type="text">
-          </md-input-container>
-          <md-input-container>
-            <label>PoC's Email</label>      
-            <!-- <ng-md-icon icon="email" style="fill:#a9f114"></ng-md-icon> -->
-            <input ng-model="editUpdate.pointOfContactEmail" type="email">
-          </md-input-container>
-          <div layout layout-sm="column">
-          <md-input-container style="width:80%">
-              <label>Next Activity</label>
-              <input ng-model="editUpdate.nextActivityAim" type="text">
+          <md-content layout-padding class="autoScroll">
+            <md-input-container>
+              <label>Update Title</label>      
+              <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
+              <input ng-model="editUpdate.title" type="text">
             </md-input-container>
-          <md-input-container flex>
-            <label>Date</label>
-            <input ng-model="editUpdate.nextActivityDate" type="date">
-          </md-input-container>
-        </div>
-        </md-content>
+            <md-input-container>
+              <label>Update Summary</label>      
+              <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
+              <textarea ng-model="editUpdate.summary"></textarea>
+            </md-input-container>
+            <md-input-container>
+              <label>PoC's Name</label>      
+              <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
+              <input ng-model="editUpdate.pointOfContactName" type="text">
+            </md-input-container>
+            <md-input-container>
+              <label>PoC's Number</label>      
+              <!-- <ng-md-icon icon="call" style="fill:#ff0000"></ng-md-icon> -->
+              <input ng-model="editUpdate.pointOfContactNumber" type="text">
+            </md-input-container>
+            <md-input-container>
+              <label>PoC's Email</label>      
+              <!-- <ng-md-icon icon="email" style="fill:#a9f114"></ng-md-icon> -->
+              <input ng-model="editUpdate.pointOfContactEmail" type="email">
+            </md-input-container>
+            <div layout layout-sm="column">
+            <md-input-container style="width:80%">
+                <label>Next Activity</label>
+                <input ng-model="editUpdate.nextActivityAim" type="text">
+              </md-input-container>
+            <md-input-container flex>
+              <label>Date</label>
+              <input ng-model="editUpdate.nextActivityDate" type="date">
+            </md-input-container>
+          </div>
+          </md-content>
 
+        </div>
       </div>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+      <md-button ng-click="cancel()" class="md-raised">
+        Discard changes
+      </md-button>
+      <md-button ng-click="save()" class="md-raised md-primary">
+        Save
+      </md-button>
     </div>
-  </md-dialog-content>
-  <div class="md-actions" layout="row">
-    <md-button ng-click="cancel()" class="md-raised">
-      Discard changes
-    </md-button>
-    <md-button ng-click="save()" class="md-raised md-primary">
-      Save
-    </md-button>
-  </div>
   </form>
 </md-dialog>
