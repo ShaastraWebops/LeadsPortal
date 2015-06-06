@@ -154,12 +154,12 @@
 							</md-whiteframe>
 						</div>
 						<div ng-show="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;" ng-repeat="update in deal.updates | orderBy: 'createdOn':true">
-							<md-whiteframe class="md-whiteframe-z3" style="background:#fff; padding: 20px;" layout layout-align="left center">
 			      	<div class="md-actions" layout="row" layout-align="end center">
 								<md-button class="md-raised md-primary md-hue-1" ng-click="updateEditModal(update)" ng-show="showButton">
 									Edit this Update
 								</md-button>
 			      	</div>						
+							<md-whiteframe class="md-whiteframe-z3" style="background:#fff; padding: 20px;" layout layout-align="left center">
 						    <md-list style="width:100%;">
 							    <md-list-item class="md-3-line">
 							    	<ng-md-icon icon="subject" style="fill:#00517F" size="32" class="md-avatar" alt="update-title-img"></ng-md-icon>
