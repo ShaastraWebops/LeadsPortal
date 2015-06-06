@@ -129,8 +129,8 @@ angular.module('erp2015App')
                 pointOfContactEmail: $scope.editUpdate.pointOfContactEmail,
                 nextActivityAim: $scope.editUpdate.nextActivityAim,
                 nextActivityDate: $scope.editUpdate.nextActivityDate,
-                deal: $stateParams.id,
-            },UpdatePassed._id)
+                deal: $stateParams.id
+            }, UpdatePassed._id)
             .then(function (data) {
                 $state.go('deal');
             })
