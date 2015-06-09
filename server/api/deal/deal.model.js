@@ -4,6 +4,13 @@ var mongoose = require('mongoose');
 var deepPopulate = require('mongoose-deep-populate');
 var Schema = mongoose.Schema;
 
+var allVerticals = [
+                    'one',
+                    'two',
+                    'three',
+                    'four'
+                    ];
+
 var DealSchema = new Schema({
   title: String,
   info: String,
@@ -19,7 +26,7 @@ var DealSchema = new Schema({
   updatedOn: Date,
   createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
   lastEditedBy: { type: Schema.Types.ObjectId, ref: 'User' },
-  vertical: String
+  vertical: {}
 });
 
 DealSchema.plugin(deepPopulate, {
@@ -65,5 +72,12 @@ DealSchema
   .validate(function (assign) {
     return assign.length;
   }, 'Should be assigned to someone');
+
+  DealSchema
+  .path('vertical')
+  .validate(function (vertical) {
+    return (allVerticals.indexOf(vertical.value) !== -1);
+  }, 'This is not a valid vertical');
+
 
 module.exports = mongoose.model('Deal', DealSchema);

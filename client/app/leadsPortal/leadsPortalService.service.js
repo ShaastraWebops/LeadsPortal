@@ -7,7 +7,6 @@ angular.module('erp2015App')
       createDeal:function(data){
         return $http.post('/api/deals', data).then(function(response){
           return response.data;
-          console.log(response.data);
         });
       },
   		getAllDeals: function () {
@@ -40,6 +39,24 @@ angular.module('erp2015App')
           return response.data;
         });
       },
+      verticals:[
+      {
+        name: 'One',
+        value: 'one'
+      },
+      {
+        name: 'Two',
+        value: 'two'
+      },
+      {
+        name: 'Three',
+        value: 'three'
+      },
+      {
+        name: 'Four',
+        value: 'four'
+      }
+      ],
       getCoords:function(){
         return $http.get('/api/users/getCoords').then(function (response){
           return response.data;

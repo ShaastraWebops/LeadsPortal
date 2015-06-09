@@ -20,7 +20,6 @@ angular.module('erp2015App')
 	LeadsPortalService.getDeal($stateParams.id)
 		.then(function (deal) {
 			$scope.deal = deal;
-
             // showing editDeal, createUpdate, editUpdate button only to permitted users
             Auth.isLoggedInAsync(function (loggedIn) {
                 if(Auth.getCurrentUser().role === 'admin' || Auth.getCurrentUser().role === 'core') {
@@ -48,7 +47,9 @@ angular.module('erp2015App')
     		templateUrl: '/app/leadsPortal/deal/dealEditModal.tmpl.html',
     		locals: {
     			DealPassed: $scope.deal,
-    			CoordsPassed: $scope.coords
+    			CoordsPassed: $scope.coords,
+                VerticalName: $scope.deal.vertical.name,
+                VerticalValue: $scope.deal.vertical.value
     		}
     	})
     	.then(function (response) {
@@ -57,11 +58,17 @@ angular.module('erp2015App')
     		console.log('Cancel editing deal');
     	});
     };
-    function DealEditModalCtrl($scope, $state, $mdDialog, DealPassed, CoordsPassed, Auth) {
-    	$scope.editDeal = DealPassed;
+    function DealEditModalCtrl($scope, $state, $mdDialog, VerticalName, VerticalValue, DealPassed, CoordsPassed, Auth) {
+        $scope.editDeal = {};
+        $scope.editDeal.vertical = {};
+        $scope.editDeal = DealPassed;
+        $scope.editDeal.vertical['name'] = VerticalName;
+        $scope.editDeal.vertical['value'] = VerticalValue;
+
     	$scope.coords = CoordsPassed;
         $scope.selectedCoords = DealPassed.assignees;
         $scope.isCoord = true;
+        $scope.verticals = LeadsPortalService.verticals;
 
         Auth.isLoggedInAsync(function (loggedIn) {
             if(Auth.getCurrentUser().role === 'coord') { $scope.isCoord = true; }

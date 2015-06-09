@@ -46,10 +46,9 @@
             <span>{{ errors.other }}</sapn>
           </div>
 
-          <md-input-container>
-            <label>Vertical</label>
-            <input name="vertical" ng-model="deal.vertical">
-          </md-input-container>
+          <md-select placeholder="Vertical" ng-model="deal.vertical">
+            <md-option ng-repeat="vertical in verticals" value="{{vertical}}">{{vertical.name}}</md-option>
+          </md-select>
 
           <md-input-container>
             <label>PoC Name</label>

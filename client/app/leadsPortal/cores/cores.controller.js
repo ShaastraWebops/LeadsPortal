@@ -4,6 +4,10 @@ angular.module('erp2015App')
 .controller('CoresCtrl', function ($scope, LeadsPortalService, $location, $http, $state, $q) {
   $scope.submitted = false;
 
+  $scope.verticals = [];
+
+  $scope.verticals = LeadsPortalService.verticals;
+
   LeadsPortalService.getCoords()
   .then(function (data) {
     $scope.coords = data;
@@ -18,13 +22,13 @@ angular.module('erp2015App')
     angular.forEach($scope.selectedCoords, function (item) {
       $scope.coordsIds.push(item._id);
     });
-    
+
     if(form.$valid) {
       LeadsPortalService.createDeal({
         title: $scope.deal.title,
         info: $scope.deal.info,
         companyName: $scope.deal.companyName,
-        vertical: $scope.deal.vertical,
+        vertical: JSON.parse($scope.deal.vertical),
         initialPointOfContactName: $scope.deal.initialPointOfContactName,
         initialPointOfContactNumber: $scope.deal.initialPointOfContactNumber,
         initialPointOfContactEmail: $scope.deal.initialPointOfContactEmail,

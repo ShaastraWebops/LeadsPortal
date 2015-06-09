@@ -20,11 +20,11 @@
               <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
               <textarea ng-model="editDeal.info"></textarea>
             </md-input-container>
-            <md-input-container>
-              <label>Vertical</label>      
-              <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
-              <textarea ng-model="editDeal.vertical"></textarea>
-            </md-input-container>
+
+            <md-select placeholder="Vertical" ng-model="editDeal.vertical">
+        <md-option ng-repeat="vertical in verticals" value="{{vertical}}" ng-selected="editDeal.vertical===vertical">{{vertical.name}}</md-option>
+      </md-select>
+
             <md-input-container>
               <label>Company Name</label>      
               <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->

@@ -3,6 +3,39 @@
 <div class="allDeals">
   <div class="makeCenter">
     <div class="md-whiteframe-z1">
+
+      <div layout="row">
+         <md-chips ng-model="selectedVerticals" md-autocomplete-snap md-require-match>
+            <md-autocomplete
+              md-selected-item="selectedItem"
+              md-search-text="searchText"
+              md-items="item in verticals"
+              md-item-text="item.name"
+              placeholder="search deals of vertical">
+                <span md-highlight-text="searchText">{{item.name}}</span>
+            </md-autocomplete>
+            <md-chip-template>
+              <strong>{{$chip.name}}</strong>
+            </md-chip-template>
+          </md-chips>
+
+         <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
+            <md-autocomplete
+              md-selected-item="selectedItem"
+              md-search-text="searchText"
+              md-items="item in coords"
+              md-item-text="item.name"
+              placeholder="search deals of coord">
+                <span md-highlight-text="searchText">{{item.name}}</span>
+            </md-autocomplete>
+            <md-chip-template>
+              <strong>{{$chip.name}}</strong>
+            </md-chip-template>
+          </md-chips>
+     
+         <md-button type="button" ng-click="search()" class="md-raised md-primary">Get Deals</md-button>
+      </div>
+      
       <md-toolbar class="md-theme-light">
         <h2 class="md-toolbar-tools">
           <span>List of all the Deals</span>
