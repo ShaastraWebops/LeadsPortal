@@ -38,7 +38,7 @@
       
       <md-toolbar class="md-theme-light">
         <h2 class="md-toolbar-tools">
-          <span>List of all the Deals</span>
+          <span>{{dealsTitle}}</span>
         </h2>
       </md-toolbar>
       <md-content>
@@ -85,6 +85,7 @@
                     <div class="md-list-item-text">
                       <h6 class="md-title">Title</h6>
                       <h5>{{ deal.title | characters:20 :false }}</h5>
+                      {{deal.vertical.name}}
                     </div>
                   </div>
 

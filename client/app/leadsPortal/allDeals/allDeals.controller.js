@@ -8,6 +8,8 @@ angular.module('erp2015App')
   $scope.selectedCoords = [];
   $scope.verticals = [];
   $scope.selectedVerticals = [];
+  
+  $scope.dealsTitle = "List of all Deals";
 
   LeadsPortalService.getAllDeals()
     .then(function (allDeals) {
@@ -33,6 +35,8 @@ angular.module('erp2015App')
     var sortedVerticals = [];
     var sortedCoords = [];
     var sortedDeals = [];
+   
+    $scope.dealsTitle = "List of required Deals";
 
     var allDeals = $scope.allDeals;
     angular.forEach(verticalSelected, function (item) { 
@@ -51,7 +55,7 @@ angular.module('erp2015App')
   };   
   
   $scope.gotoDeal = function (deal) {
-  	$state.go('deal', {id: deal._id});
+  	$state.go('deal', {id: deal
   };
 
 });
