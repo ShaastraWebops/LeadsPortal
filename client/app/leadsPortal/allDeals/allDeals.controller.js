@@ -14,11 +14,15 @@ angular.module('erp2015App')
   LeadsPortalService.getAllDeals()
     .then(function (allDeals) {
       $scope.allDeals = allDeals;
-      $scope.sortedDeals = allDeals;
+      if (sessionStorage.length == 0) {
+        $scope.sortedDeals = allDeals;
+      } else { 
+        populateStorage(); 
+      }; 
     }, function (err) {
        console.log(err);
     });
-    
+
   LeadsPortalService.getCoords()
     .then(function (data) {
       $scope.coords = data;
@@ -29,6 +33,7 @@ angular.module('erp2015App')
   $scope.verticals = LeadsPortalService.verticals;
   
   $scope.search = function() {
+    sessionStorage.clear();
     var verticalSelected = $scope.selectedVerticals;
     var coordSelected = $scope.selectedCoords;
 
@@ -51,11 +56,27 @@ angular.module('erp2015App')
       $scope.sortedDeals = _.union(sortedVerticals, sortedCoords);
     } else {
       $scope.sortedDeals = allDeals;
+      $scope.dealsTitle = "List of all Deals";
     };
-  };   
+    
+    var storageObject = {
+     "storedVerticals": verticalSelected,
+     "storedCoords": coordSelected,
+     "storedDeals": $scope.sortedDeals
+    };
+    sessionStorage.setItem("storedVerticals", JSON.stringify(storageObject.storedVerticals));
+    sessionStorage.setItem("storedCoords", JSON.stringify(storageObject.storedCoords));
+    sessionStorage.setItem("storedDeals", JSON.stringify(storageObject.storedDeals));
+  };  
+  function populateStorage() {
+    $scope.sortedDeals = JSON.parse(sessionStorage.getItem("storedDeals"));
+    $scope.selectedVerticals = JSON.parse(sessionStorage.getItem("storedVerticals"));
+    $scope.selectedCoords = JSON.parse(sessionStorage.getItem("storedCoords"));
+    $scope.dealsTitle = "List of required Deals";
+  };
   
   $scope.gotoDeal = function (deal) {
-  	$state.go('deal', {id: deal._id});
+    $state.go('deal', {id: deal._id});
   };
 
 });
