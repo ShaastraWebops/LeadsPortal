@@ -35,6 +35,8 @@
             <span>{{ errors.other }}</sapn>
           </div>
 
+        <div layout="row">
+         <div flex="50">
           <md-input-container>
             <label>Company Name</label>
             <input required name="companyName" ng-model="deal.companyName" mongoose-error />
@@ -45,26 +47,40 @@
             </span>
             <span>{{ errors.other }}</sapn>
           </div>
+         </div>
 
-          <md-select placeholder="Vertical" ng-model="deal.vertical">
-            <md-option ng-repeat="vertical in verticals" value="{{vertical}}">{{vertical.name}}</md-option>
-          </md-select>
-
+         <div flex="50"> 
           <md-input-container>
             <label>PoC Name</label>
             <input name="initialPointOfContactName" ng-model="deal.initialPointOfContactName">
           </md-input-container>
-
+         </div>
+        </div>
+          
+        <div layout="row">
+         <div flex="50">
           <md-input-container>
             <label>PoC Phone Number</label>
             <input name="initialPointOfContactNumber" ng-model="deal.initialPointOfContactNumber">
           </md-input-container>
+         </div>
 
+         <div flex="50">
           <md-input-container>
             <label>PoC Email</label>
             <input name="initialPointOfContactEmail" ng-model="deal.initialPointOfContactEmail">
           </md-input-container>
+         </div>
+        </div>
+        
+        <div layout="row">
+         <div flex="20">
+          <md-select placeholder="Select Vertical" ng-model="deal.vertical">
+            <md-option ng-repeat="vertical in verticals" value="{{vertical}}">{{vertical.name}}</md-option>
+          </md-select>
+         </div>
 
+         <div flex>
           <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
             <md-autocomplete
               md-selected-item="selectedItem"
@@ -78,6 +94,8 @@
               <strong>{{$chip.name}}</strong>
             </md-chip-template>
           </md-chips>
+         </div>
+        </div>
 
           <md-button type="submit" class="md-raised md-primary">Create</md-button>
         </form>

@@ -20,31 +20,53 @@
               <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
               <textarea ng-model="editDeal.info"></textarea>
             </md-input-container>
+           
 
-            <md-select placeholder="Vertical" ng-model="editDeal.vertical">
-        <md-option ng-repeat="vertical in verticals" value="{{vertical}}" ng-selected="editDeal.vertical===vertical">{{vertical.name}}</md-option>
-      </md-select>
-
+          <div layout="row">
+           <div flex="50">
             <md-input-container>
               <label>Company Name</label>      
               <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
               <input ng-model="editDeal.companyName" type="text">
             </md-input-container>
+           </div>
+
+           <div flex="50">
             <md-input-container>
               <label>PoC's Name</label>      
               <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
               <input ng-model="editDeal.initialPointOfContactName" type="text">
             </md-input-container>
+           </div>
+          </div>
+
+          <div layout="row">
+           <div flex="50">
             <md-input-container>
               <label>PoC's Number</label>      
               <!-- <ng-md-icon icon="call" style="fill:#ff0000"></ng-md-icon> -->
               <input ng-model="editDeal.initialPointOfContactNumber" type="text">
             </md-input-container>
+           </div>
+
+           <div flex="50">
             <md-input-container>
               <label>PoC's Email</label>      
               <!-- <ng-md-icon icon="email" style="fill:#a9f114"></ng-md-icon> -->
               <input ng-model="editDeal.initialPointOfContactEmail" type="email">
             </md-input-container>
+           </div>
+          </div>
+
+          <div layout="row">
+           <div flex="20">
+            <md-select placeholder="Change Vertical" ng-model="editDeal.vertical" ng-change="changeVertical()">
+            <md-select-label>{{editDeal.vertical.name}}</md-select-label>
+              <md-option ng-repeat="vertical in verticals" value="{{vertical}}">{{vertical.name}}</md-option>
+            </md-select>
+           </div>
+           
+           <div flex>
             <md-chips ng-hide="isCoord" ng-model="selectedCoords" md-autocomplete-snap md-require-match>
               <md-autocomplete
                   md-selected-item="selectedItem"
@@ -58,6 +80,9 @@
                 <strong>{{$chip.name}}</strong>
               </md-chip-template>
             </md-chips>
+           </div>
+          </div>
+
           </md-content>
 
         </div>

@@ -75,6 +75,11 @@ angular.module('erp2015App')
             else $scope.isCoord = false;
         });
 
+        $scope.changeVertical = function() {
+            // converting the string to json due to md-select
+            if(typeof $scope.editDeal.vertical === 'string')
+                $scope.editDeal.vertical = JSON.parse($scope.editDeal.vertical);
+        };
         $scope.cancel = function() {
             $mdDialog.cancel();
         };
