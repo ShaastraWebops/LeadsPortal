@@ -5,6 +5,8 @@
     <div class="md-whiteframe-z1">
 
       <div layout="row">
+        <div layout="row">
+         <ng-md-icon icon="poll" style="fill:#0082CC" size="48" class="md-avatar" alt="deal-vertical-img"></ng-md-icon>
          <md-chips ng-model="selectedVerticals" md-autocomplete-snap md-require-match>
             <md-autocomplete
               md-selected-item="selectedItem"
@@ -18,7 +20,10 @@
               <strong>{{$chip.name}}</strong>
             </md-chip-template>
           </md-chips>
+        </div>
 
+        <div layout="row">  
+         <ng-md-icon icon="people" style="fill:#00A2FF" size="48" class="md-avatar" alt="deal-assignee-img"></ng-md-icon>
          <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
             <md-autocomplete
               md-selected-item="selectedItem"
@@ -32,10 +37,18 @@
               <strong>{{$chip.name}}</strong>
             </md-chip-template>
           </md-chips>
-     
+        </div>
+
+        <div layout="row">
+          <ng-md-icon icon="description" style="fill:#00517F" size="48" class="md-avatar" alt="deal-summary-img"></ng-md-icon>
+          <md-input-container md-no-float style="padding-bottom:8px">
+            <input name="search" placeholder="Type text to search" type="text" ng-model="searchText">
+          </md-input-container>
+        </div>
+          
          <md-button type="button" ng-click="search()" class="md-raised md-primary">Get Deals</md-button>
       </div>
-      
+  
       <md-toolbar class="md-theme-light">
         <h2 class="md-toolbar-tools">
           <span>{{dealsTitle}}</span>
