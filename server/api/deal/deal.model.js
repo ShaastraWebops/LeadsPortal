@@ -26,7 +26,8 @@ var DealSchema = new Schema({
   updatedOn: Date,
   createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
   lastEditedBy: { type: Schema.Types.ObjectId, ref: 'User' },
-  vertical: {}
+  vertical: {},
+  comment: String
 });
 
 DealSchema.plugin(deepPopulate, {

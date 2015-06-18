@@ -10,11 +10,23 @@
 			</md-toolbar>
 			<md-content>
 		   	<md-card>
+	   	   <div layout="row" layout-align="end center">
 		     	<div class="md-actions" layout="row" layout-align="end center">
+						<md-button class="md-raised md-primary md-hue-1" ng-click="dealCloseModal()" ng-show="showButton">
+							Close Deal
+						</md-button>
+			   	</div>
+			   	<div class="md-actions" layout="row" layout-align="end center">
 						<md-button class="md-raised md-primary" ng-click="dealEditModal()" ng-show="showButton">
 							Edit Deal
 						</md-button>
 			   	</div>
+		     	<div class="md-actions" layout="row" layout-align="end center">
+						<md-button class="md-raised md-primary md-hue-1" ng-click="dealCloseModal()" ng-hide="showButton">
+							Reopen Deal
+						</md-button>
+			   	</div>
+			   </div>
 		   		<md-card-content style="word-break:break-all">
 		     		<h2 class="md-display-1"> Deal Details </h2>
 						<md-divider></md-divider>

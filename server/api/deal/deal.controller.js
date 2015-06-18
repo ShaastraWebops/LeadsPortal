@@ -85,26 +85,54 @@ exports.update = function(req, res) {
   Deal.findById(req.params.id, function (err, deal) {
     if (err) { return handleError(res, err); }
     if(!deal) { return res.sendStatus(404); }
+    // checking if the deal is closed or not
+    if(deal.status === false) {  
+      req.body.assignees = underscore.uniq(req.body.assignees);
+      User.count({ '_id' : { $in : req.body.assignees } }, function (err, count) {
+        if(err) { return handleError(res, err); }
+        if(count != req.body.assignees.length) { res.sendStatus(400); }
 
-    req.body.assignees = underscore.uniq(req.body.assignees);
-    User.count({ '_id' : { $in : req.body.assignees } }, function (err, count) {
-      if(err) { return handleError(res, err); }
-      if(count != req.body.assignees.length) { res.sendStatus(400); }
+        // if user logged in is coord, he should not be able to un-assign or assign people for that deal
+        if(req.user.role === 'coord') { req.body.assignees = deal.assignees; }
 
-      // if user logged in is coord, he should not be able to un-assign or assign people for that deal
-      if(req.user.role === 'coord') { req.body.assignees = deal.assignees; }
+        if(req.user.role === 'core' || req.user.role === 'admin' || 
+          (req.user.role === 'coord' && deal.assignees.indexOf(req.user._id)>-1)) {      
+          var updatedDeal = _.extend(deal, req.body);
+          updatedDeal.save(function (err) {
+            if (err) { return handleError(res, err); }
+            return res.status(200).json(deal);
+          });
+        } else { 
+          res.sendStatus(403);
+        }
+      });
+    } else {
+      res.sendStatus(403);
+    } 
+  });
+};
 
-      if(req.user.role === 'core' || req.user.role === 'admin' || 
-        (req.user.role === 'coord' && deal.assignees.indexOf(req.user._id)>-1)) {      
-        var updatedDeal = _.extend(deal, req.body);
-        updatedDeal.save(function (err) {
+// Closes a deal from the DB
+exports.closeDeal = function(req, res) {
+  if(req.body._id) { delete req.body._id; }
+  Deal.findById(req.params.id, function (err, deal) {
+    if(err) { return handleError(res, err); }
+    if(!deal) { return res.sendStatus(404); }
+
+    if(req.user.role === 'core' || req.user.role === 'admin' || 
+      (req.user.role === 'coord' && deal.assignees.indexOf(req.user._id)>-1)) {  
+        deal.updatedOn = Date.now();
+        deal.lastEditedBy = req.user._id;
+        deal.status = req.body.status;
+        deal.result = req.body.result;
+
+        deal.save(function (err) {
           if (err) { return handleError(res, err); }
           return res.status(200).json(deal);
         });
       } else { 
         res.sendStatus(403);
       }
-    });
   });
 };
 

@@ -30,18 +30,23 @@ exports.create = function (req, res) {
 
   Deal.findById(req.body.deal, function (err, deal) {
     if(err) { return handleError(res,err); }
-    if(deal.assignees.indexOf(req.user._id) != -1 || req.user.role === 'core' || req.user.role === 'admin') {
-      Update.create(req.body, function (err, update) {
-        if(err) { return handleError(res,err); }
-        deal.updates.push(update._id);
-        deal.save(function (err, dealfin) {
-         if(err) { return handleError(res,err); }
-         return res.sendStatus(200);
+    // checking if the deal is closed or not
+    if(deal.status === false) {   
+      if(deal.assignees.indexOf(req.user._id) != -1 || req.user.role === 'core' || req.user.role === 'admin') {
+        Update.create(req.body, function (err, update) {
+          if(err) { return handleError(res,err); }
+          deal.updates.push(update._id);
+          deal.save(function (err, dealfin) {
+           if(err) { return handleError(res,err); }
+           return res.sendStatus(200);
+          });
         });
-      });
+      }
+      else
+        return res.sendStatus(403);
+    } else { 
+      res.sendStatus(403);
     }
-    else
-      return res.sendStatus(403);
   });
 };
 
@@ -56,13 +61,19 @@ exports.update = function (req, res) {
     Deal.findById(update.deal, function (err, deal) {
       if (err) { return handleError(res, err); }
       if(!deal) { return res.sendStatus(404); }
-      if(req.user.role === 'core' || req.user.role === 'admin' || 
-        (req.user.role === 'coord' && deal.assignees.indexOf(req.user._id)>-1)) {
-          var updated = _.merge(update, req.body);
-          updated.save(function (err) {
-            if (err) { return handleError(res, err); }
-            return res.status(200).json(update);     
-        });
+      // checking if the deal is closed or not
+      if(deal.status === false) { 
+        if(req.user.role === 'core' || req.user.role === 'admin' || 
+          (req.user.role === 'coord' && deal.assignees.indexOf(req.user._id)>-1)) {
+            var updated = _.merge(update, req.body);
+            updated.save(function (err) {
+              if (err) { return handleError(res, err); }
+              return res.status(200).json(update);     
+          });
+        } else
+            res.sendStatus(403);
+      } else { 
+        res.sendStatus(403);
       }
     });
   });

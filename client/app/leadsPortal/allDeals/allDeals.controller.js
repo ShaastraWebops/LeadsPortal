@@ -55,6 +55,8 @@ angular.module('erp2015App')
     });
     if (String($scope.searchText).length != 0) {
       sortedText = $filter('filter')(allDeals, String($scope.searchText));
+      console.log(sortedText.length
+        );
     };
     if (verticalSelected.length != 0 || coordSelected.length != 0 || sortedText.length != 0) {
       $scope.sortedDeals = _.union(sortedVerticals, sortedCoords, sortedText);

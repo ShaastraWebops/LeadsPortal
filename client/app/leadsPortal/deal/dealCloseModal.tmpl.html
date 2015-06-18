@@ -1,0 +1,38 @@
+<md-dialog aria-label="Close Deal Details" style="width:80%;">
+  <form>
+    <md-dialog-content>
+      <div layout="column" class="deals">
+        <div class="md-whiteframe-z1">
+          <md-toolbar class="md-primary">
+            <h1 class="md-toolbar-tools">
+              Close Deal Details
+            </h1>
+          </md-toolbar>
+
+          <md-content layout-padding>
+          <!-- <md-switch ng-model="dealStatus" aria-label="Switch" ng-true-value="'failure'" ng-false-value="'success'" class="md-warn">
+             "Deal Success/Failure" : {{ dealStatus }}
+          </md-switch> --> 
+          <md-switch ng-model="dealResult" aria-label="Switch 1">
+            "Deal Success(true)/Failure(false)": {{ dealResult }}
+          </md-switch>
+
+           
+          <md-input-container>
+            <label>Comments</label>      
+            <textarea ng-model="closeDeal.comment"></textarea>
+          </md-input-container>  
+          </md-content>
+        </div>
+      </div>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+      <md-button ng-click="cancel()" class="md-raised">
+        Discard changes
+      </md-button>
+      <md-button ng-click="save()" class="md-raised md-primary">
+        Close Deal
+      </md-button>
+    </div>
+  </form>
+</md-dialog>

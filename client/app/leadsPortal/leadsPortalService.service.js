@@ -61,6 +61,11 @@ angular.module('erp2015App')
         return $http.get('/api/users/getCoords').then(function (response){
           return response.data;
         })
+      },
+      closeDeal:function (data){
+        return $http.put('/api/deals/closeDeal/'+ data._id, data).then(function (response){
+          return response.data;
+        });
       }
   	};
   });

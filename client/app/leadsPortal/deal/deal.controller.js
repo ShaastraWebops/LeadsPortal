@@ -22,16 +22,20 @@ angular.module('erp2015App')
 			$scope.deal = deal;
             // showing editDeal, createUpdate, editUpdate button only to permitted users
             Auth.isLoggedInAsync(function (loggedIn) {
-                if(Auth.getCurrentUser().role === 'admin' || Auth.getCurrentUser().role === 'core') {
-                    $scope.showButton = true;                    
-                } else if (Auth.getCurrentUser().role === 'coord') {
-                    var len = deal.assignees.length;
-                    for (var i=0; i<len; i++) {
-                        if(Auth.getCurrentUser()._id === deal.assignees[i]._id)
-                            $scope.showButton = true;                    
+                if(deal.status === false) {
+                    if(Auth.getCurrentUser().role === 'admin' || Auth.getCurrentUser().role === 'core') {
+                        $scope.showButton = true;                    
+                    } else if (Auth.getCurrentUser().role === 'coord') {
+                        var len = deal.assignees.length;
+                        for (var i=0; i<len; i++) {
+                            if(Auth.getCurrentUser()._id === deal.assignees[i]._id)
+                                $scope.showButton = true;                    
+                        }
+                    } else {
+                        $scope.showButton = false;                    
                     }
                 } else {
-                    $scope.showButton = false;                    
+                    $scope.showButton = false;
                 }
             });
 		})
@@ -39,6 +43,55 @@ angular.module('erp2015App')
 			// do some error handling here
 			console.log(err);
 		});
+
+    // modal for closing the deal
+    $scope.dealCloseModal = function () {
+        $mdDialog.show({
+            controller: DealCloseModalCtrl,
+            templateUrl: '/app/leadsPortal/deal/dealCloseModal.tmpl.html',
+            locals: {
+                DealPassed: $scope.deal
+            }
+        })
+        .then(function (response) {
+            console.log(response);
+        }, function () {
+            console.log('Cancel closing deal');
+        });
+    };
+    function DealCloseModalCtrl($scope, $state, $mdDialog, DealPassed, Auth) {
+        $scope.dealResult = true;
+        $scope.closeDeal = {};
+        $scope.closeDeal = DealPassed;
+        console.log($scope.closeDeal);
+
+        $scope.isCoord = true;
+
+        Auth.isLoggedInAsync(function (loggedIn) {
+            if(Auth.getCurrentUser().role === 'coord') { $scope.isCoord = true; }
+            else $scope.isCoord = false;
+        });
+
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+        $scope.save = function () {
+            // do the saving part here
+            LeadsPortalService.closeDeal({
+                _id: $scope.closeDeal._id,
+                status: true,
+                result: $scope.dealResult,
+                comment: $scope.closeDeal.comment
+            })
+            .then(function (data) {
+                $state.go('deal');
+                console.log(data);
+            });
+
+            $mdDialog.hide('Save closing deal');
+        };      
+    }
+    
 
     // modal for editing the deal
     $scope.dealEditModal = function () {
