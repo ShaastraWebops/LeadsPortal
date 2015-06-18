@@ -36,6 +36,7 @@ angular.module('erp2015App')
     sessionStorage.clear();
     var verticalSelected = $scope.selectedVerticals;
     var coordSelected = $scope.selectedCoords;
+    var searchText = String($scope.searchText);
 
     var sortedVerticals = [];
     var sortedCoords = [];
@@ -54,9 +55,9 @@ angular.module('erp2015App')
       sortedCoords = sortedCoords.concat($filter('filter')(allDeals, expression));
     });
     if (String($scope.searchText).length != 0) {
-      sortedText = $filter('filter')(allDeals, String($scope.searchText));
+      sortedText = $filter('filter')(allDeals, searchText);
     };
-    if (verticalSelected.length != 0 || coordSelected.length != 0 || sortedText.length != 0) {
+    if (verticalSelected.length != 0 || coordSelected.length != 0 || searchText.length != 0) {
       $scope.sortedDeals = _.union(sortedVerticals, sortedCoords, sortedText);
     } else {
       $scope.sortedDeals = allDeals;
@@ -73,7 +74,8 @@ angular.module('erp2015App')
     sessionStorage.setItem("storedCoords", JSON.stringify(storageObject.storedCoords));
     sessionStorage.setItem("storedText", storageObject.storedText);
     sessionStorage.setItem("storedDeals", JSON.stringify(storageObject.storedDeals));
-  };  
+  };
+  
   function populateStorage() {
     $scope.sortedDeals = JSON.parse(sessionStorage.getItem("storedDeals"));
     $scope.selectedVerticals = JSON.parse(sessionStorage.getItem("storedVerticals"));
