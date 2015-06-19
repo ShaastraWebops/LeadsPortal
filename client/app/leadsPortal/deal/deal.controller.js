@@ -60,10 +60,9 @@ angular.module('erp2015App')
         });
     };
     function DealCloseModalCtrl($scope, $state, $mdDialog, DealPassed, Auth) {
-        $scope.dealResult = true;
+        $scope.dealResult = false;
         $scope.closeDeal = {};
         $scope.closeDeal = DealPassed;
-        console.log($scope.closeDeal);
 
         $scope.isCoord = true;
 
@@ -79,17 +78,24 @@ angular.module('erp2015App')
             // do the saving part here
             LeadsPortalService.closeDeal({
                 _id: $scope.closeDeal._id,
-                status: true,
                 result: $scope.dealResult,
                 comment: $scope.closeDeal.comment
             })
             .then(function (data) {
                 $state.go('deal');
-                console.log(data);
+                window.location.reload(true);
             });
 
             $mdDialog.hide('Save closing deal');
         };      
+    }
+
+    $scope.dealOpen = function(){
+       LeadsPortalService.openDeal($scope.deal._id)
+            .then(function (data) {
+                $state.go('deal');
+                window.location.reload(true);
+            });
     }
     
 

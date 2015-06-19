@@ -9,15 +9,11 @@
             </h1>
           </md-toolbar>
 
-          <md-content layout-padding>
-          <!-- <md-switch ng-model="dealStatus" aria-label="Switch" ng-true-value="'failure'" ng-false-value="'success'" class="md-warn">
-             "Deal Success/Failure" : {{ dealStatus }}
-          </md-switch> --> 
+          <md-content layout-padding> 
           <md-switch ng-model="dealResult" aria-label="Switch 1">
             "Deal Success(true)/Failure(false)": {{ dealResult }}
           </md-switch>
 
-           
           <md-input-container>
             <label>Comments</label>      
             <textarea ng-model="closeDeal.comment"></textarea>

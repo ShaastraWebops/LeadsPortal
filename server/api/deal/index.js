@@ -13,6 +13,7 @@ router.get('/:id', auth.hasRole('coord'), controller.show);
 router.post('/', auth.hasRole('core'), controller.create);
 
 router.put('/closeDeal/:id', auth.hasRole('coord'), controller.closeDeal);
+router.put('/openDeal/:id', auth.hasRole('coord'), controller.openDeal);
 router.put('/:id', auth.hasRole('coord'), controller.update);
 router.patch('/:id', auth.hasRole('coord'), controller.update);
 router.delete('/:id', auth.hasRole('coord'), controller.destroy);

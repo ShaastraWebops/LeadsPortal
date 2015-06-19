@@ -123,7 +123,7 @@ exports.closeDeal = function(req, res) {
       (req.user.role === 'coord' && deal.assignees.indexOf(req.user._id)>-1)) {  
         deal.updatedOn = Date.now();
         deal.lastEditedBy = req.user._id;
-        deal.status = req.body.status;
+        deal.status = true;
         deal.result = req.body.result;
 
         deal.save(function (err) {
@@ -133,6 +133,34 @@ exports.closeDeal = function(req, res) {
       } else { 
         res.sendStatus(403);
       }
+  });
+};
+
+// Re-opens a deal from the DB
+exports.openDeal = function(req, res) {
+  if(req.body._id) { delete req.body._id; }
+  Deal.findById(req.params.id, function (err, deal) {
+    if(err) { return handleError(res, err); }
+    if(!deal) { return res.sendStatus(404); } 
+
+   // checking if the deal is closed or not
+   if(deal.status === true) {  
+    if(req.user.role === 'core' || req.user.role === 'admin' || 
+      (req.user.role === 'coord' && deal.assignees.indexOf(req.user._id)>-1)) {  
+        deal.updatedOn = Date.now();
+        deal.lastEditedBy = req.user._id;
+        deal.status = false;
+
+        deal.save(function (err) {
+          if (err) { return handleError(res, err); }
+          return res.status(200).json(deal);
+        });
+      } else { 
+        res.sendStatus(403);
+      }
+    } else {
+      res.sendStatus(400);
+    } 
   });
 };
 

@@ -24,6 +24,13 @@ angular.module('erp2015App', [
   .config( function( $facebookProvider ) {
     $facebookProvider.setAppId('1630409340524916');
   })
+  .config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('default')
+    .warnPalette('red', {
+      'default': '400'
+    });
+  })
+
   .run( function ($rootScope) {
     (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];

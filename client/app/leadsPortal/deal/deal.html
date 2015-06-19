@@ -3,7 +3,7 @@
 <div class="deals">
 	<div class="makeCenter">
 		<div class="md-whiteframe-z1">
-			<md-toolbar class="md-primary">
+			<md-toolbar ng-class="{true: 'md-warn', false: 'md-primary'}[ deal.status ]">
 				<h1 class="md-toolbar-tools">
 					{{ deal.title }}
 				</h1>
@@ -22,8 +22,8 @@
 						</md-button>
 			   	</div>
 		     	<div class="md-actions" layout="row" layout-align="end center">
-						<md-button class="md-raised md-primary md-hue-1" ng-click="dealCloseModal()" ng-hide="showButton">
-							Reopen Deal
+						<md-button class="md-raised md-primary md-hue-1" ng-click="dealOpen()" ng-hide="showButton">
+							Re-open Deal
 						</md-button>
 			   	</div>
 			   </div>
