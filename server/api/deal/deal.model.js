@@ -20,8 +20,8 @@ var DealSchema = new Schema({
   initialPointOfContactEmail: String,  
   assignees: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   updates: [{ type: Schema.Types.ObjectId, ref: 'Update' }],
-  status: Boolean, // closed => 1, onGoing => 0
-  result: Boolean, // success => 1, failure => 0
+  status: { type: Boolean, default: false },// closed => 1, onGoing => 0
+  result: { type: Boolean, default: false }, // success => 1, failure => 0
   createdOn: Date,
   updatedOn: Date,
   createdBy: { type: Schema.Types.ObjectId, ref: 'User' },

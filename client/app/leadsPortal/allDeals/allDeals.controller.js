@@ -55,11 +55,11 @@ angular.module('erp2015App')
         $scope.dealsTitle = "List of all Deals";
       }
       if($scope.dealCategory == 'Open Deals') {
-        sortedCategory = $filter('filter')(allDeals, { status: false});
+        sortedCategory = $filter('filter')(allDeals, { status: false });
         $scope.dealsTitle = "List of required Deals";
       }
       if($scope.dealCategory == 'Closed Deals') {
-        sortedCategory = $filter('filter')(allDeals, { status: true});
+        sortedCategory = $filter('filter')(allDeals, { status: true });
         $scope.dealsTitle = "List of required Deals";
       }
     } else {
