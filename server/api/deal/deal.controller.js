@@ -54,7 +54,6 @@ exports.show = function(req, res) {
     if(err) { return handleError(res, err); }
     if(!deal) { return res.sendStatus(404); }
     return res.json(deal);
-    console.log(deal);
   });  
 };
 
