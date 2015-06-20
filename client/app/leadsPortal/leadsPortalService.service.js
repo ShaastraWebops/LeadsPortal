@@ -67,8 +67,8 @@ angular.module('erp2015App')
           return response.data;
         });
       },
-      openDeal:function (id) {
-        return $http.put('api/deals/openDeal/'+ id).then(function (response){
+      openDeal:function (data) {
+        return $http.put('api/deals/openDeal/'+ data._id).then(function (response){
           return response.data;
         });
       }

@@ -41,6 +41,26 @@
 
 							<md-divider md-inset ng-if="!$last"></md-divider>
 
+							<div layout="row" ng-hide="showButton">
+						    <md-list-item class="md-3-line">
+						    	<ng-md-icon icon="done" style="fill:#1F5C7F" size="32" class="md-avatar" alt="deal-company-img"></ng-md-icon>
+						        <div class="md-list-item-text">
+							        <h3> Result </h3>
+							        <p>{{ dealresult }}</p>
+						        </div>
+						    </md-list-item>
+
+						    <md-list-item class="md-3-line">
+						    	<ng-md-icon icon="comment" style="fill:#0082CC" size="32" class="md-avatar" alt="deal-PoC-name-img"></ng-md-icon>
+						        <div class="md-list-item-text">
+							        <h3> Comments </h3>
+							        <p>{{ deal.comment }}</p>
+						        </div>
+						    </md-list-item>
+					    </div>
+
+							<md-divider md-inset ng-if="!$last"></md-divider>
+
 					    <md-list-item class="md-3-line">
 					    	<ng-md-icon icon="description" style="fill:#00A2FF" size="32" class="md-avatar" alt="deal-summary-img"></ng-md-icon>
 					        <div class="md-list-item-text">

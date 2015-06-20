@@ -6,6 +6,14 @@
 
     <div layout="column">
       <div layout="row">
+        <ng-md-icon icon="arrow_drop_down_circle" style="fill:#9999FF;padding-top:15px" size="38" class="md-avatar" alt="drop-down-img"></ng-md-icon>
+         <md-select placeholder="All Deals" ng-model="dealCategory" ng-change="onChange()">
+            <md-select-label>{{dealCategory}}</md-select-label>
+              <md-option ng-repeat="category in categories" value="{{category}}">{{category}}</md-option>
+            </md-select>
+      </div>
+
+      <div layout="row">
          <ng-md-icon icon="poll" style="fill:#0082CC" size="48" class="md-avatar" alt="deal-searchverticals-img"></ng-md-icon>
          <md-chips ng-model="selectedVerticals" md-autocomplete-snap md-require-match>
             <md-autocomplete
@@ -40,19 +48,8 @@
           <md-input-container md-no-float style="padding-bottom:8px">
             <input name="search" placeholder="Type text to search" type="text" ng-model="searchText">
           </md-input-container>
-      </div>
-
-      <div layout="row">
-        <div layout="row" flex="50">
-        <ng-md-icon icon="arrow_drop_down_circle" style="fill:#9999FF;padding-top:15px" size="38" class="md-avatar" alt="drop-down-img"></ng-md-icon>
-         <md-select placeholder="Deal Category" ng-model="dealCategory">
-              <md-option ng-repeat="category in categories" value="{{category}}">{{category}}</md-option>
-            </md-select>
-        </div>
-        
-        <div layout="row" layout-align="end center" flex="50">
-         <md-button type="button" ng-click="search()" class="md-raised md-primary">Get Deals</md-button>
-        </div>
+          
+         <md-button type="button" ng-click="onClick()" class="md-raised md-primary">Get Deals</md-button>
       </div>
     </div>
     

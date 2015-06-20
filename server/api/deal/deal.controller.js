@@ -54,6 +54,7 @@ exports.show = function(req, res) {
     if(err) { return handleError(res, err); }
     if(!deal) { return res.sendStatus(404); }
     return res.json(deal);
+    console.log(deal);
   });  
 };
 
@@ -125,6 +126,7 @@ exports.closeDeal = function(req, res) {
         deal.lastEditedBy = req.user._id;
         deal.status = true;
         deal.result = req.body.result;
+        deal.comment = req.body.comment;
 
         deal.save(function (err) {
           if (err) { return handleError(res, err); }
@@ -150,6 +152,8 @@ exports.openDeal = function(req, res) {
         deal.updatedOn = Date.now();
         deal.lastEditedBy = req.user._id;
         deal.status = false;
+        deal.result = false;
+        deal.comment = req.body.comment;
 
         deal.save(function (err) {
           if (err) { return handleError(res, err); }

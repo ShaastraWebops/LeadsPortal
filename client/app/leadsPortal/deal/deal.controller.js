@@ -18,8 +18,13 @@ angular.module('erp2015App')
 	$scope.deal = {};
 
 	LeadsPortalService.getDeal($stateParams.id)
-		.then(function (deal) {
-			$scope.deal = deal;
+        .then(function (deal) {
+            $scope.deal = deal;
+        if(deal.result === false) {
+            $scope.dealresult = 'failure';
+        } else {
+            $scope.dealresult = 'success';
+        }
             // showing editDeal, createUpdate, editUpdate button only to permitted users
             Auth.isLoggedInAsync(function (loggedIn) {
                 if(deal.status === false) {
@@ -38,11 +43,11 @@ angular.module('erp2015App')
                     $scope.showButton = false;
                 }
             });
-		})
-		.catch(function (err) {
-			// do some error handling here
-			console.log(err);
-		});
+        })
+        .catch(function (err) {
+            // do some error handling here
+            console.log(err);
+        });
 
     // modal for closing the deal
     $scope.dealCloseModal = function () {
@@ -79,7 +84,7 @@ angular.module('erp2015App')
             LeadsPortalService.closeDeal({
                 _id: $scope.closeDeal._id,
                 result: $scope.dealResult,
-                comment: $scope.closeDeal.comment
+                comment: $scope.deal.comment
             })
             .then(function (data) {
                 $state.go('deal');
@@ -91,7 +96,10 @@ angular.module('erp2015App')
     }
 
     $scope.dealOpen = function(){
-       LeadsPortalService.openDeal($scope.deal._id)
+       LeadsPortalService.openDeal({
+                _id: $scope.deal._id,
+                comment: $scope.deal.comment
+            })
             .then(function (data) {
                 $state.go('deal');
                 window.location.reload(true);

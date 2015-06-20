@@ -37,6 +37,7 @@ angular.module('erp2015App')
       })
       .then(function (data) {
             $state.go('allDeals');
+            sessionStorage.clear();
       })
       .catch(function (err) {
         console.log(err);
