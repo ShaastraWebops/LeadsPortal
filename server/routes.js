@@ -15,6 +15,7 @@ module.exports = function(app) {
   app.use('/api/subDepartments', require('./api/subDepartment'));
   app.use('/api/departments', require('./api/department'));
   app.use('/api/users', require('./api/user'));
+  app.use('/api/verticals', require('./api/vertical'));
 
   app.use('/auth', require('./auth'));
   

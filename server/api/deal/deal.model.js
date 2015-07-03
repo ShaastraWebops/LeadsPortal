@@ -26,7 +26,7 @@ var DealSchema = new Schema({
   updatedOn: Date,
   createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
   lastEditedBy: { type: Schema.Types.ObjectId, ref: 'User' },
-  vertical: {},
+  vertical: { type: Schema.Types.ObjectId, ref: 'Vertical' },
   comment: String
 });
 

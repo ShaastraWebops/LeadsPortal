@@ -39,6 +39,11 @@ angular.module('erp2015App')
           return response.data;
         });
       },
+      createVertical: function (data) {
+        return $http.post('api/verticals', data).then(function (response) {
+          return response.data;
+        });
+      },
       verticals:[
       {
         name: 'One',

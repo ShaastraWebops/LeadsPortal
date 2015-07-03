@@ -52,4 +52,21 @@ angular.module('erp2015App')
       });
     }
   };
+
+   $scope.newVertical=function(formVertical) {
+    $scope.submitted = true;
+   
+    if(formVertical.$valid) {
+      LeadsPortalService.createVertical({
+        title: $scope.vertical.title,
+        description: $scope.vertical.description,
+      })
+      .then(function (data) {
+        console.log(data);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+    }
+  };
 });

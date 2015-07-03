@@ -21,7 +21,7 @@
             <span ng-show="form.title.$error.required && submitted">
               Title is required.
             </span>
-            <span>{{ errors.other }}</sapn>
+            <span>{{ errors.other }}</span>
           </div>
 
           <md-input-container>
@@ -32,7 +32,7 @@
             <span ng-show="form.info.$error.required && submitted">
               Title is required.
             </span>
-            <span>{{ errors.other }}</sapn>
+            <span>{{ errors.other }}</span>
           </div>
 
         <div layout="row">
@@ -45,7 +45,7 @@
             <span ng-show="form.companyName.$error.required && submitted">
               Title is required.
             </span>
-            <span>{{ errors.other }}</sapn>
+            <span>{{ errors.other }}</span>
           </div>
          </div>
 
@@ -104,3 +104,46 @@
     </div>
   </div>
 </div>
+
+<div class="cores">
+  <div class="makeCenter">
+    <div class="md-whiteframe-z1">
+
+      <md-toolbar class="md-primary">
+        <h1 class="md-toolbar-tools">
+          Create Vertical
+        </h1>
+      </md-toolbar>
+
+      <md-content layout-padding>
+        <form name="formVertical" ng-submit="newVertical(formVertical)" novalidate>
+
+          <md-input-container>
+            <label>Title</label>
+            <input name="title" ng-model="vertical.title" ng-required="true" mongoose-error />
+          </md-input-container>
+          <div style="color:red">
+            <span ng-show="formVertical.title.$error.required && submitted">
+              Title is required.
+            </span>
+            <span>{{ errors.other }}</span>
+          </div>
+
+          <md-input-container>
+            <label>Description</label>
+            <textarea required name="description" ng-model="vertical.description" mongoose-error></textarea>
+          </md-input-container>
+          <div style="color:red">
+            <span ng-show="formVertical.description.$error.required && submitted">
+              Title is required.
+            </span>
+            <span>{{ errors.other }}</span>
+          </div>
+          <md-button type="submit" class="md-raised md-primary">Create</md-button>
+        </form>
+      </md-content>  
+
+    </div>
+  </div>
+</div>
+
