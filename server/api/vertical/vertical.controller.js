@@ -35,7 +35,6 @@ exports.show = function(req, res) {
   })
   .populate('createdBy', '-salt -hashedPassword -lastSeen -provider')
   .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider');
-  console.log();
 };
 
 // Creates a new vertical in the DB.

@@ -43,7 +43,20 @@ angular.module('erp2015App')
         return $http.post('api/verticals', data).then(function (response) {
           return response.data;
         });
+      
       },
+      getAllVerticals: function () {
+        return $http.get('/api/verticals').then(function (response) {
+          return response.data;
+        });
+      },
+
+      editVertical: function (data) {
+         return $http.put('/api/verticals/' + data._id, data).then(function (response) {
+          return response.data;
+         });
+      },
+      
       verticals:[
       {
         name: 'One',

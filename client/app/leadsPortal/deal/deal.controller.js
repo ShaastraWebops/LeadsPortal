@@ -17,7 +17,7 @@ angular.module('erp2015App')
 
 	$scope.deal = {};
 
-	LeadsPortalService.getDeal($stateParams.id)
+    LeadsPortalService.getDeal($stateParams.id)
         .then(function (deal) {
             $scope.deal = deal;
         if(deal.result === false) {

@@ -105,45 +105,83 @@
   </div>
 </div>
 
-<div class="cores">
-  <div class="makeCenter">
-    <div class="md-whiteframe-z1">
+<div layout="row">
+  <div flex>
+    <div class="cores">
+      <div class="makeCenter">
+        <div class="md-whiteframe-z1">
 
-      <md-toolbar class="md-primary">
-        <h1 class="md-toolbar-tools">
-          Create Vertical
-        </h1>
-      </md-toolbar>
+          <md-toolbar class="md-primary">
+            <h1 class="md-toolbar-tools">
+              Create Vertical
+            </h1>
+          </md-toolbar>
 
-      <md-content layout-padding>
-        <form name="formVertical" ng-submit="newVertical(formVertical)" novalidate>
+          <md-content layout-padding>
+            <form name="formVertical" ng-submit="newVertical(formVertical)" novalidate>
 
-          <md-input-container>
-            <label>Title</label>
-            <input name="title" ng-model="vertical.title" ng-required="true" mongoose-error />
-          </md-input-container>
-          <div style="color:red">
-            <span ng-show="formVertical.title.$error.required && submitted">
-              Title is required.
-            </span>
-            <span>{{ errors.other }}</span>
-          </div>
+              <md-input-container>
+                <label>Title</label>
+                <input name="title" ng-model="vertical.title" ng-required="true" mongoose-error />
+              </md-input-container>
+              <div style="color:red">
+                <span ng-show="formVertical.title.$error.required && submitted">
+                  Title is required.
+                </span>
+                <span>{{ errors.other }}</span>
+              </div>
 
-          <md-input-container>
-            <label>Description</label>
-            <textarea required name="description" ng-model="vertical.description" mongoose-error></textarea>
-          </md-input-container>
-          <div style="color:red">
-            <span ng-show="formVertical.description.$error.required && submitted">
-              Title is required.
-            </span>
-            <span>{{ errors.other }}</span>
-          </div>
-          <md-button type="submit" class="md-raised md-primary">Create</md-button>
-        </form>
-      </md-content>  
+              <md-input-container>
+                <label>Description</label>
+                <textarea required name="description" ng-model="vertical.description" mongoose-error></textarea>
+              </md-input-container>
+              <div style="color:red">
+                <span ng-show="formVertical.description.$error.required && submitted">
+                  Title is required.
+                </span>
+                <span>{{ errors.other }}</span>
+              </div>
+              <md-button type="submit" class="md-raised md-primary">Create</md-button>
+            </form>
+          </md-content>  
 
+        </div>
+      </div>
     </div>
   </div>
+
+  <div flex>
+    <div class="cores">
+      <div class="makeCenter">
+        <div class="md-whiteframe-z1">
+
+          <md-toolbar class="md-primary">
+            <h1 class="md-toolbar-tools">
+              See all Verticals
+            </h1>
+          </md-toolbar>
+
+          <md-content class="allVerticals" layout-padding>
+            <md-list>
+              <md-list-item ng-repeat="vertical in allVerticals" class="md-2-line">
+                <div layout="row">
+                  <div>
+                    <h3> {{ vertical.title }} </h3>
+                    <p> {{ vertical.description }} </p>
+                  </div>
+                  <div class="md-actions" layout="row" layout-align="end center">
+                    <md-button class="md-raised" ng-click="verticalEditModal()">Edit</md-button>
+                  </div>
+                </div>
+                <md-divider></md-divider>
+              </md-list-item>
+            </md-list>
+          </md-content>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 

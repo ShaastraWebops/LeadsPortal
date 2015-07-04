@@ -16,7 +16,8 @@ exports.register = function(socket) {
 }
 
 function onSave(socket, doc, cb) {
-  socket.emit('vertical:save', doc);
+  Vertical.populate(doc, {path:'title'}, {path:'description'}, function(err, vertical) {
+  socket.emit('vertical:save', vertical);
 }
 
 function onRemove(socket, doc, cb) {
