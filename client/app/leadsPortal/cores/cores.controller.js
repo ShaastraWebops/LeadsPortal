@@ -127,5 +127,5 @@ angular.module('erp2015App')
       $mdDialog.hide('Save edited vertical');
     };      
   };
-
+  angular.module('demoapp', ['ngMdIcons']);
 });

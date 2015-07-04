@@ -170,10 +170,10 @@
                     <p> {{ vertical.description }} </p>
                   </div>
                   <div class="md-actions" layout="row" layout-align="end center">
-                    <md-button class="md-raised" ng-click="verticalEditModal(vertical)">Edit</md-button>
+                    <ng-md-icon icon="edit" class="md-secondary" aria-label="button" ng-click="verticalEditModal(vertical)"></ng-md-icon>
                   </div>
                 </div>
-                <md-divider></md-divider>
+                <md-divider ng-if="!$last"></md-divider>
               </md-list-item>
             </md-list>
           </md-content>
