@@ -1,0 +1,36 @@
+<md-dialog aria-label="Edit Vertical Details" style="width:80%;">
+  <form>
+    <md-dialog-content>
+      <div layout="column" class="verticals">
+        <div class="md-whiteframe-z1">
+          <md-toolbar class="md-primary">
+            <h1 class="md-toolbar-tools">
+              Edit Vertical Details
+            </h1>
+          </md-toolbar>
+
+          <md-content layout-padding>
+            <md-input-container>
+              <label>Vertical Title</label>      
+              <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
+              <input ng-model="editVertical.title" type="text">
+            </md-input-container>
+            <md-input-container>
+              <label>Vertical Description</label>      
+              <!-- <ng-md-icon icon="perm_identity" style="fill:#00a1f4" class="name"></ng-md-icon> -->
+              <textarea ng-model="editVertical.description"></textarea>
+            </md-input-container>
+          </md-content>
+        </div>
+      </div>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+      <md-button ng-click="cancel()" class="md-raised">
+        Discard changes
+      </md-button>
+      <md-button ng-click="save()" class="md-raised md-primary">
+        Save
+      </md-button>
+    </div>
+  </form>
+</md-dialog>

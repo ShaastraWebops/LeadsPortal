@@ -35,12 +35,12 @@ angular.module('erp2015App')
   			});
   		},
       getDeal: function (dealId) {
-        return $http.get('api/deals/' + dealId).then(function (response) {
+        return $http.get('/api/deals/' + dealId).then(function (response) {
           return response.data;
         });
       },
       createVertical: function (data) {
-        return $http.post('api/verticals', data).then(function (response) {
+        return $http.post('/api/verticals', data).then(function (response) {
           return response.data;
         });
       
@@ -50,11 +50,10 @@ angular.module('erp2015App')
           return response.data;
         });
       },
-
       editVertical: function (data) {
-         return $http.put('/api/verticals/' + data._id, data).then(function (response) {
+        return $http.put('/api/verticals/' + data._id, data).then(function (response) {
           return response.data;
-         });
+        });
       },
       
       verticals:[

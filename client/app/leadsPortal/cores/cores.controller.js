@@ -2,7 +2,7 @@
 
 angular.module('erp2015App')
 .controller('CoresCtrl', function ($scope, LeadsPortalService, $location, $http, $state, $q, $mdDialog, $stateParams) {
-  $scope.submitted = false;
+  $scope.dealSubmitted = false;
   $scope.update = {};
   $scope.showButton = false;
 
@@ -54,8 +54,8 @@ angular.module('erp2015App')
         status: false
       })
       .then(function (data) {
-            $state.go('allDeals');
-            sessionStorage.clear();
+        $state.go('allDeals');
+        sessionStorage.clear();
       })
       .catch(function (err) {
         console.log(err);
@@ -71,8 +71,8 @@ angular.module('erp2015App')
     }
   };
 
-   $scope.newVertical=function(formVertical) {
-    $scope.submitted = true;
+  $scope.newVertical = function (formVertical) {
+    $scope.verticalSubmitted = true;
    
     if(formVertical.$valid) {
       LeadsPortalService.createVertical({
@@ -81,6 +81,8 @@ angular.module('erp2015App')
       })
       .then(function (data) {
         console.log(data);
+        $scope.vertical.title = '';
+        $scop.vertical.description = '';
       })
       .catch(function (err) {
         console.log(err);
@@ -89,13 +91,12 @@ angular.module('erp2015App')
   };
 
 // modal for editing the vertical
-   $scope.verticalEditModal = function () {
+  $scope.verticalEditModal = function (vertical) {
     $mdDialog.show({
       controller: VerticalEditModalCtrl,
-      templateUrl: 'server/api/vertical/verticalEditModal.tmpl.html',
+      templateUrl: '/app/leadsPortal/cores/verticalEditModal.tmpl.html',
       locals: {
-        VerticalPassed: $scope.vertical,
-        //CoordsPassed: $scope.coords,
+        VerticalPassed: vertical
       }
     })
     .then(function (response) {
@@ -104,45 +105,27 @@ angular.module('erp2015App')
       console.log('Cancel editing vertical');
     });
   };
-   function VerticalEditModalCtrl($scope, $state, $mdDialog, VerticalPassed) {
-      $scope.editVertical = {};
-      //$scope.editVertical.vertical = {};
-      $scope.editVertical = VerticalPassed;
-      //$scope.editVertical.vertical['name'] = VerticalName;
-      //$scope.editVertical.vertical['value'] = VerticalValue;
+  function VerticalEditModalCtrl($scope, $state, $mdDialog, VerticalPassed) {
+    $scope.editVertical = {};
+    $scope.editVertical = VerticalPassed;
 
-      //$scope.coords = CoordsPassed;
-      //$scope.selectedCoords = VerticalPassed.assignees;
-      //$scope.isCoord = true;
-      //$scope.editVerticals = LeadsPortalService.editVerticals;
+    $scope.cancel = function() {
+        $mdDialog.cancel();
+    };
+    $scope.save = function () {
+      // do the saving part here
+      LeadsPortalService.editVertical({
+          _id: $scope.editVertical._id,
+          title: $scope.editVertical.title,
+          description: $scope.editVertical.description
+      })
+      .then(function (data) {
+        console.log(data);
+        $state.go('leadsPortalAdmin');
+      });
 
-      $scope.changeVertical = function() {
-          // converting the string to json due to md-select
-          if(typeof $scope.editVertical === 'string')
-              $scope.editVertical = JSON.parse($scope.editVerticals);
-      };
-      $scope.cancel = function() {
-          $mdDialog.cancel();
-      };
-      $scope.save = function () {
-          // do the saving part here
-          //$scope.coordIds = [];
-          //angular.forEach($scope.selectedCoords, function (item) {
-            //$scope.coordIds.push(item._id);
-          //});
-
-          LeadsPortalService.editVertical({
-              _id: $scope.editVertical._id,
-              title: $scope.editVertical.title,
-              description: $scope.editVertical.description,
-              assignees: $scope.coordIds
-          })
-          .then(function (data) {
-              $state.go('vertical');
-          });
-
-          $mdDialog.hide('Save edited vertical');
-      };      
+      $mdDialog.hide('Save edited vertical');
+    };      
   };
 
 });
