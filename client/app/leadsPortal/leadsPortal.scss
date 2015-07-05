@@ -1,0 +1,19 @@
+.leadsPortal .right {
+	padding-right: 15%;
+}
+
+.leadsPortal .left {
+	padding-left: 15%;
+}
+
+.leadsPortal md-toolbar {
+	border-radius: 4px 4px 0px 0px;
+}
+
+.allVerticals {
+	height: 275px;
+	overflow-y: hidden;
+	&:hover {
+		overflow-y: auto;
+	}
+}

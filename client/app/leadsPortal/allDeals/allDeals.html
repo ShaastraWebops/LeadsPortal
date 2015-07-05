@@ -1,15 +1,15 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="allDeals">
-  <div class="makeCenter">
+<div class="leadsPortal" layout-margin>
+  <div class="left right">
     <div class="md-whiteframe-z1">
 
     <div layout="column">
       <div layout="row">
         <ng-md-icon icon="arrow_drop_down_circle" style="fill:#9999FF;padding-top:15px" size="38" class="md-avatar" alt="drop-down-img"></ng-md-icon>
          <md-select placeholder="All Deals" ng-model="dealCategory" ng-change="onChange()">
-            <md-select-label>{{dealCategory}}</md-select-label>
-              <md-option ng-repeat="category in categories" value="{{category}}">{{category}}</md-option>
+            <md-select-label>{{ dealCategory }}</md-select-label>
+              <md-option ng-repeat="category in categories" value="{{ category }}">{{ category }}</md-option>
             </md-select>
       </div>
 
@@ -22,10 +22,10 @@
               md-items="item in verticals"
               md-item-text="item.name"
               placeholder="search deals of vertical">
-                <span md-highlight-text="searchText">{{item.name}}</span>
+                <span md-highlight-text="searchText">{{ item.name }}</span>
             </md-autocomplete>
             <md-chip-template>
-              <strong>{{$chip.name}}</strong>
+              <strong>{{ $chip.name }}</strong>
             </md-chip-template>
           </md-chips>
 
@@ -37,10 +37,10 @@
               md-items="item in coords"
               md-item-text="item.name"
               placeholder="search deals of coord">
-                <span md-highlight-text="searchText">{{item.name}}</span>
+                <span md-highlight-text="searchText">{{ item.name }}</span>
             </md-autocomplete>
             <md-chip-template>
-              <strong>{{$chip.name}}</strong>
+              <strong>{{ $chip.name }}</strong>
             </md-chip-template>
           </md-chips>
 
@@ -55,7 +55,7 @@
     
       <md-toolbar class="md-theme-light">
         <h2 class="md-toolbar-tools">
-          <span>{{dealsTitle}}</span>
+          <span>{{ dealsTitle }}</span>
         </h2>
       </md-toolbar>
       <md-content>
