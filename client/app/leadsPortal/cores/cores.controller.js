@@ -9,33 +9,22 @@ angular.module('erp2015App')
   $scope.verticals = [];
 
   $scope.verticals = LeadsPortalService.verticals;
+
   LeadsPortalService.getAllVerticals()
-  .then(function (data) {
-    $scope.allVerticals = data;
-  });
-
-  $scope.vertical = [];
-
-  //LeadsPortalService.getAllVerticals($stateParams.id)
-    //.then(function (vertical) { 
-        //$scope.vertical = vertical;
-    //if(vertical.result === false) {
-        //$scope.verticalresult = 'failure';
-    //} else {
-        //$scope.verticalresult = 'success';
-    //}
-
+    .then(function (data) {
+      $scope.allVerticals = data;
+    });
   
   LeadsPortalService.getCoords()
-  .then(function (data) {
-    $scope.coords = data;
-  },function (err){
-     console.log(err);
-  });
-  $scope.selectedCoords = [];
-  $scope.coordsIds=[];
+    .then(function (data) {
+      $scope.coords = data;
+    },function (err){
+       console.log(err);
+    });
    
-  $scope.newDeal=function(form) {
+  $scope.selectedCoords = [];
+  $scope.coordsIds = [];
+  $scope.newDeal = function (form) {
     $scope.submitted = true;
     angular.forEach($scope.selectedCoords, function (item) {
       $scope.coordsIds.push(item._id);
@@ -50,8 +39,7 @@ angular.module('erp2015App')
         initialPointOfContactName: $scope.deal.initialPointOfContactName,
         initialPointOfContactNumber: $scope.deal.initialPointOfContactNumber,
         initialPointOfContactEmail: $scope.deal.initialPointOfContactEmail,
-        assignees: $scope.coordsIds,
-        status: false
+        assignees: $scope.coordsIds
       })
       .then(function (data) {
         $state.go('allDeals');
@@ -82,8 +70,8 @@ angular.module('erp2015App')
       .then(function (data) {
         console.log(data);
         $scope.verticalSubmitted = false;
-        $scope.vertical.title = undefined;
-        $scope.vertical.description = undefined;
+        $scope.vertical.title = '';
+        $scope.vertical.description = '';
       })
       .catch(function (err) {
         console.log(err);
@@ -128,5 +116,4 @@ angular.module('erp2015App')
       $mdDialog.hide('Save edited vertical');
     };      
   };
-  angular.module('demoapp', ['ngMdIcons']);
 });

@@ -68,10 +68,7 @@ exports.create = function(req, res) {
     if(err) { return handleError(res, err); }
     if(count != req.body.assignees.length) { res.sendStatus(400); }
     Deal.create(req.body, function (err, deal) {
-
-      if (err) { 
-         console.log(err);
-        return handleError(res, err); }
+      if (err) { return handleError(res, err); }
       return res.status(201).json(deal);
     });
   });
