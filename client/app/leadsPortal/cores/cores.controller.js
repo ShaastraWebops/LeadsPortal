@@ -32,10 +32,10 @@ angular.module('erp2015App')
   },function (err){
      console.log(err);
   });
-   $scope.selectedCoords = [];
-   $scope.coordsIds=[];
+  $scope.selectedCoords = [];
+  $scope.coordsIds=[];
    
-   $scope.newDeal=function(form) {
+  $scope.newDeal=function(form) {
     $scope.submitted = true;
     angular.forEach($scope.selectedCoords, function (item) {
       $scope.coordsIds.push(item._id);
@@ -81,8 +81,9 @@ angular.module('erp2015App')
       })
       .then(function (data) {
         console.log(data);
-        $scope.vertical.title = '';
-        $scop.vertical.description = '';
+        $scope.verticalSubmitted = false;
+        $scope.vertical.title = undefined;
+        $scope.vertical.description = undefined;
       })
       .catch(function (err) {
         console.log(err);

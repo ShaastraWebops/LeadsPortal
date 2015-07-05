@@ -1,6 +1,9 @@
-.cores .makeCenter {
-	padding-left: 15%; 
-	padding-right: 15%;	
+.cores .right {
+	padding-right: 15%;
+}
+
+.cores .left {
+	padding-left: 15%;
 }
 
 .cores md-toolbar {
@@ -8,6 +11,9 @@
 }
 
 .allVerticals {
-	height: 200px;
-	overflow-y: auto;
+	height: 275px;
+	overflow-y: hidden;
+	&:hover {
+		overflow-y: auto;
+	}
 }
