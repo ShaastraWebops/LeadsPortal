@@ -12,7 +12,7 @@
 		   	<md-card>
 	   	   <div layout="row" layout-align="end center">
 		     	<div class="md-actions" layout="row" layout-align="end center">
-						<md-button class="md-raised md-primary md-hue-1" ng-click="dealCloseModal()" ng-show="showButton">
+						<md-button class="md-raised md-primary md-hue-1" ng-click="dealCloseModal()" ng-show="showButton && !deal.status">
 							Close Deal
 						</md-button>
 			   	</div>
@@ -22,7 +22,7 @@
 						</md-button>
 			   	</div>
 		     	<div class="md-actions" layout="row" layout-align="end center">
-						<md-button class="md-raised md-primary md-hue-1" ng-click="dealOpen()" ng-hide="showButton">
+						<md-button class="md-raised md-primary md-hue-1" ng-click="dealOpen()" ng-show="showButton && deal.status">
 							Re-open Deal
 						</md-button>
 			   	</div>

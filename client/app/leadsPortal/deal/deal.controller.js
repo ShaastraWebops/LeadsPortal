@@ -28,27 +28,23 @@ angular.module('erp2015App')
       
         // showing editDeal, createUpdate, editUpdate button only to permitted users
         Auth.isLoggedInAsync(function (loggedIn) {
-          if(deal.status === false) {
-            if(Auth.getCurrentUser().role === 'admin' || Auth.getCurrentUser().role === 'core') {
-              $scope.showButton = true;                    
-            } else if (Auth.getCurrentUser().role === 'coord') {
-              var len = deal.assignees.length;
-              for (var i=0; i<len; i++) {
-                if(Auth.getCurrentUser()._id === deal.assignees[i]._id)
-                  $scope.showButton = true;                    
-              }
-            } else {
-              $scope.showButton = false;                    
+          if(Auth.getCurrentUser().role === 'admin' || Auth.getCurrentUser().role === 'core') {
+            $scope.showButton = true;                    
+          } else if (Auth.getCurrentUser().role === 'coord') {
+            var len = deal.assignees.length;
+            for (var i=0; i<len; i++) {
+              if(Auth.getCurrentUser()._id === deal.assignees[i]._id)
+                $scope.showButton = true;                    
             }
           } else {
-              $scope.showButton = false;
-            }
-          });
-        })
-        .catch(function (err) {
-            // do some error handling here
-            console.log(err);
+            $scope.showButton = false;                    
+          }
         });
+      })
+      .catch(function (err) {
+          // do some error handling here
+          console.log(err);
+      });
 
     // modal for closing the deal
     $scope.dealCloseModal = function () {
@@ -67,6 +63,7 @@ angular.module('erp2015App')
     };
     function DealCloseModalCtrl($scope, $state, $mdDialog, DealPassed, Auth) {
         $scope.dealResult = false;
+        $scope.dealComment = '';
         $scope.closeDeal = {};
         $scope.closeDeal = DealPassed;
 
@@ -85,7 +82,7 @@ angular.module('erp2015App')
             LeadsPortalService.closeDeal({
                 _id: $scope.closeDeal._id,
                 result: $scope.dealResult,
-                comment: $scope.deal.comment
+                comment: $scope.dealComment
             })
             .then(function (data) {
                 $state.go('deal');

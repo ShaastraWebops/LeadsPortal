@@ -10,13 +10,13 @@
           </md-toolbar>
 
           <md-content layout-padding> 
-          <md-switch ng-model="dealResult" aria-label="Switch 1" ng-true-value="'success'" ng-false-value="'failure'">
-            "Deal Success(true)/Failure(false)": {{ dealResult }}
+          <md-switch ng-model="dealResult" aria-label="switch-success-failure" ng-true-value="'success'" ng-false-value="'failure'">
+            Deal Result: {{ dealResult }}
           </md-switch>
 
           <md-input-container>
             <label>Comments</label>      
-            <textarea ng-model="deal.comment">{{ deal.comment }}</textarea>
+            <textarea ng-model="dealComment">{{ dealComment }}</textarea>
           </md-input-container>  
           </md-content>
         </div>
