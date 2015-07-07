@@ -78,7 +78,7 @@
             <div layout="row">
              <div flex="20">
               <md-select placeholder="Select Vertical" ng-model="deal.vertical">
-                <md-option ng-repeat="vertical in verticals" value="{{vertical}}">{{vertical.name}}</md-option>
+                <md-option ng-repeat="vertical in verticals" value="{{vertical}}">{{ vertical.name }}</md-option>
               </md-select>
              </div>
 
@@ -90,10 +90,10 @@
                   md-items="item in coords"
                   md-item-text="item.name"
                   placeholder="Assign a team member">
-                    <span md-highlight-text="searchText">{{item.name}}</span>
+                    <span md-highlight-text="searchText">{{ item.name }}</span>
                 </md-autocomplete>
                 <md-chip-template>
-                  <strong>{{$chip.name}}</strong>
+                  <strong>{{ $chip.name }}</strong>
                 </md-chip-template>
               </md-chips>
              </div>
