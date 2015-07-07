@@ -5,6 +5,7 @@ var underscore = require('underscore');
 var deepPopulate = require('mongoose-deep-populate');
 var Deal = require('./deal.model');
 var User = require('../user/user.model');
+var Vertical = require('../vertical/vertical.model');
 
 //Error handling
 var validationError = function (res, err) {
@@ -18,9 +19,9 @@ function handleError (res, err) {
 // Get list of deals
 exports.index = function(req, res) {
   Deal.find()
-  .populate('assignees', '-salt -hashedPassword -lastSeen -provider')
-  .populate('updates')
-  .deepPopulate('updates.createdBy', '-salt -hashedPassword -lastSeen -provider')
+  // .populate('assignees', '-salt -hashedPassword -lastSeen -provider')
+  // .populate('updates')
+  // .deepPopulate('updates.createdBy', '-salt -hashedPassword -lastSeen -provider')
   .populate('createdBy', '-salt -hashedPassword -lastSeen -provider')
   .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider')
   .exec(function (err, deals) {
@@ -36,6 +37,7 @@ exports.myDeals = function(req, res) {
   .deepPopulate('updates.createdBy updates.lastEditedBy')
   .populate('createdBy', '-salt -hashedPassword -lastSeen -provider')
   .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider')
+  .populate('vertical')
   .exec(function (err, deals) {
     if(err) { return handleError(res, err); }
     if(!deals) { return res.sendStatus(404); }
@@ -68,9 +70,13 @@ exports.create = function(req, res) {
   User.count({ '_id' : { $in : req.body.assignees } }, function (err, count) {
     if(err) { return handleError(res, err); }
     if(count != req.body.assignees.length) { res.sendStatus(400); }
-    Deal.create(req.body, function (err, deal) {
-      if (err) { return handleError(res, err); }
-      return res.status(201).json(deal);
+    Vertical.findById(req.body.vertical, function (err, vertical) {
+      if(err) { return handleError(res, err); }
+      if(!vertical) { return res.sendStatus(404); }
+        Deal.create(req.body, function (err, deal) {
+          if (err) { return handleError(res, err); }
+          return res.status(201).json(deal);
+        });
     });
   });
 };
@@ -95,10 +101,15 @@ exports.update = function(req, res) {
 
         if(req.user.role === 'core' || req.user.role === 'admin' || 
           (req.user.role === 'coord' && deal.assignees.indexOf(req.user._id)>-1)) {      
-          var updatedDeal = _.extend(deal, req.body);
-          updatedDeal.save(function (err) {
-            if (err) { return handleError(res, err); }
-            return res.status(200).json(deal);
+          Vertical.findById(req.body.vertical, function (err, vertical) {
+            if(err) { return handleError(res, err); }
+            if(!vertical) { return res.sendStatus(404); }
+
+            var updatedDeal = _.extend(deal, req.body);
+            updatedDeal.save(function (err) {
+              if (err) { return handleError(res, err); }
+              return res.status(200).json(deal);
+            });
           });
         } else { 
           res.sendStatus(403);
