@@ -156,16 +156,9 @@
 
             <md-content class="allVerticals" layout-padding>
               <md-list>
-                <md-list-item ng-repeat="vertical in allVerticals" class="md-2-line">
-                  <div flex layout="row">
-                    <div>
-                      <h3>{{ vertical.title }}</h3>
-                      <p>{{ vertical.description }}</p>
-                    </div>
-                    <div flex class="md-actions" layout-align="end center">
-                      <ng-md-icon icon="edit" class="md-secondary" aria-label="button" ng-click="verticalEditModal(vertical)"></ng-md-icon>
-                    </div>
-                  </div>
+                <md-list-item ng-repeat="vertical in allVerticals">
+                  <h4>{{ vertical.title }}</h4>
+                  <ng-md-icon icon="edit" class="md-secondary" ng-click="verticalEditModal(vertical)" aria-label="button"></ng-md-icon>
                   <md-divider></md-divider>
                 </md-list-item>
               </md-list>
