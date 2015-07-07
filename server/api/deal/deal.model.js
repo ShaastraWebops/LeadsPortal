@@ -4,13 +4,6 @@ var mongoose = require('mongoose');
 var deepPopulate = require('mongoose-deep-populate');
 var Schema = mongoose.Schema;
 
-var allVerticals = [
-                    'one',
-                    'two',
-                    'three',
-                    'four'
-                    ];
-
 var DealSchema = new Schema({
   title: String,
   info: String,
@@ -68,17 +61,17 @@ DealSchema
   }, 'Company Name cannot be blank');  
 
 //Assignees
-DealSchema
-  .path('assignees')
-  .validate(function (assign) {
-    return assign.length;
-  }, 'Should be assigned to someone');
+// DealSchema
+//   .path('assignees')
+//   .validate(function (assign) {
+//     return assign.length;
+//   }, 'Should be assigned to someone');
 
-  DealSchema
-  .path('vertical')
-  .validate(function (vertical) {
-    return (allVerticals.indexOf(vertical.value) !== -1);
-  }, 'This is not a valid vertical');
+  // DealSchema
+  // .path('vertical')
+  // .validate(function (vertical) {
+  //   return (allVerticals.indexOf(vertical.value) !== -1);
+  // }, 'This is not a valid vertical');
 
 
 module.exports = mongoose.model('Deal', DealSchema);

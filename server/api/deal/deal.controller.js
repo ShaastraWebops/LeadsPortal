@@ -50,6 +50,7 @@ exports.show = function(req, res) {
   .deepPopulate('updates.createdBy updates.lastEditedBy')
   .populate('createdBy', '-salt -hashedPassword -lastSeen -provider')
   .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider')
+  .populate('vertical')
   .exec(function (err, deal) {
     if(err) { return handleError(res, err); }
     if(!deal) { return res.sendStatus(404); }
