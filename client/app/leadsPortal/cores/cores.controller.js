@@ -6,9 +6,9 @@ angular.module('erp2015App')
   $scope.update = {};
   $scope.showButton = false;
 
-  $scope.verticals = [];
+  //$scope.verticals = [];
 
-  $scope.verticals = LeadsPortalService.verticals;
+  //$scope.verticals = LeadsPortalService.verticals;
 
   LeadsPortalService.getAllVerticals()
     .then(function (data) {
@@ -35,7 +35,7 @@ angular.module('erp2015App')
         title: $scope.deal.title,
         info: $scope.deal.info,
         companyName: $scope.deal.companyName,
-        vertical: JSON.parse($scope.deal.vertical),
+        vertical: JSON.parse($scope.deal.vertical)._id,
         initialPointOfContactName: $scope.deal.initialPointOfContactName,
         initialPointOfContactNumber: $scope.deal.initialPointOfContactNumber,
         initialPointOfContactEmail: $scope.deal.initialPointOfContactEmail,

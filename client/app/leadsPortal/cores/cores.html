@@ -78,7 +78,7 @@
             <div layout="row">
              <div flex="20">
               <md-select placeholder="Select Vertical" ng-model="deal.vertical">
-                <md-option ng-repeat="vertical in verticals" value="{{vertical}}">{{ vertical.name }}</md-option>
+                <md-option ng-repeat="vertical in allVerticals" value="{{ vertical }}">{{ vertical.title }}</md-option>
               </md-select>
              </div>
 

@@ -25,24 +25,25 @@ angular.module('erp2015App')
         } else {
             $scope.dealresult = 'success';
         }
-            // showing editDeal, createUpdate, editUpdate button only to permitted users
-            Auth.isLoggedInAsync(function (loggedIn) {
-                if(deal.status === false) {
-                    if(Auth.getCurrentUser().role === 'admin' || Auth.getCurrentUser().role === 'core') {
-                        $scope.showButton = true;                    
-                    } else if (Auth.getCurrentUser().role === 'coord') {
-                        var len = deal.assignees.length;
-                        for (var i=0; i<len; i++) {
-                            if(Auth.getCurrentUser()._id === deal.assignees[i]._id)
-                                $scope.showButton = true;                    
-                        }
-                    } else {
-                        $scope.showButton = false;                    
-                    }
-                } else {
-                    $scope.showButton = false;
-                }
-            });
+      
+        // showing editDeal, createUpdate, editUpdate button only to permitted users
+        Auth.isLoggedInAsync(function (loggedIn) {
+          if(deal.status === false) {
+            if(Auth.getCurrentUser().role === 'admin' || Auth.getCurrentUser().role === 'core') {
+              $scope.showButton = true;                    
+            } else if (Auth.getCurrentUser().role === 'coord') {
+              var len = deal.assignees.length;
+              for (var i=0; i<len; i++) {
+                if(Auth.getCurrentUser()._id === deal.assignees[i]._id)
+                  $scope.showButton = true;                    
+              }
+            } else {
+              $scope.showButton = false;                    
+            }
+          } else {
+              $scope.showButton = false;
+            }
+          });
         })
         .catch(function (err) {
             // do some error handling here
@@ -115,8 +116,7 @@ angular.module('erp2015App')
     		locals: {
     			DealPassed: $scope.deal,
     			CoordsPassed: $scope.coords,
-                VerticalName: $scope.deal.vertical.name,
-                VerticalValue: $scope.deal.vertical.value
+                VerticalPassed: $scope.deal.vertical
     		}
     	})
     	.then(function (response) {
@@ -125,17 +125,20 @@ angular.module('erp2015App')
     		console.log('Cancel editing deal');
     	});
     };
-    function DealEditModalCtrl($scope, $state, $mdDialog, VerticalName, VerticalValue, DealPassed, CoordsPassed, Auth) {
+    function DealEditModalCtrl($scope, $state, $mdDialog, VerticalPassed, DealPassed, CoordsPassed, Auth) {
         $scope.editDeal = {};
         $scope.editDeal.vertical = {};
         $scope.editDeal = DealPassed;
-        $scope.editDeal.vertical['name'] = VerticalName;
-        $scope.editDeal.vertical['value'] = VerticalValue;
+        $scope.editDeal.vertical = VerticalPassed;
 
-    	$scope.coords = CoordsPassed;
+    	  $scope.coords = CoordsPassed;
         $scope.selectedCoords = DealPassed.assignees;
         $scope.isCoord = true;
-        $scope.verticals = LeadsPortalService.verticals;
+      
+        LeadsPortalService.getAllVerticals()
+          .then(function (data) {
+            $scope.allVerticals = data;
+          });
 
         Auth.isLoggedInAsync(function (loggedIn) {
             if(Auth.getCurrentUser().role === 'coord') { $scope.isCoord = true; }
@@ -162,7 +165,7 @@ angular.module('erp2015App')
                 title: $scope.editDeal.title,
                 info: $scope.editDeal.info,
                 companyName: $scope.editDeal.companyName,
-                vertical: $scope.editDeal.vertical,
+                vertical: $scope.editDeal.vertical._id,
                 initialPointOfContactName: $scope.editDeal.initialPointOfContactName,
                 initialPointOfContactNumber: $scope.editDeal.initialPointOfContactNumber,
                 initialPointOfContactEmail: $scope.editDeal.initialPointOfContactEmail,
