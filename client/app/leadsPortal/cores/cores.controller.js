@@ -6,10 +6,6 @@ angular.module('erp2015App')
   $scope.update = {};
   $scope.showButton = false;
 
-  //$scope.verticals = [];
-
-  //$scope.verticals = LeadsPortalService.verticals;
-
   LeadsPortalService.getAllVerticals()
     .then(function (data) {
       $scope.allVerticals = data;
