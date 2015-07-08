@@ -2,9 +2,9 @@
 
 angular.module('erp2015App')
   .controller('dealController', function ($rootScope, $scope, $state, $window, Auth, LeadsPortalService, $stateParams, $http, $mdDialog) {
-    $scope.selectedCoords = [];
-    $scope.update = {};
-    $scope.showButton = false;
+  $scope.selectedCoords = [];
+  $scope.update = {};
+  $scope.showButton = false;
 
 	LeadsPortalService.getCoords()
 		.then(function (data) {
