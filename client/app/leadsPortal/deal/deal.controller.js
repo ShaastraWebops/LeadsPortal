@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('erp2015App')
-  .controller('dealController', function ($rootScope, $scope, $state, $window, Auth, LeadsPortalService, $stateParams, $http, $mdDialog) {
+  .controller('dealController', function ($rootScope, $scope, $state, $window, Auth, LeadsPortalService, $stateParams, $http, $mdDialog, $filter) {
   $scope.selectedCoords = [];
   $scope.update = {};
   $scope.showButton = false;
@@ -202,14 +202,14 @@ angular.module('erp2015App')
 
   // modal for editing the update 
   $scope.updateEditModal = function (update, index) {
-  	$mdDialog.show({
-  		controller: UpdateEditModalCtrl,
-  		templateUrl: '/app/leadsPortal/deal/updateEditModal.tmpl.html',
-  		locals: {
-  			DealPassed: $scope.deal,
-  			UpdatePassed: update
-  		}
-  	})
+    $mdDialog.show({
+      controller: UpdateEditModalCtrl,
+      templateUrl: '/app/leadsPortal/deal/updateEditModal.tmpl.html',
+      locals: {
+        DealPassed: $scope.deal,
+        UpdatePassed: update
+      }
+    })
     .then(function (response) {
       if(response.status === 200) {
         $scope.deal.updates[index] = response.data;
@@ -221,9 +221,10 @@ angular.module('erp2015App')
       console.log('Cancel creating update');
     });
   };
-  function UpdateEditModalCtrl($scope, $mdDialog, DealPassed, UpdatePassed) {
+  function UpdateEditModalCtrl($scope, $mdDialog, DealPassed, UpdatePassed, $filter) {
   	$scope.deal = DealPassed;
     $scope.editUpdate = UpdatePassed;
+    $scope.editUpdate.nextActivityDate = new Date($filter('date')($scope.editUpdate.nextActivityDate, "yyyy-MM-dd"));
   	$scope.cancel = function() {
   		$mdDialog.cancel();
   	};
@@ -265,8 +266,6 @@ angular.module('erp2015App')
       } else {
         $rootScope.showToast('Error occurred!');
       }
-      console.log(response);
-      // $window.location.reload();
     }, function () {
       console.log('Cancel creating update');
     });
