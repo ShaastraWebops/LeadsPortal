@@ -34,8 +34,8 @@ angular.module('erp2015App')
        console.log(err);
     });
 
-    var allDeals = $scope.allDeals;
-    $scope.sortedcategory = allDeals;
+  var allDeals = $scope.allDeals;
+  $scope.sortedcategory = allDeals;
 
   $scope.onChange = function() {
     if($scope.searchText == undefined) {
