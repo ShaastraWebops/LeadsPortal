@@ -17,7 +17,7 @@
 						</md-button>
 			   	</div>
 			   	<div class="md-actions" layout="row" layout-align="end center">
-						<md-button class="md-raised md-primary" ng-click="dealEditModal()" ng-show="showButton">
+						<md-button class="md-raised md-primary" ng-click="dealEditModal()" ng-show="showButton && !deal.status">
 							Edit Deal
 						</md-button>
 			   	</div>
@@ -173,7 +173,7 @@
 		    		<div layout="row">
 			     		<h2 flex class="md-display-1"> Updates </h2>
 					   	<div class="md-actions" layout-align="end end">
-								<md-button class="md-raised md-primary" ng-click="updateCreateModal()" ng-show="showButton">
+								<md-button class="md-raised md-primary" ng-click="updateCreateModal()" ng-show="showButton && !deal.status">
 									Create Update
 								</md-button>
 					   	</div>
@@ -188,7 +188,7 @@
 						</div>
 						<div ng-show="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;" ng-repeat="update in deal.updates | orderBy: 'createdOn':true">
 			      	<div class="md-actions" layout="row" layout-align="end center">
-								<md-button class="md-raised md-primary md-hue-1" ng-click="updateEditModal(update, $index)" ng-show="showButton">
+								<md-button class="md-raised md-primary md-hue-1" ng-click="updateEditModal(update, $index)" ng-show="showButton && !deal.status">
 									Edit this Update
 								</md-button>
 			      	</div>						
