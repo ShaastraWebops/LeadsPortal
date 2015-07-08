@@ -18,7 +18,9 @@
          <md-chips ng-model="selectedVerticals" md-autocomplete-snap md-require-match>
             <md-autocomplete
               md-selected-item="selectedItem"
+              md-selected-item-change="null"
               md-search-text="searchText"
+              md-search-text-change="null"
               md-items="item in verticals"
               md-item-text="item.name"
               placeholder="search deals of vertical">
@@ -33,7 +35,9 @@
          <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
             <md-autocomplete
               md-selected-item="selectedItem"
+              md-selected-item-change="null"
               md-search-text="searchText"
+              md-search-text-change="null"
               md-items="item in coords"
               md-item-text="item.name"
               placeholder="search deals of coord">

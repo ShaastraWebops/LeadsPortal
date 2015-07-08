@@ -14,6 +14,8 @@ angular.module('erp2015App')
   
   $scope.dealsTitle = "List of all Deals";
 
+  
+
   LeadsPortalService.getAllDeals()
     .then(function (allDeals) {
       $scope.allDeals = allDeals;
