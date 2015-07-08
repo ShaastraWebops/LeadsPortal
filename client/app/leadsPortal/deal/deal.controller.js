@@ -68,7 +68,7 @@ angular.module('erp2015App')
   };
   function DealCloseModalCtrl($scope, $state, $mdDialog, DealPassed, Auth) {
     $scope.dealResult = false;
-    $scope.dealComment = '';
+    $scope.dealComment = DealPassed.comment;
     $scope.closeDeal = {};
     $scope.closeDeal = DealPassed;
 
@@ -103,8 +103,7 @@ angular.module('erp2015App')
 
   $scope.dealOpen = function () {
     LeadsPortalService.openDeal({
-      _id: $scope.deal._id,
-      comment: $scope.deal.comment
+      _id: $scope.deal._id
     })
     .then(function (response) {
       if(response.status === 200) {

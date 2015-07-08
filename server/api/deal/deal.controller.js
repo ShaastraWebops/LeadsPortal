@@ -176,7 +176,6 @@ exports.openDeal = function(req, res) {
         deal.lastEditedBy = req.user._id;
         deal.status = false;
         deal.result = false;
-        deal.comment = req.body.comment;
 
         deal.save(function (err) {
           if (err) { return handleError(res, err); }
