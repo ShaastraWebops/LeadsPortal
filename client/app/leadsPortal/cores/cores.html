@@ -19,22 +19,26 @@
               <label>Title</label>
               <input name="title" ng-model="deal.title" ng-required="true" mongoose-error />
             </md-input-container>
-            <div style="color:red">
-              <span ng-show="form.title.$error.required && dealSubmitted">
-                Title is required.
-              </span>
-              <span>{{ errors.other }}</span>
+            <div class="color">
+              <div>
+                <span ng-show="form.title.$error.required && dealSubmitted">
+                  Title is required.
+                </span>
+                <span>{{ errors.other }}</span>
+              </div>
             </div>
 
             <md-input-container>
               <label>Deal Info</label>
               <textarea required name="info" ng-model="deal.info" mongoose-error></textarea>
             </md-input-container>
-            <div style="color:red">
-              <span ng-show="form.info.$error.required && dealSubmitted">
-                Title is required.
-              </span>
-              <span>{{ errors.other }}</span>
+            <div class="color">
+              <div>
+                <span ng-show="form.info.$error.required && dealSubmitted">
+                  Title is required.
+                </span>
+                <span>{{ errors.other }}</span>
+              </div>
             </div>
 
             <div layout="row">
@@ -43,11 +47,13 @@
                 <label>Company Name</label>
                 <input required name="companyName" ng-model="deal.companyName" mongoose-error />
               </md-input-container>
-              <div style="color:red">
-                <span ng-show="form.companyName.$error.required && dealSubmitted">
-                  Title is required.
-                </span>
-                <span>{{ errors.other }}</span>
+              <div class="color">
+                <div>
+                  <span ng-show="form.companyName.$error.required && dealSubmitted">
+                    Title is required.
+                  </span>
+                  <span>{{ errors.other }}</span>
+                </div>
               </div>
              </div>
 
@@ -121,22 +127,26 @@
                   <label>Title</label>
                   <input name="title" ng-model="vertical.title" ng-required="true" mongoose-error />
                 </md-input-container>
-                <div style="color:red">
-                  <span ng-show="formVertical.title.$error.required && verticalSubmitted">
-                    Title is required.
-                  </span>
-                  <span>{{ errors.other }}</span>
+                <div class="color">
+                  <div>
+                    <span ng-show="formVertical.title.$error.required && verticalSubmitted">
+                      Title is required.
+                    </span>
+                    <span>{{ errors.other }}</span>
+                  </div>
                 </div>
 
                 <md-input-container>
                   <label>Description</label>
                   <textarea required name="description" ng-model="vertical.description" mongoose-error></textarea>
                 </md-input-container>
-                <div style="color:red">
-                  <span ng-show="formVertical.description.$error.required && verticalSubmitted">
-                    Title is required.
-                  </span>
-                  <span>{{ errors.other }}</span>
+                <div class="color">
+                  <div>
+                    <span ng-show="formVertical.description.$error.required && verticalSubmitted">
+                      Title is required.
+                    </span>
+                    <span>{{ errors.other }}</span>
+                  </div>
                 </div>
                 <md-button type="submit" class="md-raised md-primary">Create</md-button>
               </form>

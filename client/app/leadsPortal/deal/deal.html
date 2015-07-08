@@ -27,267 +27,323 @@
 						</md-button>
 			   	</div>
 			   </div>
-		   		<md-card-content style="word-break:break-all">
-		     		<h2 class="md-display-1"> Deal Details </h2>
-						<md-divider></md-divider>
-				    <md-list>
-					    <md-list-item class="md-3-line">
-					    	<ng-md-icon icon="subject" style="fill:#00517F" size="32" class="md-avatar" alt="deal-title-img"></ng-md-icon>
-					        <div class="md-list-item-text">
-						        <h3> Title </h3>
-						        <p>{{ deal.title }}</p>
-					        </div>
-					    </md-list-item>
+			   <div class="dealDetails">
+			   		<md-card-content>
+			     		<h2 class="md-display-1"> Deal Details </h2>
+							<md-divider></md-divider>
+					    <md-list>
+						    <md-list-item class="md-3-line">
+						    	<div class="dealTitle">
+						    		<ng-md-icon icon="subject" size="32" class="md-avatar" alt="deal-title-img"></ng-md-icon>
+						    	</div>
+						        <div class="md-list-item-text">
+							        <h3> Title </h3>
+							        <p>{{ deal.title }}</p>
+						        </div>
+						    </md-list-item>
+
+								<md-divider md-inset ng-if="!$last"></md-divider>
+
+								<div layout="row" ng-hide="!deal.status">
+							    <md-list-item class="md-3-line">
+							    	<div class="dealResultDone">
+							    		<ng-md-icon ng-if="deal.result" icon="done" size="32" class="md-avatar" alt="deal-result-img"></ng-md-icon>
+							    	</div>
+							    	<div class="dealResultClear">
+							    		<ng-md-icon ng-if="!deal.result" icon="clear" size="32" class="md-avatar" alt="deal-result-img"></ng-md-icon>
+							    	</div>
+							        <div class="md-list-item-text">
+								        <h3> Result </h3>
+								        <p>{{ dealresult }}</p>
+							        </div>
+							    </md-list-item>
+
+							    <md-list-item class="md-3-line">
+							    	<div class="dealComments">
+							    		<ng-md-icon icon="comment" size="32" class="md-avatar" alt="deal-PoC-name-img"></ng-md-icon>
+							    	</div>
+							        <div class="md-list-item-text">
+								        <h3> Comments </h3>
+								        <p>{{ deal.comment }}</p>
+							        </div>
+							    </md-list-item>
+						    </div>
+
+								<md-divider md-inset ng-if="!$last"></md-divider>
+
+						    <md-list-item class="md-3-line">
+						    	<div class="dealInfo">
+						    		<ng-md-icon icon="description" size="32" class="md-avatar" alt="deal-summary-img"></ng-md-icon>
+						    	</div>
+						        <div class="md-list-item-text">
+							        <h3> Info </h3>
+							        <p>{{ deal.info }}</p>
+						        </div>
+						    </md-list-item>
+
+								<md-divider md-inset ng-if="!$last"></md-divider>
+			                           
+			          <md-list-item class="md-3-line">
+			          			<div class="dealVerticalTitle">
+						    		<ng-md-icon icon="poll" size="32" class="md-avatar" alt="deal-vertical-img"></ng-md-icon>
+						    	</div>
+						        <div class="md-list-item-text">
+							        <h3> Vertical </h3>
+							        <p>{{ deal.vertical.title }}</p>
+						        </div>
+						    </md-list-item>
+
+								<md-divider md-inset ng-if="!$last"></md-divider>
+
+						    <div layout="row">
+							    <md-list-item class="md-3-line">
+							    	<div class="dealCompanyName">
+							    		<ng-md-icon icon="work" size="32" class="md-avatar" alt="deal-company-img"></ng-md-icon>
+							    	</div>
+							        <div class="md-list-item-text">
+								        <h3> Company Name </h3>
+								        <p>{{ deal.companyName }}</p>
+							        </div>
+							    </md-list-item>
+
+							    <md-list-item class="md-3-line">
+							    	<div class="dealPOCName">
+							    		<ng-md-icon icon="account_box" size="32" class="md-avatar" alt="deal-PoC-name-img"></ng-md-icon>
+							    	</div>
+							        <div class="md-list-item-text">
+								        <h3> PoC's Name </h3>
+								        <p>{{ deal.initialPointOfContactName }}</p>
+							        </div>
+							    </md-list-item>
+						    </div>
+
+								<md-divider md-inset ng-if="!$last"></md-divider>
+
+						    <div layout="row">
+							    <md-list-item class="md-3-line">
+							    	<div class="dealPOCEmail">
+							    		<ng-md-icon icon="email" size="32" class="md-avatar" alt="deal-PoC-email-img"></ng-md-icon>
+							    	</div>
+							        <div class="md-list-item-text">
+								        <h3> PoC's Email Id </h3>
+								        <p>{{ deal.initialPointOfContactEmail }}</p>
+							        </div>
+							    </md-list-item>
+							    <md-list-item class="md-3-line">
+							    	<div class="dealPOCPhoneNumber">
+							    		<ng-md-icon icon="phone" size="32" class="md-avatar" alt="deal-PoC-number-img"></ng-md-icon>
+							    	</div>
+							        <div class="md-list-item-text">
+								        <h3> PoC's Phone Number </h3>
+								        <p>{{ deal.initialPointOfContactNumber }}</p>
+							        </div>
+							    </md-list-item>
+						    </div>
+
+								<md-divider md-inset ng-if="!$last"></md-divider>
+
+						    <div layout="row">
+							    <md-list-item class="md-3-line">
+							    	<div class="dealCreated">
+							    		<ng-md-icon icon="today" size="48" class="md-avatar" alt="deal-created-date-img"></ng-md-icon>
+							    	</div>
+							        <div class="md-list-item-text">
+								        <h3> Created </h3>
+								        <p>{{ deal.createdBy.name }}</p>
+								        <p>{{ deal.createdBy.email }}</p>
+								        <p>{{ deal.createdBy.rollNumber }}</p>
+								        <p>{{ deal.createdBy.phoneNumber }}</p>
+								        <p>{{ deal.createdOn | date: 'medium' }}</p>
+							        </div>
+							    </md-list-item>
+							    <md-list-item class="md-3-line">
+							    	<div class="dealUpdated">
+							    		<ng-md-icon icon="schedule" size="48" class="md-avatar" alt="deal-last-updated-img"></ng-md-icon>
+							    	</div>
+							        <div class="md-list-item-text">
+								        <h3> Last Updated On </h3>
+								        <p>{{ deal.lastEditedBy.name }}</p>
+								        <p>{{ deal.lastEditedBy.email }}</p>
+								        <p>{{ deal.lastEditedBy.rollNumber }}</p>
+								        <p>{{ deal.lastEditedBy.phoneNumber }}</p>
+								        <p>{{ deal.updatedOn | date: 'medium' }}</p>
+							        </div>
+							    </md-list-item>
+						    </div>
+					    </md-list>
 
 							<md-divider md-inset ng-if="!$last"></md-divider>
 
-							<div layout="row" ng-hide="!deal.status">
-						    <md-list-item class="md-3-line">
-						    	<ng-md-icon ng-if="deal.result" icon="done" style="fill:#1F5C7F" size="32" class="md-avatar" alt="deal-result-img"></ng-md-icon>
-						    	<ng-md-icon ng-if="!deal.result" icon="clear" style="fill:#1F5C7F" size="32" class="md-avatar" alt="deal-result-img"></ng-md-icon>
-						        <div class="md-list-item-text">
-							        <h3> Result </h3>
-							        <p>{{ dealresult }}</p>
-						        </div>
-						    </md-list-item>
-
-						    <md-list-item class="md-3-line">
-						    	<ng-md-icon icon="comment" style="fill:#0082CC" size="32" class="md-avatar" alt="deal-PoC-name-img"></ng-md-icon>
-						        <div class="md-list-item-text">
-							        <h3> Comments </h3>
-							        <p>{{ deal.comment }}</p>
-						        </div>
-						    </md-list-item>
-					    </div>
-
-							<md-divider md-inset ng-if="!$last"></md-divider>
-
-					    <md-list-item class="md-3-line">
-					    	<ng-md-icon icon="description" style="fill:#00A2FF" size="32" class="md-avatar" alt="deal-summary-img"></ng-md-icon>
-					        <div class="md-list-item-text">
-						        <h3> Info </h3>
-						        <p>{{ deal.info }}</p>
-					        </div>
-					    </md-list-item>
-
-							<md-divider md-inset ng-if="!$last"></md-divider>
-		                           
-		          <md-list-item class="md-3-line">
-					    	<ng-md-icon icon="poll" style="fill:#0082CC" size="32" class="md-avatar" alt="deal-vertical-img"></ng-md-icon>
-					        <div class="md-list-item-text">
-						        <h3> Vertical </h3>
-						        <p>{{ deal.vertical.title }}</p>
-					        </div>
-					    </md-list-item>
-
-							<md-divider md-inset ng-if="!$last"></md-divider>
-
-					    <div layout="row">
-						    <md-list-item class="md-3-line">
-						    	<ng-md-icon icon="work" style="fill:#1F5C7F" size="32" class="md-avatar" alt="deal-company-img"></ng-md-icon>
-						        <div class="md-list-item-text">
-							        <h3> Company Name </h3>
-							        <p>{{ deal.companyName }}</p>
-						        </div>
-						    </md-list-item>
-
-						    <md-list-item class="md-3-line">
-						    	<ng-md-icon icon="account_box" style="fill:#0082CC" size="32" class="md-avatar" alt="deal-PoC-name-img"></ng-md-icon>
-						        <div class="md-list-item-text">
-							        <h3> PoC's Name </h3>
-							        <p>{{ deal.initialPointOfContactName }}</p>
-						        </div>
-						    </md-list-item>
-					    </div>
-
-							<md-divider md-inset ng-if="!$last"></md-divider>
-
-					    <div layout="row">
-						    <md-list-item class="md-3-line">
-						    	<ng-md-icon icon="email" style="fill:#00517F" size="32" class="md-avatar" alt="deal-PoC-email-img"></ng-md-icon>
-						        <div class="md-list-item-text">
-							        <h3> PoC's Email Id </h3>
-							        <p>{{ deal.initialPointOfContactEmail }}</p>
-						        </div>
-						    </md-list-item>
-						    <md-list-item class="md-3-line">
-						    	<ng-md-icon icon="phone" style="fill:#00A2FF" size="32" class="md-avatar" alt="deal-PoC-number-img"></ng-md-icon>
-						        <div class="md-list-item-text">
-							        <h3> PoC's Phone Number </h3>
-							        <p>{{ deal.initialPointOfContactNumber }}</p>
-						        </div>
-						    </md-list-item>
-					    </div>
-
-							<md-divider md-inset ng-if="!$last"></md-divider>
-
-					    <div layout="row">
-						    <md-list-item class="md-3-line">
-						    	<ng-md-icon icon="today" style="fill:#1F5C7F" size="48" class="md-avatar" alt="deal-created-date-img"></ng-md-icon>
-						        <div class="md-list-item-text">
-							        <h3> Created </h3>
-							        <p>{{ deal.createdBy.name }}</p>
-							        <p>{{ deal.createdBy.email }}</p>
-							        <p>{{ deal.createdBy.rollNumber }}</p>
-							        <p>{{ deal.createdBy.phoneNumber }}</p>
-							        <p>{{ deal.createdOn | date: 'medium' }}</p>
-						        </div>
-						    </md-list-item>
-						    <md-list-item class="md-3-line">
-						    	<ng-md-icon icon="schedule" style="fill:#0082CC" size="48" class="md-avatar" alt="deal-last-updated-img"></ng-md-icon>
-						        <div class="md-list-item-text">
-							        <h3> Last Updated On </h3>
-							        <p>{{ deal.lastEditedBy.name }}</p>
-							        <p>{{ deal.lastEditedBy.email }}</p>
-							        <p>{{ deal.lastEditedBy.rollNumber }}</p>
-							        <p>{{ deal.lastEditedBy.phoneNumber }}</p>
-							        <p>{{ deal.updatedOn | date: 'medium' }}</p>
-						        </div>
-						    </md-list-item>
-					    </div>
-				    </md-list>
-
-						<md-divider md-inset ng-if="!$last"></md-divider>
-
-				    <md-list>
-			    		<h1 class="md-headline">Assigned to</h1>
-			    		<div layout="row">
-						    <md-list-item class="md-3-line" ng-repeat="person in deal.assignees">
-						    	<ng-md-icon icon="perm_identity" style="fill:#00A2FF" size="48" class="md-avatar" alt="deal-assignee-img"></ng-md-icon>
-						        <div class="md-list-item-text">
-							        <h3>{{ person.name }}</h3>
-							        <p>{{ person.email }}</p>
-							        <p>{{ person.rollNumber }}</p>
-							        <p>{{ person.phoneNumber }}</p>
-						        </div>
-						    </md-list-item>
-			    		</div>
-						</md-list>
-		 			</md-card-content>
+					    <md-list>
+				    		<h1 class="md-headline">Assigned to</h1>
+				    		<div layout="row">
+							    <md-list-item class="md-3-line" ng-repeat="person in deal.assignees">
+							    	<div class="dealAssignee"></div>
+							    	<ng-md-icon icon="perm_identity" size="48" class="md-avatar" alt="deal-assignee-img"></ng-md-icon>
+							        <div class="md-list-item-text">
+								        <h3>{{ person.name }}</h3>
+								        <p>{{ person.email }}</p>
+								        <p>{{ person.rollNumber }}</p>
+								        <p>{{ person.phoneNumber }}</p>
+							        </div>
+							    </md-list-item>
+				    		</div>
+							</md-list>
+			 			</md-card-content>
+		 			</div>
 		 		</md-card>
 		  </md-content>
 
 			<md-content>
 		    <md-card>
-		    	<md-card-content style="word-break:break-all">
-		    		<div layout="row">
-			     		<h2 flex class="md-display-1"> Updates </h2>
-					   	<div class="md-actions" layout-align="end end">
-								<md-button class="md-raised md-primary" ng-click="updateCreateModal()" ng-show="showButton && !deal.status">
-									Create Update
-								</md-button>
-					   	</div>
-		    		</div>
-					
-						<md-divider></md-divider>
-					
-						<div ng-hide="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;">
-							<md-whiteframe class="md-whiteframe-z1" style="background:#fff; margin:20px; padding: 20px;" layout layout-align="left center">
-							    <span>No updates as of now</span>
-							</md-whiteframe>
-						</div>
-						<div ng-show="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;" ng-repeat="update in deal.updates | orderBy: 'createdOn':true">
-			      	<div class="md-actions" layout="row" layout-align="end center">
-								<md-button class="md-raised md-primary md-hue-1" ng-click="updateEditModal(update, $index)" ng-show="showButton && !deal.status">
-									Edit this Update
-								</md-button>
-			      	</div>						
-							<md-whiteframe class="md-whiteframe-z3" style="background:#fff; padding: 20px;" layout layout-align="left center">
-						    <md-list style="width:100%;">
-							    <md-list-item class="md-3-line">
-							    	<ng-md-icon icon="subject" style="fill:#00517F" size="32" class="md-avatar" alt="update-title-img"></ng-md-icon>
-							        <div class="md-list-item-text">
-								        <h3> Title </h3>
-								        <p>{{ update.title }}</p>
-							        </div>
-							    </md-list-item>		
+		    	<div class="createUpdate">
+			    	<md-card-content>
+			    		<div layout="row">
+				     		<h2 flex class="md-display-1"> Updates </h2>
+						   	<div class="md-actions" layout-align="end end">
+									<md-button class="md-raised md-primary" ng-click="updateCreateModal()" ng-show="showButton && !deal.status">
+										Create Update
+									</md-button>
+						   	</div>
+			    		</div>
+						
+							<md-divider></md-divider>
+							<div class="noUpdates">
+								<div class="noUpdatesAsOfNow">
+									<div ng-hide="(deal.updates.length)" layout="column" layout-fill>
+										<md-whiteframe class="md-whiteframe-z1" layout layout-align="left center">
+										    <span>No updates as of now</span>
+										</md-whiteframe>
+									</div>
+								</div>
+								<div class="editUpdate">
+									<div ng-show="(deal.updates.length)" layout="column" layout-fill ng-repeat="update in deal.updates | orderBy: 'createdOn':true">
+						      		<div class="md-actions" layout="row" layout-align="end center">
+												<md-button class="md-raised md-primary md-hue-1" ng-click="updateEditModal(update, $index)" ng-show="showButton && !deal.status">
+													Edit this Update
+												</md-button>
+						      		</div>
+						      			<div class="whiteFrameClass">					
+											<md-whiteframe class="md-whiteframe-z3" layout layout-align="left center">
+										    <div class="listClass"></div>
+										    <md-list>
+											    <md-list-item class="md-3-line">
+											    	<div class="updateTitle">
+											  		  	<ng-md-icon icon="subject" size="32" class="md-avatar" alt="update-title-img"></ng-md-icon>
+											  		</div>
+											        <div class="md-list-item-text">
+												        <h3> Title </h3>
+												        <p>{{ update.title }}</p>
+											        </div>
+											    </md-list-item>		
 
-									<md-divider md-inset></md-divider>
-				
-							    <md-list-item class="md-3-line">
-							    	<ng-md-icon icon="description" style="fill:#00A2FF" size="32" class="md-avatar" alt="update-summary-img"></ng-md-icon>
-							        <div class="md-list-item-text">
-								        <h3> Summary </h3>
-								        <p>{{ update.summary }}</p>
-							        </div>
-							    </md-list-item>
+													<md-divider md-inset></md-divider>
+								
+											    <md-list-item class="md-3-line">
+											    	<div class="updateSummary">
+											  		  	<ng-md-icon icon="description" size="32" class="md-avatar" alt="update-summary-img"></ng-md-icon>
+											  		</div>
+											        <div class="md-list-item-text">
+												        <h3> Summary </h3>
+												        <p>{{ update.summary }}</p>
+											        </div>
+											    </md-list-item>
 
-									<md-divider md-inset></md-divider>
+													<md-divider md-inset></md-divider>
 
-							    <div layout="row">
-								    <md-list-item class="md-3-line">
-								    	<ng-md-icon icon="account_box" style="fill:#0082CC" size="32" class="md-avatar" alt="update-PoC-name-img"></ng-md-icon>
-								        <div class="md-list-item-text">
-									        <h3> PoC Name </h3>
-									        <p>{{ update.pointOfContactName }}</p>
-								        </div>
-								    </md-list-item>						    	
-								    <md-list-item class="md-3-line">
-								    	<ng-md-icon icon="email" style="fill:#00517F" size="32" class="md-avatar" alt="update-PoC-email-img"></ng-md-icon>
-								        <div class="md-list-item-text">
-									        <h3> PoC Email </h3>
-									        <p>{{ update.pointOfContactEmail }}</p>
-								        </div>
-								    </md-list-item>						    	
-								    <md-list-item class="md-3-line">
-								    	<ng-md-icon icon="phone" style="fill:#00A2FF" size="32" class="md-avatar" alt="update-PoC-number-img"></ng-md-icon>
-								        <div class="md-list-item-text">
-									        <h3> PoC Number </h3>
-									        <p>{{ update.pointOfContactNumber }}</p>
-								        </div>
-								    </md-list-item>						    	
-							    </div>
+											    <div layout="row">
+												    <md-list-item class="md-3-line">
+												    	<div class="updatePOCName">
+												 		   	<ng-md-icon icon="account_box" size="32" class="md-avatar" alt="update-PoC-name-img"></ng-md-icon>
+												 		</div>
+												        <div class="md-list-item-text">
+													        <h3> PoC Name </h3>
+													        <p>{{ update.pointOfContactName }}</p>
+												        </div>
+												    </md-list-item>						    	
+												    <md-list-item class="md-3-line">
+												    	<div class="updatePOCEmail">
+												 		   	<ng-md-icon icon="email" size="32" class="md-avatar" alt="update-PoC-email-img"></ng-md-icon>
+												 		</div>
+												        <div class="md-list-item-text">
+													        <h3> PoC Email </h3>
+													        <p>{{ update.pointOfContactEmail }}</p>
+												        </div>
+												    </md-list-item>						    	
+												    <md-list-item class="md-3-line">
+												    	<div class="updatePOCPhoneNumber">
+												 		   	<ng-md-icon icon="phone" size="32" class="md-avatar" alt="update-PoC-number-img"></ng-md-icon>
+												 		</div>
+												        <div class="md-list-item-text">
+													        <h3> PoC Number </h3>
+													        <p>{{ update.pointOfContactNumber }}</p>
+												        </div>
+												    </md-list-item>						    	
+											    </div>
 
-									<md-divider md-inset></md-divider>
+													<md-divider md-inset></md-divider>
 
-							    <div layout="row">
-								    <md-list-item class="md-3-line">
-								    	<ng-md-icon icon="sort" style="fill:#00517F" size="48" class="md-avatar" alt="next-activity-aim-details-img"></ng-md-icon>
-								        <div class="md-list-item-text">
-									        <h3> Next Activity </h3>
-									        <p>{{ update.nextActivityAim }}</p>
-								        </div>
-								    </md-list-item>						    	
-								    <md-list-item class="md-3-line">
-								    	<ng-md-icon icon="today" style="fill:#00517F" size="48" class="md-avatar" alt="next-activity-date-details-img"></ng-md-icon>
-								        <div class="md-list-item-text">
-									        <h3> Date </h3>
-									        <p>{{ update.nextActivityDate | date: 'fullDate' }}</p>
-								        </div>
-								    </md-list-item>						    	
-							    </div>
+											    <div layout="row">
+												    <md-list-item class="md-3-line">
+												    	<div class="updateNextActivity">
+												 		   	<ng-md-icon icon="sort" size="48" class="md-avatar" alt="next-activity-aim-details-img"></ng-md-icon>
+												 		</div>
+												        <div class="md-list-item-text">
+													        <h3> Next Activity </h3>
+													        <p>{{ update.nextActivityAim }}</p>
+												        </div>
+												    </md-list-item>						    	
+												    <md-list-item class="md-3-line">
+												    	<div class="updateNextActivityDate">
+												 		   	<ng-md-icon icon="today" size="48" class="md-avatar" alt="next-activity-date-details-img"></ng-md-icon>
+												 		</div>
+												        <div class="md-list-item-text">
+													        <h3> Date </h3>
+													        <p>{{ update.nextActivityDate | date: 'fullDate' }}</p>
+												        </div>
+												    </md-list-item>						    	
+											    </div>
 
-									<md-divider md-inset></md-divider>
+													<md-divider md-inset></md-divider>
 
-							    <div layout="row">
-								    <md-list-item class="md-3-line">
-								    	<ng-md-icon icon="perm_identity" style="fill:#0082CC" size="48" class="md-avatar" alt="update-created-details-img"></ng-md-icon>
-								        <div class="md-list-item-text">
-									        <h3> Created - {{ update.createdOn | date: 'medium' }} </h3>
-									        <p>{{ update.createdBy.name }}</p>
-									        <p>{{ update.createdBy.email }}</p>
-									        <p>{{ update.createdBy.rollNumber }}</p>
-									        <p>{{ update.createdBy.phoneNumber }}</p>
-								        </div>
-								    </md-list-item>						    	
-								    <md-list-item class="md-3-line">
-								    	<ng-md-icon icon="assignment_turned_in" style="fill:#0082CC" size="48" class="md-avatar" alt="update-last-edited-details-img"></ng-md-icon>
-								        <div class="md-list-item-text">
-									        <h3> Last Edited - {{ update.updatedOn | date: 'medium' }} </h3>
-									        <p>{{ update.lastEditedBy.name }}</p>
-									        <p>{{ update.lastEditedBy.email }}</p>
-									        <p>{{ update.lastEditedBy.rollNumber }}</p>
-									        <p>{{ update.lastEditedBy.phoneNumber }}</p>
-								        </div>
-								    </md-list-item>						    	
-							    </div>
-								</md-list>
-							</md-whiteframe>
+											    <div layout="row">
+												    <md-list-item class="md-3-line">
+												    	<div class="updateCreatedOn">
+												 		   	<ng-md-icon icon="perm_identity" size="48" class="md-avatar" alt="update-created-details-img"></ng-md-icon>
+												 		</div>
+												        <div class="md-list-item-text">
+													        <h3> Created - {{ update.createdOn | date: 'medium' }} </h3>
+													        <p>{{ update.createdBy.name }}</p>
+													        <p>{{ update.createdBy.email }}</p>
+													        <p>{{ update.createdBy.rollNumber }}</p>
+													        <p>{{ update.createdBy.phoneNumber }}</p>
+												        </div>
+												    </md-list-item>						    	
+												    <md-list-item class="md-3-line">
+												    	<div class="updateUpdatedOn">
+												 		   	<ng-md-icon icon="assignment_turned_in" size="48" class="md-avatar" alt="update-last-edited-details-img"></ng-md-icon>
+												 		</div>
+												        <div class="md-list-item-text">
+													        <h3> Last Edited - {{ update.updatedOn | date: 'medium' }} </h3>
+													        <p>{{ update.lastEditedBy.name }}</p>
+													        <p>{{ update.lastEditedBy.email }}</p>
+													        <p>{{ update.lastEditedBy.rollNumber }}</p>
+													        <p>{{ update.lastEditedBy.phoneNumber }}</p>
+												        </div>
+												    </md-list-item>						    	
+											    </div>
+												</md-list>
+											</md-whiteframe>
+										</div>	
 
-							<md-divider md-inset ng-if="!$last"></md-divider>
+										<md-divider md-inset ng-if="!$last"></md-divider>
 
-						</div>
-					</md-card-content>
+									</div>
+								</div>
+								</div>
+							</div>
+						</md-card-content>
+					</div>
 				</md-card>
 			<md-content>
 
