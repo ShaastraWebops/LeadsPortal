@@ -6,7 +6,7 @@ angular.module('erp2015App')
   	return {
       createDeal:function(data){
         return $http.post('/api/deals', data).then(function(response){
-          return response.data;
+          return response;
         });
       },
   		getAllDeals: function () {
@@ -20,18 +20,18 @@ angular.module('erp2015App')
   			});
   		},
   		editDeal: function (data) {
-  			 return $http.put('/api/deals/' + data._id, data).then(function (response) {
-  				return response.data;
+  			return $http.put('/api/deals/' + data._id, data).then(function (response) {
+  				return response;
   			 });
   		},
   		createUpdate: function (data) {
   			return $http.post('/api/updates', data).then(function (response) {
-  			 	return response.data;
+  			 	return response;
   			});
   		},
   		editUpdate: function (data, updateId) {
   			 return $http.put('/api/updates/' + updateId, data).then(function (response) {
-  				return response.data;
+  				return response;
   			});
   		},
       getDeal: function (dealId) {
@@ -41,7 +41,7 @@ angular.module('erp2015App')
       },
       createVertical: function (data) {
         return $http.post('/api/verticals', data).then(function (response) {
-          return response.data;
+          return response;
         });
       
       },
@@ -52,28 +52,9 @@ angular.module('erp2015App')
       },
       editVertical: function (data) {
         return $http.put('/api/verticals/' + data._id, data).then(function (response) {
-          return response.data;
+          return response;
         });
-      },
-      
-      // verticals:[
-      // {
-      //   name: 'One',
-      //   value: 'one'
-      // },
-      // {
-      //   name: 'Two',
-      //   value: 'two'
-      // },
-      // {
-      //   name: 'Three',
-      //   value: 'three'
-      // },
-      // {
-      //   name: 'Four',
-      //   value: 'four'
-      // }
-      // ],
+      },      
       getCoords:function(){
         return $http.get('/api/users/getCoords').then(function (response){
           return response.data;
@@ -81,12 +62,12 @@ angular.module('erp2015App')
       },
       closeDeal:function (data) {
         return $http.put('/api/deals/closeDeal/'+ data._id, data).then(function (response){
-          return response.data;
+          return response;
         });
       },
       openDeal:function (data) {
         return $http.put('api/deals/openDeal/'+ data._id).then(function (response){
-          return response.data;
+          return response;
         });
       }
   	};

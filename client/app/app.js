@@ -67,7 +67,7 @@ angular.module('erp2015App', [
     };
   })
 
-  .run(function ($rootScope, $location, $state, Auth) {
+  .run(function ($rootScope, $location, $state, Auth, $mdToast, $animate) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {
@@ -91,4 +91,12 @@ angular.module('erp2015App', [
         }
       });
     });
+    $rootScope.showToast = function (value) {
+      $mdToast.show(
+        $mdToast.simple()
+          .content(value)
+          .position('bottom right')
+          .hideDelay(3000)
+      );
+    };
   });

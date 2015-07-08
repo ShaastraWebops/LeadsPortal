@@ -49,6 +49,7 @@
                 <label>Next Activity</label>
                 <input ng-model="editUpdate.nextActivityAim" type="text">
               </md-input-container>
+              {{editUpdate.nextActivityDate | date: 'medium'}}
             <md-input-container flex>
               <label>Date</label>
               <input ng-model="editUpdate.nextActivityDate" type="date">

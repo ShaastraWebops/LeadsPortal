@@ -156,7 +156,7 @@
 
             <md-content class="allVerticals" layout-padding>
               <md-list>
-                <md-list-item ng-repeat="vertical in allVerticals">
+                <md-list-item ng-repeat="vertical in allVerticals | orderBy: 'createdOn':true">
                   <h4>{{ vertical.title }}</h4>
                   <ng-md-icon icon="edit" class="md-secondary" ng-click="verticalEditModal(vertical)" aria-label="edit-vertical"></ng-md-icon>
                   <md-divider></md-divider>

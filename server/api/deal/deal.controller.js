@@ -108,7 +108,15 @@ exports.update = function(req, res) {
             var updatedDeal = _.extend(deal, req.body);
             updatedDeal.save(function (err) {
               if (err) { return handleError(res, err); }
-              return res.status(200).json(deal);
+              // to populate the deal wile saving to send it to client side
+              updatedDeal
+                .populate('updates')
+                .populate('assignees')
+                .populate('vertical')
+                .populate('createdBy', '-salt -hashedPassword -lastSeen -provider')
+                .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider', function (err, upde) {
+                  return res.status(200).json(upde);
+                });
             });
           });
         } else { 
@@ -138,11 +146,18 @@ exports.closeDeal = function(req, res) {
 
         deal.save(function (err) {
           if (err) { return handleError(res, err); }
-          return res.status(200).json(deal);
+          deal
+            .populate('updates')
+            .populate('assignees')
+            .populate('vertical')
+            .populate('createdBy', '-salt -hashedPassword -lastSeen -provider')
+            .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider', function (err, upde) {
+              return res.status(200).json(upde);
+            });
         });
-      } else { 
-        res.sendStatus(403);
-      }
+    } else { 
+      res.sendStatus(403);
+    }
   });
 };
 
@@ -165,7 +180,14 @@ exports.openDeal = function(req, res) {
 
         deal.save(function (err) {
           if (err) { return handleError(res, err); }
-          return res.status(200).json(deal);
+          deal
+            .populate('updates')
+            .populate('assignees')
+            .populate('vertical')
+            .populate('createdBy', '-salt -hashedPassword -lastSeen -provider')
+            .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider', function (err, upde) {
+              return res.status(200).json(upde);
+            });
         });
       } else { 
         res.sendStatus(403);

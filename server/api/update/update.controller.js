@@ -34,11 +34,15 @@ exports.create = function (req, res) {
     if(deal.status === false) {   
       if(deal.assignees.indexOf(req.user._id) != -1 || req.user.role === 'core' || req.user.role === 'admin') {
         Update.create(req.body, function (err, update) {
-          if(err) { return handleError(res,err); }
+          if(err) { return handleError(res, err); }
           deal.updates.push(update._id);
           deal.save(function (err, dealfin) {
-           if(err) { return handleError(res,err); }
-           return res.sendStatus(200);
+            if(err) { return handleError(res, err); }
+            update
+              .populate('createdBy', '-salt -hashedPassword -lastSeen -provider')
+              .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider', function (err, up) {
+                return res.status(201).json(up);
+              });
           });
         });
       }
@@ -68,7 +72,11 @@ exports.update = function (req, res) {
             var updated = _.merge(update, req.body);
             updated.save(function (err) {
               if (err) { return handleError(res, err); }
-              return res.status(200).json(update);     
+              updated
+                .populate('createdBy', '-salt -hashedPassword -lastSeen -provider')
+                .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider', function (err, up) {
+                  return res.status(200).json(up);
+                });
           });
         } else
             res.sendStatus(403);
@@ -94,3 +102,24 @@ exports.destroy = function(req, res) {
 function handleError(res, err) {
   return res.status(500).send(err);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// post.save(function(err) {
+//   if (err) { return res.json(500, { error: 'Cannot save the post' }); }
+// post
+//   .populate('group', 'name')
+//   .populate({ path: 'wallUser', select: 'name picture' }, function(err, doc) {
+//     res.json(doc);
+//   });
+// });

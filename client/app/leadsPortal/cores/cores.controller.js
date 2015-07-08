@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('erp2015App')
-.controller('CoresCtrl', function ($scope, LeadsPortalService, $location, $http, $state, $q, $mdDialog, $stateParams) {
+.controller('CoresCtrl', function ($rootScope, $scope, LeadsPortalService, $location, $http, $state, $q, $mdDialog, $stateParams) {
   $scope.dealSubmitted = false;
   $scope.update = {};
   $scope.showButton = false;
+  $scope.allVerticals = [];
 
   LeadsPortalService.getAllVerticals()
     .then(function (data) {
@@ -37,11 +38,18 @@ angular.module('erp2015App')
         initialPointOfContactEmail: $scope.deal.initialPointOfContactEmail,
         assignees: $scope.coordsIds
       })
-      .then(function (data) {
-        $state.go('allDeals');
-        sessionStorage.clear();
+      .then(function (response) {
+        if(response.status === 201) {
+          $scope.submitted = false;
+          $state.go('deal', { id: response.data._id });
+          // sessionStorage.clear();
+        } else {
+          $scope.submitted = false;
+          $rootScope.showToast('Error occurred!');
+        }
       })
       .catch(function (err) {
+        $rootScope.showToast('Error! Check internet connection!');
         console.log(err);
         // err = err.data;
         // $scope.errors = {};
@@ -63,13 +71,20 @@ angular.module('erp2015App')
         title: $scope.vertical.title,
         description: $scope.vertical.description,
       })
-      .then(function (data) {
-        console.log(data);
-        $scope.verticalSubmitted = false;
-        $scope.vertical.title = '';
-        $scope.vertical.description = '';
+      .then(function (response) {
+        if(response.status === 201) {
+          $scope.allVerticals.push(response.data);
+          $rootScope.showToast('Success!');
+          $scope.verticalSubmitted = false;
+          $scope.vertical.title = '';
+          $scope.vertical.description = '';
+        } else {
+          $rootScope.showToast('Error occurred!');
+          $scope.verticalSubmitted = false;
+        }
       })
       .catch(function (err) {
+        $rootScope.showToast('Error! Check internet connection!');
         console.log(err);
       });
     }
@@ -104,9 +119,16 @@ angular.module('erp2015App')
           title: $scope.editVertical.title,
           description: $scope.editVertical.description
       })
-      .then(function (data) {
-        console.log(data);
-        $state.go('leadsPortalAdmin');
+      .then(function (response) {
+        if(response.status === 200) {
+          $rootScope.showToast('Success!');
+        } else {
+          $rootScope.showToast('Error occurred!');
+        }
+      })
+      .catch(function (err) {
+        $rootScope.showToast('Error! Check internet connection!');
+        console.log(err);
       });
 
       $mdDialog.hide('Save edited vertical');
