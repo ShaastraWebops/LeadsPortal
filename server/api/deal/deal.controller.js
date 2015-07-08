@@ -19,11 +19,12 @@ function handleError (res, err) {
 // Get list of deals
 exports.index = function(req, res) {
   Deal.find()
-  // .populate('assignees', '-salt -hashedPassword -lastSeen -provider')
   // .populate('updates')
   // .deepPopulate('updates.createdBy', '-salt -hashedPassword -lastSeen -provider')
+  .populate('assignees', '-salt -hashedPassword -lastSeen -provider')
   .populate('createdBy', '-salt -hashedPassword -lastSeen -provider')
   .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider')
+  .populate('vertical')
   .exec(function (err, deals) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(deals);
