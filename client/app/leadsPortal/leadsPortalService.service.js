@@ -56,24 +56,24 @@ angular.module('erp2015App')
         });
       },
       
-      verticals:[
-      {
-        name: 'One',
-        value: 'one'
-      },
-      {
-        name: 'Two',
-        value: 'two'
-      },
-      {
-        name: 'Three',
-        value: 'three'
-      },
-      {
-        name: 'Four',
-        value: 'four'
-      }
-      ],
+      // verticals:[
+      // {
+      //   name: 'One',
+      //   value: 'one'
+      // },
+      // {
+      //   name: 'Two',
+      //   value: 'two'
+      // },
+      // {
+      //   name: 'Three',
+      //   value: 'three'
+      // },
+      // {
+      //   name: 'Four',
+      //   value: 'four'
+      // }
+      // ],
       getCoords:function(){
         return $http.get('/api/users/getCoords').then(function (response){
           return response.data;

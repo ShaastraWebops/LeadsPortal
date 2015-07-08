@@ -12,7 +12,7 @@
 		   	<md-card>
 	   	   <div layout="row" layout-align="end center">
 		     	<div class="md-actions" layout="row" layout-align="end center">
-						<md-button class="md-raised md-primary md-hue-1" ng-click="dealCloseModal()" ng-show="showButton">
+						<md-button class="md-raised md-primary md-hue-1" ng-click="dealCloseModal()" ng-show="showButton && !deal.status">
 							Close Deal
 						</md-button>
 			   	</div>
@@ -22,11 +22,12 @@
 						</md-button>
 			   	</div>
 		     	<div class="md-actions" layout="row" layout-align="end center">
-						<md-button class="md-raised md-primary md-hue-1" ng-click="dealOpen()" ng-hide="showButton">
+						<md-button class="md-raised md-primary md-hue-1" ng-click="dealOpen()" ng-show="showButton && deal.status">
 							Re-open Deal
 						</md-button>
 			   	</div>
 			   </div>
+<<<<<<< HEAD
 			   <div class="dealDetails">
 			   		<md-card-content>
 			     		<h2 class="md-display-1"> Deal Details </h2>
@@ -41,6 +42,98 @@
 							        </div>
 							    </md-list-item>
 						    </div>
+=======
+		   		<md-card-content style="word-break:break-all">
+		     		<h2 class="md-display-1"> Deal Details </h2>
+						<md-divider></md-divider>
+				    <md-list>
+					    <md-list-item class="md-3-line">
+					    	<ng-md-icon icon="subject" style="fill:#00517F" size="32" class="md-avatar" alt="deal-title-img"></ng-md-icon>
+					        <div class="md-list-item-text">
+						        <h3> Title </h3>
+						        <p>{{ deal.title }}</p>
+					        </div>
+					    </md-list-item>
+
+							<md-divider md-inset ng-if="!$last"></md-divider>
+
+							<div layout="row" ng-hide="showButton">
+						    <md-list-item class="md-3-line">
+						    	<ng-md-icon icon="done" style="fill:#1F5C7F" size="32" class="md-avatar" alt="deal-company-img"></ng-md-icon>
+						        <div class="md-list-item-text">
+							        <h3> Result </h3>
+							        <p>{{ dealresult }}</p>
+						        </div>
+						    </md-list-item>
+
+						    <md-list-item class="md-3-line">
+						    	<ng-md-icon icon="comment" style="fill:#0082CC" size="32" class="md-avatar" alt="deal-PoC-name-img"></ng-md-icon>
+						        <div class="md-list-item-text">
+							        <h3> Comments </h3>
+							        <p>{{ deal.comment }}</p>
+						        </div>
+						    </md-list-item>
+					    </div>
+
+							<md-divider md-inset ng-if="!$last"></md-divider>
+
+					    <md-list-item class="md-3-line">
+					    	<ng-md-icon icon="description" style="fill:#00A2FF" size="32" class="md-avatar" alt="deal-summary-img"></ng-md-icon>
+					        <div class="md-list-item-text">
+						        <h3> Info </h3>
+						        <p>{{ deal.info }}</p>
+					        </div>
+					    </md-list-item>
+
+							<md-divider md-inset ng-if="!$last"></md-divider>
+		                           
+		          <md-list-item class="md-3-line">
+					    	<ng-md-icon icon="poll" style="fill:#0082CC" size="32" class="md-avatar" alt="deal-vertical-img"></ng-md-icon>
+					        <div class="md-list-item-text">
+						        <h3> Vertical </h3>
+						        <p>{{ deal.vertical.title }}</p>
+					        </div>
+					    </md-list-item>
+
+							<md-divider md-inset ng-if="!$last"></md-divider>
+
+					    <div layout="row">
+						    <md-list-item class="md-3-line">
+						    	<ng-md-icon icon="work" style="fill:#1F5C7F" size="32" class="md-avatar" alt="deal-company-img"></ng-md-icon>
+						        <div class="md-list-item-text">
+							        <h3> Company Name </h3>
+							        <p>{{ deal.companyName }}</p>
+						        </div>
+						    </md-list-item>
+
+						    <md-list-item class="md-3-line">
+						    	<ng-md-icon icon="account_box" style="fill:#0082CC" size="32" class="md-avatar" alt="deal-PoC-name-img"></ng-md-icon>
+						        <div class="md-list-item-text">
+							        <h3> PoC's Name </h3>
+							        <p>{{ deal.initialPointOfContactName }}</p>
+						        </div>
+						    </md-list-item>
+					    </div>
+
+							<md-divider md-inset ng-if="!$last"></md-divider>
+
+					    <div layout="row">
+						    <md-list-item class="md-3-line">
+						    	<ng-md-icon icon="email" style="fill:#00517F" size="32" class="md-avatar" alt="deal-PoC-email-img"></ng-md-icon>
+						        <div class="md-list-item-text">
+							        <h3> PoC's Email Id </h3>
+							        <p>{{ deal.initialPointOfContactEmail }}</p>
+						        </div>
+						    </md-list-item>
+						    <md-list-item class="md-3-line">
+						    	<ng-md-icon icon="phone" style="fill:#00A2FF" size="32" class="md-avatar" alt="deal-PoC-number-img"></ng-md-icon>
+						        <div class="md-list-item-text">
+							        <h3> PoC's Phone Number </h3>
+							        <p>{{ deal.initialPointOfContactNumber }}</p>
+						        </div>
+						    </md-list-item>
+					    </div>
+>>>>>>> 0d54193d303a802945b21c69c66ae0c6afa450ac
 
 								<md-divider md-inset ng-if="!$last"></md-divider>
 

@@ -31,12 +31,57 @@
                 <label>Deal Info</label>
                 <textarea required name="info" ng-model="deal.info" mongoose-error></textarea>
               </md-input-container>
+<<<<<<< HEAD
               <div>
                 <span ng-show="form.info.$error.required && dealSubmitted">
                   Title is required.
                 </span>
                 <span>{{ errors.other }}</span>
               </div>
+=======
+             </div>
+            </div>
+            
+            <div layout="row">
+             <div flex="20">
+              <md-select placeholder="Select Vertical" ng-model="deal.vertical">
+                <md-option ng-repeat="vertical in allVerticals" value="{{ vertical }}">{{ vertical.title }}</md-option>
+              </md-select>
+             </div>
+
+             <div flex>
+              <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
+                <md-autocomplete
+                  md-selected-item="selectedItem"
+                  md-search-text="searchText"
+                  md-items="item in coords"
+                  md-item-text="item.name"
+                  placeholder="Assign a team member">
+                    <span md-highlight-text="searchText">{{ item.name }}</span>
+                </md-autocomplete>
+                <md-chip-template>
+                  <strong>{{ $chip.name }}</strong>
+                </md-chip-template>
+              </md-chips>
+             </div>
+            </div>
+
+            <md-button type="submit" class="md-raised md-primary">Create</md-button>
+          </form>
+        </md-content>  
+
+      </div>
+
+      <div layout="row" layout-margin>
+        <div flex flex-order="1">
+          <div class="md-whiteframe-z1">
+
+            <md-toolbar class="md-primary">
+              <h1 class="md-toolbar-tools">
+                Create Vertical
+              </h1>
+            </md-toolbar>
+>>>>>>> 0d54193d303a802945b21c69c66ae0c6afa450ac
 
               <div layout="row">
                <div flex="50">
