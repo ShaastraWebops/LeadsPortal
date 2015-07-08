@@ -10,11 +10,16 @@ angular.module('erp2015App')
   $scope.selectedVerticals = [];
   $scope.dealCategory = "All Deals";
   $scope.categories = ['All Deals', 'Open Deals', 'Closed Deals'];
-  $scope.verticals = LeadsPortalService.verticals;
+  //$scope.verticals = LeadsPortalService.verticals;
   
   $scope.dealsTitle = "List of all Deals";
 
-  
+  LeadsPortalService.getAllVerticals()
+    .then(function(verticals){
+      $scope.verticals=verticals;
+    },function(err){
+      console.log(err);
+    });
 
   LeadsPortalService.getAllDeals()
     .then(function (allDeals) {

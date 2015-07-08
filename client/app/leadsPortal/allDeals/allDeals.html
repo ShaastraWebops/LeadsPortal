@@ -22,12 +22,12 @@
               md-search-text="searchText"
               md-search-text-change="null"
               md-items="item in verticals"
-              md-item-text="item.name"
+              md-item-text="item.title"
               placeholder="search deals of vertical">
-                <span md-highlight-text="searchText">{{ item.name }}</span>
+                <span md-highlight-text="searchText">{{ item.title }}</span>
             </md-autocomplete>
             <md-chip-template>
-              <strong>{{ $chip.name }}</strong>
+              <strong>{{ $chip.title }}</strong>
             </md-chip-template>
           </md-chips>
 
