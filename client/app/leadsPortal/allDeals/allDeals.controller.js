@@ -113,7 +113,7 @@ angular.module('erp2015App')
   };
   
   $scope.gotoDeal = function (deal) {
-    $state.go('deal', {id: deal._id});
+    $state.go('deal', { id: deal._id });
   };
 
 });
