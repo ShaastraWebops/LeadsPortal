@@ -81,18 +81,18 @@ angular.module('erp2015App')
     var sortedCategory = $scope.sortedcategory;
     
     angular.forEach(verticalSelected, function (item) { 
-      var expression = { vertical: { name: item.name } };
+      var expression = { vertical: { _id: item._id } };
+      console.log(expression);
       sortedVerticals = sortedVerticals.concat($filter('filter')(sortedCategory, expression));
     });
     angular.forEach(coordSelected, function (item) { 
-      var expression = { assignees: { name: item.name } };
+      var expression = { assignees: { _id: item._id } };
       sortedCoords = sortedCoords.concat($filter('filter')(sortedCategory, expression));
     });
     if (String($scope.searchText).length != 0) {
       sortedText = $filter('filter')(sortedCategory, String($scope.searchText));
     }
-
-    if (verticalSelected.length != 0 || coordSelected.length != 0 || String($scope.searchText).length != 0) {
+    if (verticalSelected.length != 0 || coordSelected.length != 0 || $scope.searchText.length != 0) {
       $scope.sortedDeals = _.union(sortedVerticals, sortedCoords, sortedText);
     } else {
       $scope.sortedDeals = sortedCategory;
@@ -101,7 +101,7 @@ angular.module('erp2015App')
     var storageObject = {
      "storedVerticals": verticalSelected,
      "storedCoords": coordSelected,
-     "storedText": String($scope.searchText),
+     "storedText": $scope.searchText,
      "storedCategory": String($scope.dealCategory)
     };
     sessionStorage.setItem("storedVerticals", JSON.stringify(storageObject.storedVerticals));
