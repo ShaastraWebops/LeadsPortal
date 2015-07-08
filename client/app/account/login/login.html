@@ -1,54 +1,55 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="account">
-  <div class="makeCenter">
-    <div class="md-whiteframe-z3">
+  <div clss="color">
+    <div class="makeCenter">
+      <div class="md-whiteframe-z3">
 
-      <md-toolbar class="md-primary">
-        <h1 class="md-toolbar-tools">
-          Login
-        </h1>
-      </md-toolbar>
+        <md-toolbar class="md-primary">
+          <h1 class="md-toolbar-tools">
+            Login
+          </h1>
+        </md-toolbar>
 
-      <md-content layout-padding>
-        <form class="form" name="form" ng-submit="login(form)" novalidate>
+        <md-content layout-padding>
+          <form class="form" name="form" ng-submit="login(form)" novalidate>
 
-          <md-input-container>
-            <label>Email</label>
+            <md-input-container>
+              <label>Email</label>
 
-            <input type="email" name="email" ng-model="user.email" required>
-          </md-input-container>
+              <input type="email" name="email" ng-model="user.email" required>
+            </md-input-container>
 
-          <md-input-container>
-            <label>Password</label>
+            <md-input-container>
+              <label>Password</label>
 
-            <input type="password" name="password" ng-model="user.password" required>
-          </md-input-container>
+              <input type="password" name="password" ng-model="user.password" required>
+            </md-input-container>
 
-          <div style="color:red">
-            <span ng-show="form.email.$error.required && form.password.$error.required && submitted">
-              Please enter your email and password.
-            </span>
-            <span ng-show="form.email.$error.email && submitted">
-              Please enter a valid email.
-            </span>
+            <div>
+              <span ng-show="form.email.$error.required && form.password.$error.required && submitted">
+                Please enter your email and password.
+              </span>
+              <span ng-show="form.email.$error.email && submitted">
+                Please enter a valid email.
+              </span>
 
-            <span>{{ errors.other }}</sapn>
-          </div>
+              <span>{{ errors.other }}</sapn>
+            </div>
 
-          <div>
-            <md-button class="md-raised md-primary" type="submit">
-              Login
-            </md-button>
-          </div>
+            <div>
+              <md-button class="md-raised md-primary" type="submit">
+                Login
+              </md-button>
+            </div>
 
-        </form>
-      </md-content>
+          </form>
+        </md-content>
+      </div>
+      <br />
+      <div id="fb-root">
+        <div class="fb-like" data-href="https://www.facebook.com/Shaastra" data-width="420" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+      </div>
     </div>
-    <br />
-    <div id="fb-root">
-      <div class="fb-like" data-href="https://www.facebook.com/Shaastra" data-width="420" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-    </div>
-
   </div>
 </div>

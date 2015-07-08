@@ -2,172 +2,173 @@
 
 <div class="leadsPortal" layout-margin>
   <div class="left right">
-    <div layout="column">
+    <div class="color">
+      <div layout="column">
 
-      <div class="md-whiteframe-z1">
+        <div class="md-whiteframe-z1">
 
-        <md-toolbar class="md-primary">
-          <h1 class="md-toolbar-tools">
-            Create a new Deal
-          </h1>
-        </md-toolbar>
+          <md-toolbar class="md-primary">
+            <h1 class="md-toolbar-tools">
+              Create a new Deal
+            </h1>
+          </md-toolbar>
 
-        <md-content layout-padding>
-          <form name="form" ng-submit="newDeal(form)" novalidate>
+          <md-content layout-padding>
+            <form name="form" ng-submit="newDeal(form)" novalidate>
 
-            <md-input-container>
-              <label>Title</label>
-              <input name="title" ng-model="deal.title" ng-required="true" mongoose-error />
-            </md-input-container>
-            <div style="color:red">
-              <span ng-show="form.title.$error.required && dealSubmitted">
-                Title is required.
-              </span>
-              <span>{{ errors.other }}</span>
-            </div>
-
-            <md-input-container>
-              <label>Deal Info</label>
-              <textarea required name="info" ng-model="deal.info" mongoose-error></textarea>
-            </md-input-container>
-            <div style="color:red">
-              <span ng-show="form.info.$error.required && dealSubmitted">
-                Title is required.
-              </span>
-              <span>{{ errors.other }}</span>
-            </div>
-
-            <div layout="row">
-             <div flex="50">
               <md-input-container>
-                <label>Company Name</label>
-                <input required name="companyName" ng-model="deal.companyName" mongoose-error />
+                <label>Title</label>
+                <input name="title" ng-model="deal.title" ng-required="true" mongoose-error />
               </md-input-container>
-              <div style="color:red">
-                <span ng-show="form.companyName.$error.required && dealSubmitted">
+              <div>
+                <span ng-show="form.title.$error.required && dealSubmitted">
                   Title is required.
                 </span>
                 <span>{{ errors.other }}</span>
               </div>
-             </div>
 
-             <div flex="50"> 
               <md-input-container>
-                <label>PoC Name</label>
-                <input name="initialPointOfContactName" ng-model="deal.initialPointOfContactName">
+                <label>Deal Info</label>
+                <textarea required name="info" ng-model="deal.info" mongoose-error></textarea>
               </md-input-container>
-             </div>
-            </div>
+              <div>
+                <span ng-show="form.info.$error.required && dealSubmitted">
+                  Title is required.
+                </span>
+                <span>{{ errors.other }}</span>
+              </div>
+
+              <div layout="row">
+               <div flex="50">
+                <md-input-container>
+                  <label>Company Name</label>
+                  <input required name="companyName" ng-model="deal.companyName" mongoose-error />
+                </md-input-container>
+                <div>
+                  <span ng-show="form.companyName.$error.required && dealSubmitted">
+                    Title is required.
+                  </span>
+                  <span>{{ errors.other }}</span>
+                </div>
+               </div>
+
+               <div flex="50"> 
+                <md-input-container>
+                  <label>PoC Name</label>
+                  <input name="initialPointOfContactName" ng-model="deal.initialPointOfContactName">
+                </md-input-container>
+               </div>
+              </div>
+                
+              <div layout="row">
+               <div flex="50">
+                <md-input-container>
+                  <label>PoC Phone Number</label>
+                  <input name="initialPointOfContactNumber" ng-model="deal.initialPointOfContactNumber">
+                </md-input-container>
+               </div>
+
+               <div flex="50">
+                <md-input-container>
+                  <label>PoC Email</label>
+                  <input name="initialPointOfContactEmail" ng-model="deal.initialPointOfContactEmail">
+                </md-input-container>
+               </div>
+              </div>
               
-            <div layout="row">
-             <div flex="50">
-              <md-input-container>
-                <label>PoC Phone Number</label>
-                <input name="initialPointOfContactNumber" ng-model="deal.initialPointOfContactNumber">
-              </md-input-container>
-             </div>
+              <div layout="row">
+               <div flex="20">
+                <md-select placeholder="Select Vertical" ng-model="deal.vertical">
+                  <md-option ng-repeat="vertical in verticals" value="{{vertical}}">{{ vertical.name }}</md-option>
+                </md-select>
+               </div>
 
-             <div flex="50">
-              <md-input-container>
-                <label>PoC Email</label>
-                <input name="initialPointOfContactEmail" ng-model="deal.initialPointOfContactEmail">
-              </md-input-container>
-             </div>
-            </div>
-            
-            <div layout="row">
-             <div flex="20">
-              <md-select placeholder="Select Vertical" ng-model="deal.vertical">
-                <md-option ng-repeat="vertical in verticals" value="{{vertical}}">{{ vertical.name }}</md-option>
-              </md-select>
-             </div>
+               <div flex>
+                <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
+                  <md-autocomplete
+                    md-selected-item="selectedItem"
+                    md-search-text="searchText"
+                    md-items="item in coords"
+                    md-item-text="item.name"
+                    placeholder="Assign a team member">
+                      <span md-highlight-text="searchText">{{ item.name }}</span>
+                  </md-autocomplete>
+                  <md-chip-template>
+                    <strong>{{ $chip.name }}</strong>
+                  </md-chip-template>
+                </md-chips>
+               </div>
+              </div>
 
-             <div flex>
-              <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
-                <md-autocomplete
-                  md-selected-item="selectedItem"
-                  md-search-text="searchText"
-                  md-items="item in coords"
-                  md-item-text="item.name"
-                  placeholder="Assign a team member">
-                    <span md-highlight-text="searchText">{{ item.name }}</span>
-                </md-autocomplete>
-                <md-chip-template>
-                  <strong>{{ $chip.name }}</strong>
-                </md-chip-template>
-              </md-chips>
-             </div>
-            </div>
+              <md-button type="submit" class="md-raised md-primary">Create</md-button>
+            </form>
+          </md-content>  
 
-            <md-button type="submit" class="md-raised md-primary">Create</md-button>
-          </form>
-        </md-content>  
-
-      </div>
-
-      <div layout="row" layout-margin>
-        <div flex flex-order="1">
-          <div class="md-whiteframe-z1">
-
-            <md-toolbar class="md-primary">
-              <h1 class="md-toolbar-tools">
-                Create Vertical
-              </h1>
-            </md-toolbar>
-
-            <md-content class="allVerticals" layout-padding>
-              <form name="formVertical" ng-submit="newVertical(formVertical)" novalidate>
-                <md-input-container>
-                  <label>Title</label>
-                  <input name="title" ng-model="vertical.title" ng-required="true" mongoose-error />
-                </md-input-container>
-                <div style="color:red">
-                  <span ng-show="formVertical.title.$error.required && verticalSubmitted">
-                    Title is required.
-                  </span>
-                  <span>{{ errors.other }}</span>
-                </div>
-
-                <md-input-container>
-                  <label>Description</label>
-                  <textarea required name="description" ng-model="vertical.description" mongoose-error></textarea>
-                </md-input-container>
-                <div style="color:red">
-                  <span ng-show="formVertical.description.$error.required && verticalSubmitted">
-                    Title is required.
-                  </span>
-                  <span>{{ errors.other }}</span>
-                </div>
-                <md-button type="submit" class="md-raised md-primary">Create</md-button>
-              </form>
-            </md-content>  
-
-          </div>
         </div>
 
-        <div flex flex-order="2">
-          <div class="md-whiteframe-z1">
+        <div layout="row" layout-margin>
+          <div flex flex-order="1">
+            <div class="md-whiteframe-z1">
 
-            <md-toolbar class="md-primary">
-              <h1 class="md-toolbar-tools">
-                See all Verticals
-              </h1>
-            </md-toolbar>
+              <md-toolbar class="md-primary">
+                <h1 class="md-toolbar-tools">
+                  Create Vertical
+                </h1>
+              </md-toolbar>
 
-            <md-content class="allVerticals" layout-padding>
-              <md-list>
-                <md-list-item ng-repeat="vertical in allVerticals">
-                  <h4>{{ vertical.title }}</h4>
-                  <ng-md-icon icon="edit" class="md-secondary" ng-click="verticalEditModal(vertical)" aria-label="edit-vertical"></ng-md-icon>
-                  <md-divider></md-divider>
-                </md-list-item>
-              </md-list>
-            </md-content>
+              <md-content class="allVerticals" layout-padding>
+                <form name="formVertical" ng-submit="newVertical(formVertical)" novalidate>
+                  <md-input-container>
+                    <label>Title</label>
+                    <input name="title" ng-model="vertical.title" ng-required="true" mongoose-error />
+                  </md-input-container>
+                  <div>
+                    <span ng-show="formVertical.title.$error.required && verticalSubmitted">
+                      Title is required.
+                    </span>
+                    <span>{{ errors.other }}</span>
+                  </div>
 
+                  <md-input-container>
+                    <label>Description</label>
+                    <textarea required name="description" ng-model="vertical.description" mongoose-error></textarea>
+                  </md-input-container>
+                  <div>
+                    <span ng-show="formVertical.description.$error.required && verticalSubmitted">
+                      Title is required.
+                    </span>
+                    <span>{{ errors.other }}</span>
+                  </div>
+                  <md-button type="submit" class="md-raised md-primary">Create</md-button>
+                </form>
+              </md-content>  
+
+            </div>
+          </div>
+
+          <div flex flex-order="2">
+            <div class="md-whiteframe-z1">
+
+              <md-toolbar class="md-primary">
+                <h1 class="md-toolbar-tools">
+                  See all Verticals
+                </h1>
+              </md-toolbar>
+
+              <md-content class="allVerticals" layout-padding>
+                <md-list>
+                  <md-list-item ng-repeat="vertical in allVerticals">
+                    <h4>{{ vertical.title }}</h4>
+                    <ng-md-icon icon="edit" class="md-secondary" ng-click="verticalEditModal(vertical)" aria-label="edit-vertical"></ng-md-icon>
+                    <md-divider></md-divider>
+                  </md-list-item>
+                </md-list>
+              </md-content>
+
+            </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
