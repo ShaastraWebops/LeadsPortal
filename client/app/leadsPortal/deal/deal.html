@@ -41,9 +41,10 @@
 
 							<md-divider md-inset ng-if="!$last"></md-divider>
 
-							<div layout="row" ng-hide="showButton">
+							<div layout="row" ng-hide="!deal.status">
 						    <md-list-item class="md-3-line">
-						    	<ng-md-icon icon="done" style="fill:#1F5C7F" size="32" class="md-avatar" alt="deal-company-img"></ng-md-icon>
+						    	<ng-md-icon ng-if="deal.result" icon="done" style="fill:#1F5C7F" size="32" class="md-avatar" alt="deal-result-img"></ng-md-icon>
+						    	<ng-md-icon ng-if="!deal.result" icon="clear" style="fill:#1F5C7F" size="32" class="md-avatar" alt="deal-result-img"></ng-md-icon>
 						        <div class="md-list-item-text">
 							        <h3> Result </h3>
 							        <p>{{ dealresult }}</p>
