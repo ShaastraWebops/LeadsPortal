@@ -6,9 +6,7 @@
 
     <div layout="column">
       <div layout="row">
-        <div class="allDeals">
-          <ng-md-icon icon="arrow_drop_down_circle" size="38" class="md-avatar" alt="drop-down-img"></ng-md-icon>
-        </div>
+        <ng-md-icon style="fill:#9999FF" icon="arrow_drop_down_circle" size="38" class="md-avatar1" alt="drop-down-img"></ng-md-icon>
          <md-select placeholder="All Deals" ng-model="dealCategory" ng-change="onChange()">
             <md-select-label>{{ dealCategory }}</md-select-label>
               <md-option ng-repeat="category in categories" value="{{ category }}">{{ category }}</md-option>
@@ -16,9 +14,7 @@
       </div>
 
       <div layout="row">
-        <div class="selectedVertical">
-          <ng-md-icon icon="poll" size="48" class="md-avatar" alt="deal-searchverticals-img"></ng-md-icon>
-         </div>
+        <ng-md-icon style="fill:#0082CC" icon="poll" size="48" class="md-avatar" alt="deal-searchverticals-img"></ng-md-icon>
          <md-chips ng-model="selectedVerticals" md-autocomplete-snap md-require-match>
             <md-autocomplete
               md-selected-item="selectedItem"
@@ -32,9 +28,7 @@
               <strong>{{ $chip.name }}</strong>
             </md-chip-template>
           </md-chips>
-        <div class="selectedCoords">
-          <ng-md-icon icon="people" size="48" class="md-avatar" alt="deal-searchcoords-img"></ng-md-icon>
-         </div>
+        <ng-md-icon style="fill:#00A2FF" icon="people" size="48" class="md-avatar" alt="deal-searchcoords-img"></ng-md-icon>
          <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
             <md-autocomplete
               md-selected-item="selectedItem"
@@ -48,14 +42,10 @@
               <strong>{{ $chip.name }}</strong>
             </md-chip-template>
           </md-chips>
-          <div class="searchText">  
-            <ng-md-icon icon="description" size="48" class="md-avatar" alt="deal-searchtext-img"></ng-md-icon>
-          </div>
-          <div class="searchTextInput">
-            <md-input-container md-no-float>
-              <input name="search" placeholder="Type text to search" type="text" ng-model="searchText">
-            </md-input-container>
-          </div>
+          <ng-md-icon style="fill:#00517F" icon="description" size="48" class="md-avatar" alt="deal-searchtext-img"></ng-md-icon>
+          <md-input-container md-no-float class="searchTextInput">
+            <input name="search" placeholder="Type text to search" type="text" ng-model="searchText">
+          </md-input-container>
           
          <md-button type="button" ng-click="onClick()" class="md-raised md-primary">Get Deals</md-button>
       </div>
