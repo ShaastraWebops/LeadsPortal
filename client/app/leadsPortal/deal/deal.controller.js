@@ -58,6 +58,13 @@ angular.module('erp2015App')
     .then(function (response) {
       if(response.status === 200) {
         $scope.deal = response.data;
+
+        if($scope.deal.result === false) {
+          $scope.dealresult = 'Failure';
+        } else {
+          $scope.dealresult = 'Success';
+        }
+
         $rootScope.showToast('Successfully closed!');
       } else {
         $rootScope.showToast('Error occurred!');
