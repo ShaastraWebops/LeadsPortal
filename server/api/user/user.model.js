@@ -53,6 +53,7 @@ var UserSchema = new Schema({
   resetPasswordToken: String,
   resetPasswordExpires: Date,
   deals: [{ type: Schema.Types.ObjectId, ref: 'Deal' }],
+  notifications: [{ type: Schema.Types.ObjectId, ref: 'Notification' }],
   facebook: {},
   google: {},
   github: {}
