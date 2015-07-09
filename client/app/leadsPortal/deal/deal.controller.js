@@ -74,9 +74,9 @@ angular.module('erp2015App')
     });
   };
   function DealCloseModalCtrl($scope, $state, $mdDialog, DealPassed, Auth) {
-    $scope.dealResult = false;
+    $scope.dealResult = 'Failure';
+    var result = false;
     $scope.dealComment = DealPassed.comment;
-    $scope.closeDeal = {};
     $scope.closeDeal = DealPassed;
 
     $scope.isCoord = true;
@@ -91,9 +91,13 @@ angular.module('erp2015App')
     };
     $scope.save = function () {
     // do the saving part here
+      if($scope.dealResult === 'Failure')
+        result = false;
+      else result = true;
+
       LeadsPortalService.closeDeal({
         _id: $scope.closeDeal._id,
-        result: $scope.dealResult,
+        result: result,
         comment: $scope.dealComment
       })
       .then(function (response) {
