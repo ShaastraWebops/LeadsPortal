@@ -22,29 +22,19 @@
 	padding-top: 15px;
 }
 
-.md-avatar {
-	padding-top: 5px;
-}
-
-
 .searchTextInput {
-	padding-top: 8px;
-	padding-bottom: 8px;
+	padding-bottom: 4px;
 }
 
-.dealDetails {
+.wordBreak {
 	word-break:break-all;
 }
 
-.createUpdate {
-	word-break:break-all;
-}
-
-.createUpdate .noUpdates {
+.wordBreak .noUpdates {
 	padding-bottom: 32px;
 }
 
-.createUpdate .noUpdates .noUpdatesAsOfNow {
+.wordBreak .noUpdates .noUpdatesAsOfNow {
 	background:#fff; 
 	margin:20px;
 	padding: 20px;
