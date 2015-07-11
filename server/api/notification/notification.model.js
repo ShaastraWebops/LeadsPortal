@@ -5,24 +5,23 @@ var Schema = mongoose.Schema;
 var deepPopulate = require('mongoose-deep-populate');
 
 var NotifcationSchema = new Schema({
-  name: String,
   info: String,
-  deals: [{ type: Schema.Types.ObjectId, ref: 'Deal' }],
-  updates: [{ type: Schema.Types.ObjectId, ref: 'Update' }]
+  deal: { type: Schema.Types.ObjectId, ref: 'Deal' },
+  update: { type: Schema.Types.ObjectId, ref: 'Update' }
 });
 
 NotifcationSchema.plugin(deepPopulate, {
   populate: {
-    'updates.createdBy': {
+    'update.createdBy': {
       select: 'name rollNumber email phoneNumber'
     },
-    'updates.lastEditedBy': {
+    'update.lastEditedBy': {
       select: 'name rollNumber email phoneNumber'
     },
-    'deals.createdBy': {
+    'deal.createdBy': {
       select: 'name rollNumber email phoneNumber'
     },
-    'deals.lastEditedBy': {
+    'deal.lastEditedBy': {
       select: 'name rollNumber email phoneNumber'
     }
   }	
