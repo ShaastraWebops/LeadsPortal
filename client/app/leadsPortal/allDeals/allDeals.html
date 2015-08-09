@@ -14,22 +14,22 @@
       </div>
 
       <div layout="row">
-         <ng-md-icon icon="poll" style="fill:#0082CC" size="48" class="md-avatar" alt="deal-searchverticals-img"></ng-md-icon>
-         <md-chips ng-model="selectedVerticals" md-autocomplete-snap md-require-match>
-            <md-autocomplete
-              md-selected-item="selectedItem"
-              md-selected-item-change="null"
-              md-search-text="searchText"
-              md-search-text-change="null"
-              md-items="item in verticals"
-              md-item-text="item.title"
-              placeholder="search deals of vertical">
-                <span md-highlight-text="searchText">{{ item.title }}</span>
-            </md-autocomplete>
-            <md-chip-template>
-              <strong>{{ $chip.title }}</strong>
-            </md-chip-template>
-          </md-chips>
+        <ng-md-icon icon="poll" style="fill:#0082CC" size="48" class="md-avatar" alt="deal-searchverticals-img"></ng-md-icon>
+        <md-chips ng-model="selectedVerticals" md-autocomplete-snap md-require-match>
+          <md-autocomplete
+            md-selected-item="selectedItem"
+            md-selected-item-change="null"
+            md-search-text="searchText"
+            md-search-text-change="null"
+            md-items="item in verticals"
+            md-item-text="item.title"
+            placeholder="search deals of vertical">
+              <span md-highlight-text="searchText">{{ item.title }}</span>
+          </md-autocomplete>
+          <md-chip-template>
+            <strong>{{ $chip.title }}</strong>
+          </md-chip-template>
+        </md-chips>
 
          <ng-md-icon icon="people" style="fill:#00A2FF" size="48" class="md-avatar" alt="deal-searchcoords-img"></ng-md-icon>
          <md-chips ng-model="selectedCoords" md-autocomplete-snap md-require-match>
