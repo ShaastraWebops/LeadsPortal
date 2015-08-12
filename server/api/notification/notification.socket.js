@@ -4,7 +4,7 @@
 
 'use strict';
 
-var Notifcation = require('./notifcation.model');
+var Notifcation = require('./notification.model');
 
 exports.register = function(socket) {
   Notifcation.schema.post('save', function (doc) {
@@ -16,9 +16,9 @@ exports.register = function(socket) {
 }
 
 function onSave(socket, doc, cb) {
-  socket.emit('notifcation:save', doc);
+  socket.emit('notification:save', doc);
 }
 
 function onRemove(socket, doc, cb) {
-  socket.emit('notifcation:remove', doc);
+  socket.emit('notification:remove', doc);
 }

@@ -6,6 +6,7 @@ var deepPopulate = require('mongoose-deep-populate');
 var Deal = require('./deal.model');
 var User = require('../user/user.model');
 var Vertical = require('../vertical/vertical.model');
+var notifier = require('../notification/notification.controller');
 
 //Error handling
 var validationError = function (res, err) {
@@ -76,7 +77,11 @@ exports.create = function(req, res) {
       if(!vertical) { return res.sendStatus(404); }
         Deal.create(req.body, function (err, deal) {
           if (err) { return handleError(res, err); }
-          return res.status(201).json(deal);
+          else {
+            notifier.notifyDeal(deal.assignees, req.user, deal, function() {
+              return res.status(201).json(deal);
+            });
+          }
         });
     });
   });
@@ -106,6 +111,11 @@ exports.update = function(req, res) {
             if(err) { return handleError(res, err); }
             if(!vertical) { return res.sendStatus(404); }
 
+            // checking for change of assignees before updating
+            var newAssignees = _.difference(req.body.assignees, deal.assignees);
+            notifier.notifyDeal(newAssignees, req.user, deal, function() {
+              console.log('notified');
+            });            
             var updatedDeal = _.extend(deal, req.body);
             updatedDeal.save(function (err) {
               if (err) { return handleError(res, err); }
