@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var Update = require('./update.model');
 var Deal = require('../deal/deal.model');
+var notifier = require('../notification/notification.controller');
 
 // Get list of updates
 exports.index = function(req, res) {
@@ -43,6 +44,10 @@ exports.create = function (req, res) {
               .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider', function (err, up) {
                 return res.status(201).json(up);
               });
+            notifier.notifyDeal(deal.assignees, req.user, deal, ' has posted an update to deal - ', function() {
+              console.log("notified");
+              return res.status(201).json(deal);
+            });
           });
         });
       }
@@ -77,6 +82,10 @@ exports.update = function (req, res) {
                 .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider', function (err, up) {
                   return res.status(200).json(up);
                 });
+              notifier.notifyDeal(deal.assignees, req.user, deal, ' has edited an update to deal - ', function() {
+                console.log("notified");
+                return res.status(201).json(deal);
+            });  
           });
         } else
             res.sendStatus(403);

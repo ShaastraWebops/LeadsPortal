@@ -7,6 +7,7 @@ var Deal = require('./deal.model');
 var User = require('../user/user.model');
 var Vertical = require('../vertical/vertical.model');
 var notifier = require('../notification/notification.controller');
+var mongoose=require('mongoose');
 
 //Error handling
 var validationError = function (res, err) {
@@ -78,7 +79,8 @@ exports.create = function(req, res) {
         Deal.create(req.body, function (err, deal) {
           if (err) { return handleError(res, err); }
           else {
-            notifier.notifyDeal(deal.assignees, req.user, deal, function() {
+            notifier.notifyDeal(deal.assignees, req.user, deal, ' has assigned you to a deal - ', function() {
+              console.log("notified");
               return res.status(201).json(deal);
             });
           }
@@ -111,11 +113,20 @@ exports.update = function(req, res) {
             if(err) { return handleError(res, err); }
             if(!vertical) { return res.sendStatus(404); }
 
+            //Converting mongoose objectIds to string so that lodash can process it
+            var i,request_assignees=[],initial_assignees=[];
+            for(i=0;i<req.body.assignees.length;i++)
+              request_assignees.push(req.body.assignees[i].toString());
+            
+            for(i=0;i<deal.assignees.length;i++)
+              initial_assignees.push(deal.assignees[i].toString());
             // checking for change of assignees before updating
-            var newAssignees = _.difference(req.body.assignees, deal.assignees);
-            notifier.notifyDeal(newAssignees, req.user, deal, function() {
-              console.log('notified');
-            });            
+            var newAssignees_str = _.difference(request_assignees, initial_assignees);
+            var newAssignees=[];
+            //reconverting strings to mongoose objectIds
+            for(i=0;i<newAssignees_str.length;i++)
+              newAssignees.push(mongoose.Types.ObjectId(newAssignees_str[i]));
+
             var updatedDeal = _.extend(deal, req.body);
             updatedDeal.save(function (err) {
               if (err) { return handleError(res, err); }
@@ -128,6 +139,16 @@ exports.update = function(req, res) {
                 .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider', function (err, upde) {
                   return res.status(200).json(upde);
                 });
+              if(newAssignees.length!=0)
+              {   notifier.notifyDeal(newAssignees, req.user, deal, ' has assigned you to a deal - ', function() {
+                  console.log('notified');
+                });
+              } 
+              else{
+                   notifier.notifyDeal(req.body.assignees,req.user,deal,' has edited the deal - ',function(){
+                   console.log('notified');
+                  });
+              }                
             });
           });
         } else { 
@@ -165,6 +186,10 @@ exports.closeDeal = function(req, res) {
             .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider', function (err, upde) {
               return res.status(200).json(upde);
             });
+          notifier.notifyDeal(deal.assignees,req.user,deal,' has closed the deal - ',function(){
+            console.log('notified');
+          })
+
         });
     } else { 
       res.sendStatus(403);
@@ -198,6 +223,9 @@ exports.openDeal = function(req, res) {
             .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider', function (err, upde) {
               return res.status(200).json(upde);
             });
+          notifier.notifyDeal(deal.assignees,req.user,deal,' has re-opened the deal - ',function(){
+            console.log('notified');
+          });            
         });
       } else { 
         res.sendStatus(403);
