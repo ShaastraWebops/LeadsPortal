@@ -12,6 +12,9 @@ angular.module('erp2015App')
     $scope.isAdmin = Auth.isAdmin;
     $scope.isCore = Auth.isCore;
     $scope.getCurrentUser = Auth.getCurrentUser;
+    $scope.notif = false;
+    $scope.notifClick = true;
+    $scope.notifications = ["notification1", "notification2", "notification3", "notification4"];
 
     $scope.logout = function() {
       Auth.logout();
@@ -22,5 +25,15 @@ angular.module('erp2015App')
 
     $scope.isActive = function(route) {
       return route === $location.path();
+    };
+   
+    $scope.showNotification = function() {
+      if ($scope.notif == false) {
+        $scope.notif = true;
+        $scope.notifClick = false;
+      }
+      else {
+        $scope.notif = false;
+      }
     };
   });
