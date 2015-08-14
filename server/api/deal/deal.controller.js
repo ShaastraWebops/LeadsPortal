@@ -82,7 +82,8 @@ exports.create = function(req, res) {
           else {
             notifier.notifyDeal(deal.assignees, req.user, deal, ' has assigned you to a deal - ', function() {
               console.log("notified");
-              mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] New Deal created-'+deal.title, ' has assigned you to a deal - ');
+              var info=req.user.name+' has assigned you to a deal - '+deal.title;
+              mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] New Deal created-'+deal.title, info);
         
             });
           }
@@ -146,13 +147,15 @@ exports.update = function(req, res) {
               if(newAssignees.length!=0)
               {   notifier.notifyDeal(newAssignees, req.user, deal, ' has assigned you to a deal - ', function() {
                   console.log('notified');
-                  mailer.sendMail(newAssignees, '[Shaastra16-LeadsPortal]New assignee added to deal - '+deal.title, notif.info);
+                  var info=req.user.name+' has assigned you to a deal - '+deal.title;
+                  mailer.sendMail(newAssignees, '[Shaastra16-LeadsPortal]New assignee added to deal - '+deal.title, info);
                 });
               } 
               else{
                    notifier.notifyDeal(req.body.assignees,req.user,deal,' has edited the deal - ',function(){
                    console.log('notified');
-                   mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] Deal edited - '+deal.title, ' has edited the deal - ');
+                   var info=req.user.name+' has edited the deal - '+deal.title;
+                   mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] Deal edited - '+deal.title, info);
                   });
               }                
             });
@@ -194,7 +197,8 @@ exports.closeDeal = function(req, res) {
             });
           notifier.notifyDeal(deal.assignees,req.user,deal,' has closed the deal - ',function(){
             console.log('notified');
-            mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] Deal closed - '+deal.title, ' has closed the deal - ');
+            var info=req.user.name+' has closed the deal - '+deal.title;
+            mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] Deal closed - '+deal.title, info);
           })
 
         });
@@ -232,7 +236,8 @@ exports.openDeal = function(req, res) {
             });
           notifier.notifyDeal(deal.assignees,req.user,deal,' has re-opened the deal - ',function(){
             console.log('notified');
-            mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] Deal re-opened - '+ deal.title, ' has re-opened the deal - ');
+            var info=req.user.name+' has re-opened the deal - '+deal.title;
+            mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] Deal re-opened - '+ deal.title, info);
           });            
         });
       } else { 
