@@ -81,7 +81,7 @@ exports.create = function(req, res) {
           else {
             notifier.notifyDeal(deal.assignees, req.user, deal, ' has assigned you to a deal - ', function() {
               console.log("notified");
-              return res.status(201).json(deal);
+        
             });
           }
         });

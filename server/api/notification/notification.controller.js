@@ -3,15 +3,16 @@
 var _ = require('lodash');
 var Notifcation = require('./notification.model');
 var User = require('../user/user.model');
-var nodemailer=require('nodemailer');
+var mailer=require('../mailer/mailer.controller');
+// var nodemailer=require('nodemailer');
 
-var transporter=nodemailer.createTransport({
-  service:'Gmail',
-  auth:{
-    user:'shaastra.iitmadras@gmail.com',
-    pass:'shaastra@123'
-  }
-});
+// var transporter=nodemailer.createTransport({
+//   service:'Gmail',
+//   auth:{
+//     user:'shaastra.iitmadras@gmail.com',
+//     pass:'shaastra@123'
+//   }
+// });
 
 // Get list of notifcations
 exports.index = function(req, res) {
@@ -76,6 +77,7 @@ exports.notifyDeal = function(assignees, updatedBy, deal, message, callback) {
     if(err) { console.log(err); }
     else {
       var len = assignees.length;
+      var sendTo=[];
       for(var i=0; i<len; i++) {
         User.findById(assignees[i], function (err, user) {
           if(err) { console.log('error'); }
@@ -86,17 +88,19 @@ exports.notifyDeal = function(assignees, updatedBy, deal, message, callback) {
               if(err) { console.log(err); }
               else
               {
-                transporter.sendMail({
-                  from: 'shaastra.iitmadras@gmail.com',
-                  to: user.email,
-                  subject: 'New Notifications from Leads Portal!!',
-                  text: notif.info
-                });
+                sendTo.push(user.email);
+                // transporter.sendMail({
+                //   from: 'shaastra.iitmadras@gmail.com',
+                //   to: user.email,
+                //   subject: 'New Notifications from Leads Portal!!',
+                //   text: notif.info
+                // });
               }
             })
           }
         });
       }
+      mailer.sendMail(sendTo, 'New Notifications from Leads Portal!!', notif.info);
     }
     callback();
   });  

@@ -46,7 +46,6 @@ exports.create = function (req, res) {
               });
             notifier.notifyDeal(deal.assignees, req.user, deal, ' has posted an update to deal - ', function() {
               console.log("notified");
-              return res.status(201).json(deal);
             });
           });
         });
@@ -84,7 +83,6 @@ exports.update = function (req, res) {
                 });
               notifier.notifyDeal(deal.assignees, req.user, deal, ' has edited an update to deal - ', function() {
                 console.log("notified");
-                return res.status(201).json(deal);
             });  
           });
         } else
