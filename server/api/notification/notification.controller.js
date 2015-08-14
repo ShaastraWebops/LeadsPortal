@@ -3,16 +3,6 @@
 var _ = require('lodash');
 var Notifcation = require('./notification.model');
 var User = require('../user/user.model');
-var mailer=require('../mailer/mailer.controller');
-// var nodemailer=require('nodemailer');
-
-// var transporter=nodemailer.createTransport({
-//   service:'Gmail',
-//   auth:{
-//     user:'shaastra.iitmadras@gmail.com',
-//     pass:'shaastra@123'
-//   }
-// });
 
 // Get list of notifcations
 exports.index = function(req, res) {
@@ -86,21 +76,12 @@ exports.notifyDeal = function(assignees, updatedBy, deal, message, callback) {
             user.notifications.push(notif._id);
             user.save(function (err) {
               if(err) { console.log(err); }
-              else
-              {
-                sendTo.push(user.email);
-                // transporter.sendMail({
-                //   from: 'shaastra.iitmadras@gmail.com',
-                //   to: user.email,
-                //   subject: 'New Notifications from Leads Portal!!',
-                //   text: notif.info
-                // });
-              }
+              
             })
           }
         });
       }
-      mailer.sendMail(sendTo, 'New Notifications from Leads Portal!!', notif.info);
+      
     }
     callback();
   });  

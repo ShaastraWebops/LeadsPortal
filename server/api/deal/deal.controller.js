@@ -8,6 +8,7 @@ var User = require('../user/user.model');
 var Vertical = require('../vertical/vertical.model');
 var notifier = require('../notification/notification.controller');
 var mongoose=require('mongoose');
+var mailer=require('../mailer/mailer.controller');
 
 //Error handling
 var validationError = function (res, err) {
@@ -81,6 +82,7 @@ exports.create = function(req, res) {
           else {
             notifier.notifyDeal(deal.assignees, req.user, deal, ' has assigned you to a deal - ', function() {
               console.log("notified");
+              mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] New Deal created-'+deal.title, ' has assigned you to a deal - ');
         
             });
           }
@@ -120,9 +122,11 @@ exports.update = function(req, res) {
             
             for(i=0;i<deal.assignees.length;i++)
               initial_assignees.push(deal.assignees[i].toString());
+
             // checking for change of assignees before updating
             var newAssignees_str = _.difference(request_assignees, initial_assignees);
             var newAssignees=[];
+
             //reconverting strings to mongoose objectIds
             for(i=0;i<newAssignees_str.length;i++)
               newAssignees.push(mongoose.Types.ObjectId(newAssignees_str[i]));
@@ -142,11 +146,13 @@ exports.update = function(req, res) {
               if(newAssignees.length!=0)
               {   notifier.notifyDeal(newAssignees, req.user, deal, ' has assigned you to a deal - ', function() {
                   console.log('notified');
+                  mailer.sendMail(newAssignees, '[Shaastra16-LeadsPortal]New assignee added to deal - '+deal.title, notif.info);
                 });
               } 
               else{
                    notifier.notifyDeal(req.body.assignees,req.user,deal,' has edited the deal - ',function(){
                    console.log('notified');
+                   mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] Deal edited - '+deal.title, ' has edited the deal - ');
                   });
               }                
             });
@@ -188,6 +194,7 @@ exports.closeDeal = function(req, res) {
             });
           notifier.notifyDeal(deal.assignees,req.user,deal,' has closed the deal - ',function(){
             console.log('notified');
+            mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] Deal closed - '+deal.title, ' has closed the deal - ');
           })
 
         });
@@ -225,6 +232,7 @@ exports.openDeal = function(req, res) {
             });
           notifier.notifyDeal(deal.assignees,req.user,deal,' has re-opened the deal - ',function(){
             console.log('notified');
+            mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] Deal re-opened - '+ deal.title, ' has re-opened the deal - ');
           });            
         });
       } else { 

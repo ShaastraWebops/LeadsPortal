@@ -4,6 +4,7 @@ var _ = require('lodash');
 var Update = require('./update.model');
 var Deal = require('../deal/deal.model');
 var notifier = require('../notification/notification.controller');
+var mailer=require('../mailer/mailer.controller');
 
 // Get list of updates
 exports.index = function(req, res) {
@@ -46,6 +47,7 @@ exports.create = function (req, res) {
               });
             notifier.notifyDeal(deal.assignees, req.user, deal, ' has posted an update to deal - ', function() {
               console.log("notified");
+              mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] New update added to deal - '+deal.title, ' has posted an update to deal - ');
             });
           });
         });
@@ -83,6 +85,7 @@ exports.update = function (req, res) {
                 });
               notifier.notifyDeal(deal.assignees, req.user, deal, ' has edited an update to deal - ', function() {
                 console.log("notified");
+                mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] Update edited - '+deal.title, ' has edited an update to deal - ');
             });  
           });
         } else
