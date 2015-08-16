@@ -4,6 +4,7 @@ angular.module('erp2015App')
   .controller('dealController', function ($rootScope, $scope, $state, $window, Auth, LeadsPortalService, $stateParams, $http, $mdDialog, $filter) {
   $scope.selectedCoords = [];
   $scope.update = {};
+  $scope.sortedUpdates = [];
   $scope.showButton = false;
 
 	LeadsPortalService.getCoords()
@@ -20,6 +21,7 @@ angular.module('erp2015App')
   LeadsPortalService.getDeal($stateParams.id)
     .then(function (deal) {
       $scope.deal = deal;
+      $scope.sortedUpdates = $scope.deal.updates;
       if(deal.result === false) {
         $scope.dealresult = 'Failure';
       } else {
@@ -45,6 +47,32 @@ angular.module('erp2015App')
       // do some error handling here
       console.log(err);
     });
+
+  $scope.updateSearch = function() {
+    var updateDates = [];
+    var sortDate = [];
+    $scope.sortedUpdates = [];
+    angular.forEach($scope.deal.updates, function (item) {
+      var element = {};
+      element.formatDate = $filter('date')(item.updatedOn, 'yyyy-MM-dd');
+      element._id = String(item._id);
+      updateDates.push(element);
+    });
+    if ($scope.searchUpdate != "null") {
+     $scope.searchupdate = $filter('date')(new Date($scope.searchUpdate), 'yyyy-MM-dd');
+      // when ever we remove the date after search in the input box then the default date choosen by the date picker is "1970-01-01"
+      if ($scope.searchupdate == "1970-01-01") { 
+        $scope.searchUpdate = "null";
+        $scope.sortedUpdates = $scope.deal.updates;
+      }
+     if ($scope.searchUpdate != "null") {
+       sortDate = $filter('filter')(updateDates, { formatDate: $scope.searchupdate });
+       angular.forEach(sortDate, function (item) {
+        $scope.sortedUpdates = $scope.sortedUpdates.concat($filter('filter')($scope.deal.updates, item._id));
+       });
+     }
+    } 
+  };
 
   // modal for closing the deal
   $scope.dealCloseModal = function () {
