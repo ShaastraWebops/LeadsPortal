@@ -27,6 +27,7 @@ angular.module('erp2015App')
       if (sessionStorage.length == 0) {
         $scope.sortedDeals = allDeals;
         $scope.sortedcategory = allDeals;
+        console.log(allDeals);
       } else { 
         populateStorage(); 
       }; 
@@ -43,12 +44,8 @@ angular.module('erp2015App')
 
   var allDeals = $scope.allDeals;
   $scope.sortedcategory = allDeals;
-
+ 
   $scope.onChange = function() {
-    if($scope.searchText == undefined) {
-      $scope.searchText = "";
-    }
-
     var allDeals = $scope.allDeals;
     var DealCategory = String($scope.dealCategory);
     var sortedCategory = [];
@@ -78,22 +75,46 @@ angular.module('erp2015App')
     var sortedVerticals = [];
     var sortedCoords = [];
     var sortedText = [];
+    var dealDates = [];
+    var sortDate = [];
+    var sortedDate = [];
     var sortedCategory = $scope.sortedcategory;
     
     angular.forEach(verticalSelected, function (item) { 
       var expression = { vertical: { _id: item._id } };
-      console.log(expression);
       sortedVerticals = sortedVerticals.concat($filter('filter')(sortedCategory, expression));
     });
     angular.forEach(coordSelected, function (item) { 
       var expression = { assignees: { _id: item._id } };
       sortedCoords = sortedCoords.concat($filter('filter')(sortedCategory, expression));
     });
-    if (String($scope.searchText).length != 0) {
-      sortedText = $filter('filter')(sortedCategory, String($scope.searchText));
+    if($scope.searchText == undefined) {
+      $scope.searchText = "";
     }
-    if (verticalSelected.length != 0 || coordSelected.length != 0 || $scope.searchText.length != 0) {
-      $scope.sortedDeals = _.union(sortedVerticals, sortedCoords, sortedText);
+    if ($scope.searchText != "") {
+      sortedText = $filter('filter')(sortedCategory, $scope.searchText);
+      console.log(sortedText);
+      console.log($scope.searchText);
+    }
+    angular.forEach(sortedCategory, function (item) {
+      var element = {};
+      element.formatDate = $filter('date')(item.createdOn, 'yyyy-MM-dd');
+      element._id = String(item._id);
+      dealDates.push(element);
+    });
+    if ($scope.searchdate != "null") {
+     $scope.searchDate = $filter('date')(new Date($scope.searchdate), 'yyyy-MM-dd');
+        // when ever we remove the date after search in the input box then the default date choosen by the date picker is "1970-01-01"
+       if ($scope.searchDate == "1970-01-01") { 
+          $scope.searchdate = "null"
+       }
+      sortDate = $filter('filter')(dealDates, { formatDate: $scope.searchDate });
+      angular.forEach(sortDate, function (item) {
+        sortedDate = sortedDate.concat($filter('filter')(sortedCategory, item._id));
+      });
+    } 
+    if (verticalSelected.length != 0 || coordSelected.length != 0 || $scope.searchText != "" || $scope.searchdate != "null") {
+      $scope.sortedDeals = _.union(sortedVerticals, sortedCoords, sortedText, sortedDate);
     } else {
       $scope.sortedDeals = sortedCategory;
     };
@@ -102,11 +123,14 @@ angular.module('erp2015App')
      "storedVerticals": verticalSelected,
      "storedCoords": coordSelected,
      "storedText": $scope.searchText,
+     "storedDate": $scope.searchdate,
      "storedCategory": String($scope.dealCategory)
+
     };
     sessionStorage.setItem("storedVerticals", JSON.stringify(storageObject.storedVerticals));
     sessionStorage.setItem("storedCoords", JSON.stringify(storageObject.storedCoords));
     sessionStorage.setItem("storedText", storageObject.storedText);
+    sessionStorage.setItem("storedDate", storageObject.storedDate);
     sessionStorage.setItem("storedCategory", storageObject.storedCategory);
   };
 
@@ -114,6 +138,7 @@ angular.module('erp2015App')
     $scope.selectedVerticals = JSON.parse(sessionStorage.getItem("storedVerticals"));
     $scope.selectedCoords = JSON.parse(sessionStorage.getItem("storedCoords"));
     $scope.searchText = sessionStorage.getItem("storedText");
+    $scope.searchdate = sessionStorage.getItem("storedDate");
     $scope.dealCategory = sessionStorage.getItem("storedCategory");
     $scope.dealsTitle = "List of required Deals";
     $scope.onChange();

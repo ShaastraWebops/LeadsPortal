@@ -30,7 +30,7 @@
 	padding: 8px;
 	font-size: 13px;
 	background-color: #ffffff;
-	position: fixed;
+	position: absolute;
 	z-index: 1000;
 	width: 398px;
 	border-bottom: 3px solid #dddddd;
@@ -62,5 +62,20 @@
 	font-size: 11px;
 }
 .md-whiteframe-z2 {
- 	height: 100px;
+ 	min-height: 100px;
+}
+.notifDiv {
+	min-height: 100px;
+	width: 100%;
+}
+#notifMessage {
+	margin-top: 15px;
+	margin-left: 10px;
+}
+#closeButton {
+	top: 12px;
+	left: 353px;
+}
+#closeButton:hover {
+	color: #FF3300;
 }

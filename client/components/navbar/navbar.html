@@ -25,15 +25,21 @@
         
         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/dashboard')}"><a ui-sref="leadsPortalDashboard"><span class="glyphicon glyphicon-dashboard"></span> Your Deals</a></li>
         
-        <li ng-show="isLoggedIn()"  id="notificationLink"><a ng-click="showNotification()"><span id="notificationCount" ng-if="notifClick">4</span><span class="glyphicon glyphicon-bell"></span></a>
+        <li ng-show="isLoggedIn()"  id="notificationLink" ng-class="{active: notif}"><a ng-click="showNotification()"><span id="notificationCount">{{ notifications.length }}</span><span class="glyphicon glyphicon-bell"></span></a>
           <div id="notificationContainer" ng-if="notif">
           <div id="notificationTitle">Notifications</div>
           <div id="notificationsBody" class="notifications">
+            <md-whiteframe class="md-whiteframe-z2" layout layout-align="center center" ng-if="(notifications.length == 0)">
+            <span>No new notifications</span>
+            </md-whiteframe>
             <md-whiteframe class="md-whiteframe-z2" layout layout-align="center center" ng-repeat="notification in notifications">
-            <span>{{ notification }}</span>
+            <div class="notifDiv">
+              <a id="closeButton" class="glyphicon glyphicon-remove-circle" ng-click="notifHide($index)"></a>
+              <div id="notifMessage">{{ notification }}</div>
+            </div>
             </md-whiteframe>
           </div>
-          <div id="notificationFooter"><a href="#">Mark all as read</a></div>
+          <div id="notificationFooter"><a ng-click="hideAllNotif()">Mark all as read</a></div>
           </div>
         </li>
         

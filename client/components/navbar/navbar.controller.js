@@ -13,14 +13,13 @@ angular.module('erp2015App')
     $scope.isCore = Auth.isCore;
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.notif = false;
-    $scope.notifClick = true;
-    $scope.notifications = ["notification1", "notification2", "notification3", "notification4"];
-
+    $scope.notifications = ["Deal x has been created by y and assigned to you and also to coord w on z day", "notification2", "notification3", "notification4"];
+    
     $scope.logout = function() {
       Auth.logout();
       // $location.path('/login');
       $state.go('login');
-      // $location.url('/login');
+      // $location.url('/login'); 
     };
 
     $scope.isActive = function(route) {
@@ -30,10 +29,17 @@ angular.module('erp2015App')
     $scope.showNotification = function() {
       if ($scope.notif == false) {
         $scope.notif = true;
-        $scope.notifClick = false;
-      }
-      else {
+      } else {
         $scope.notif = false;
       }
     };
+
+    $scope.notifHide = function(index) {
+      $scope.notifications.splice(index, 1);
+    };
+
+    $scope.hideAllNotif = function() {
+      $scope.notifications = [];
+    };
+
   });
