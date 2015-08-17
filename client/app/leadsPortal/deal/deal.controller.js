@@ -48,9 +48,11 @@ angular.module('erp2015App')
       console.log(err);
     });
 
+
   $scope.updateSearch = function() {
     var updateDates = [];
     var sortDate = [];
+    var searchUpdateTemp = "";
     $scope.sortedUpdates = [];
     angular.forEach($scope.deal.updates, function (item) {
       var element = {};
@@ -59,19 +61,21 @@ angular.module('erp2015App')
       updateDates.push(element);
     });
     if ($scope.searchUpdate != "null") {
-     $scope.searchupdate = $filter('date')(new Date($scope.searchUpdate), 'yyyy-MM-dd');
-      // when ever we remove the date after search in the input box then the default date choosen by the date picker is "1970-01-01"
-      if ($scope.searchupdate == "1970-01-01") { 
+     searchUpdateTemp = $filter('date')(new Date($scope.searchUpdate), 'yyyy-MM-dd');
+      // whenever we remove the date after search in the input box then the default date choosen by the date picker is "1970-01-01"
+      if (searchUpdateTemp == "1970-01-01") { 
         $scope.searchUpdate = "null";
         $scope.sortedUpdates = $scope.deal.updates;
       }
      if ($scope.searchUpdate != "null") {
-       sortDate = $filter('filter')(updateDates, { formatDate: $scope.searchupdate });
+       sortDate = $filter('filter')(updateDates, { formatDate: searchUpdateTemp });
        angular.forEach(sortDate, function (item) {
         $scope.sortedUpdates = $scope.sortedUpdates.concat($filter('filter')($scope.deal.updates, item._id));
        });
      }
-    } 
+    }else {
+        $scope.sortedUpdates = $scope.deal.updates;
+    }
   };
 
   // modal for closing the deal
@@ -252,6 +256,7 @@ angular.module('erp2015App')
     .then(function (response) {
       if(response.status === 200) {
         $scope.deal.updates[index] = response.data;
+        $scope.sortedUpdates = $scope.deal.updates;
         $rootScope.showToast('Success!');
       } else {
         $rootScope.showToast('Error occurred!');
@@ -301,6 +306,7 @@ angular.module('erp2015App')
     .then(function (response) {
       if(response.status === 201) {
         $scope.deal.updates.push(response.data);
+        $scope.sortedUpdates = $scope.deal.updates;
         $rootScope.showToast('Success!');
       } else {
         $rootScope.showToast('Error occurred!');

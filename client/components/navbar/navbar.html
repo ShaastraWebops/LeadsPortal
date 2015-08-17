@@ -26,7 +26,7 @@
         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/dashboard')}"><a ui-sref="leadsPortalDashboard"><span class="glyphicon glyphicon-dashboard"></span> Your Deals</a></li>
         
         <li ng-show="isLoggedIn()"  id="notificationLink" ng-class="{active: notif}"><a ng-click="showNotification()"><span id="notificationCount">{{ notifications.length }}</span><span class="glyphicon glyphicon-bell"></span></a>
-          <div id="notificationContainer" ng-if="notif">
+          <div id="notificationContainer" ng-if="notif" ng-mouseenter="scrollStop()" ng-mouseleave="scrollWork()">
           <div id="notificationTitle">Notifications</div>
           <div id="notificationsBody" class="notifications">
             <md-whiteframe class="md-whiteframe-z2" layout layout-align="center center" ng-if="(notifications.length == 0)">

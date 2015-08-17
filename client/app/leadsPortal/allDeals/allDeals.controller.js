@@ -27,7 +27,6 @@ angular.module('erp2015App')
       if (sessionStorage.length == 0) {
         $scope.sortedDeals = allDeals;
         $scope.sortedcategory = allDeals;
-        console.log(allDeals);
       } else { 
         populateStorage(); 
       }; 
@@ -93,8 +92,6 @@ angular.module('erp2015App')
     }
     if ($scope.searchText != "") {
       sortedText = $filter('filter')(sortedCategory, $scope.searchText);
-      console.log(sortedText);
-      console.log($scope.searchText);
     }
     angular.forEach(sortedCategory, function (item) {
       var element = {};

@@ -1,5 +1,6 @@
 #notificationLink {
-	position:relative
+	position:relative;
+	cursor: pointer;
 }
 #notificationContainer {
 	background-color: #fff;
@@ -78,4 +79,5 @@
 }
 #closeButton:hover {
 	color: #FF3300;
+	cursor: pointer;
 }

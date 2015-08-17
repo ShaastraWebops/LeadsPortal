@@ -15,6 +15,16 @@ angular.module('erp2015App')
     $scope.notif = false;
     $scope.notifications = ["Deal x has been created by y and assigned to you and also to coord w on z day", "notification2", "notification3", "notification4"];
     
+    $(window).bind('keydown', function (event) {
+      var key = event.keyCode;
+      if (key == "27") {
+        if($scope.notif === true)
+          $scope.$apply(function () {
+            $scope.notif = false;
+          });
+      }
+    });
+
     $scope.logout = function() {
       Auth.logout();
       // $location.path('/login');
@@ -33,6 +43,25 @@ angular.module('erp2015App')
         $scope.notif = false;
       }
     };
+
+    // For preventing the notif window scroll
+    var previousScrollTop = 0;
+    var scrollLock = false;
+    $scope.scrollStop = function () {
+      scrollLock = true;
+    };
+
+    $scope.scrollWork = function () {
+      scrollLock = false;
+    };
+
+    $(window).scroll(function (event) {     
+      if(scrollLock) {
+        $(window).scrollTop(previousScrollTop); 
+      }
+      previousScrollTop = $(window).scrollTop();
+    });
+
 
     $scope.notifHide = function(index) {
       $scope.notifications.splice(index, 1);
