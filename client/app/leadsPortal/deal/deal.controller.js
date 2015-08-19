@@ -60,6 +60,9 @@ angular.module('erp2015App')
       element._id = String(item._id);
       updateDates.push(element);
     });
+    if ($scope.searchUpdate == undefined) {
+      $scope.searchUpdate = "null";
+    }
     if ($scope.searchUpdate != "null") {
      searchUpdateTemp = $filter('date')(new Date($scope.searchUpdate), 'yyyy-MM-dd');
       // whenever we remove the date after search in the input box then the default date choosen by the date picker is "1970-01-01"
