@@ -45,10 +45,10 @@ exports.create = function (req, res) {
               .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider', function (err, up) {
                 return res.status(201).json(up);
               });
-            notifier.notifyDeal(deal.assignees, req.user, deal, ' has posted an update to deal - ', function() {
+            notifier.notifyDeal(deal.assignees, req.user, deal, ' has posted an update to deal - ', function () {
               console.log("notified");
-              var info=req.user.name+' has posted an update to deal - '+deal.title;
-              mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] New update added to deal - '+deal.title, info);
+              var info = req.user.name + ' has posted an update to deal - ' + deal.title;
+              mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] New update added to deal - ' + deal.title, info);
             });
           });
         });
@@ -84,10 +84,10 @@ exports.update = function (req, res) {
                 .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider', function (err, up) {
                   return res.status(200).json(up);
                 });
-              notifier.notifyDeal(deal.assignees, req.user, deal, ' has edited an update to deal - ', function() {
+              notifier.notifyDeal(deal.assignees, req.user, deal, ' has edited an update to deal - ', function () {
                 console.log("notified");
-                var info=req.user.name+' has edited an update to deal - '+deal.title;
-                mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] Update edited - '+deal.title, info);
+                var info=req.user.name + ' has edited an update to deal - ' + deal.title;
+                mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] Update edited - ' + deal.title, info);
             });  
           });
         } else
@@ -114,24 +114,3 @@ exports.destroy = function(req, res) {
 function handleError(res, err) {
   return res.status(500).send(err);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// post.save(function(err) {
-//   if (err) { return res.json(500, { error: 'Cannot save the post' }); }
-// post
-//   .populate('group', 'name')
-//   .populate({ path: 'wallUser', select: 'name picture' }, function(err, doc) {
-//     res.json(doc);
-//   });
-// });

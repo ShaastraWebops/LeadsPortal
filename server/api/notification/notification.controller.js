@@ -67,7 +67,7 @@ exports.notifyDeal = function(assignees, updatedBy, deal, message, callback) {
     if(err) { console.log(err); }
     else {
       var len = assignees.length;
-      var sendTo=[];
+      var sendTo = [];
       for(var i=0; i<len; i++) {
         User.findById(assignees[i], function (err, user) {
           if(err) { console.log('error'); }
@@ -76,12 +76,10 @@ exports.notifyDeal = function(assignees, updatedBy, deal, message, callback) {
             user.notifications.push(notif._id);
             user.save(function (err) {
               if(err) { console.log(err); }
-              
-            })
+            });
           }
         });
       }
-      
     }
     callback();
   });  
