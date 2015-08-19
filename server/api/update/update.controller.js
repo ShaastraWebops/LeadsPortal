@@ -4,7 +4,7 @@ var _ = require('lodash');
 var Update = require('./update.model');
 var Deal = require('../deal/deal.model');
 var notifier = require('../notification/notification.controller');
-var mailer=require('../mailer/mailer.controller');
+var mailer = require('../mailer/mailer.controller');
 
 // Get list of updates
 exports.index = function(req, res) {

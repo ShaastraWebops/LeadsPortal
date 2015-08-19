@@ -7,8 +7,8 @@ var Deal = require('./deal.model');
 var User = require('../user/user.model');
 var Vertical = require('../vertical/vertical.model');
 var notifier = require('../notification/notification.controller');
-var mongoose=require('mongoose');
-var mailer=require('../mailer/mailer.controller');
+var mongoose = require('mongoose');
+var mailer = require('../mailer/mailer.controller');
 
 //Error handling
 var validationError = function (res, err) {
