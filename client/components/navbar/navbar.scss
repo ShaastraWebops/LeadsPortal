@@ -74,10 +74,11 @@
 	margin-left: 10px;
 }
 #closeButton {
-	top: 12px;
-	left: 353px;
+	margin-top: 7px;
+	margin-left: 365px;
+	fill: #d3d3d3;
 }
 #closeButton:hover {
-	color: #FF3300;
+	fill: #000000;
 	cursor: pointer;
 }

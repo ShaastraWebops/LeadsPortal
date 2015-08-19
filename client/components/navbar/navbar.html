@@ -34,7 +34,7 @@
             </md-whiteframe>
             <md-whiteframe class="md-whiteframe-z2" layout layout-align="center center" ng-repeat="notification in notifications">
             <div class="notifDiv">
-              <a id="closeButton" class="glyphicon glyphicon-remove-circle" ng-click="notifHide($index)"></a>
+              <ng-md-icon layout layout-align="end start" icon="close" id="closeButton" size="18" alt="close-notification-img" ng-click="notifHide($index)"></ng-md-icon>
               <div id="notifMessage">{{ notification }}</div>
             </div>
             </md-whiteframe>
