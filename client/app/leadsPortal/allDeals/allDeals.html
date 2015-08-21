@@ -7,10 +7,10 @@
     <div layout="column">
       <div layout="row">
         <ng-md-icon icon="arrow_drop_down_circle" style="fill:#9999FF;padding-top:15px" size="38" class="md-avatar" alt="drop-down-img"></ng-md-icon>
-         <md-select placeholder="All Deals" ng-model="dealCategory" ng-change="onChange()">
-            <md-select-label>{{ dealCategory }}</md-select-label>
-              <md-option ng-repeat="category in categories" value="{{ category }}">{{ category }}</md-option>
-            </md-select>
+        <md-select placeholder="All Deals" ng-model="dealCategory" ng-change="onChange()">
+          <md-select-label>{{ dealCategory }}</md-select-label>
+          <md-option ng-repeat="category in categories" value="{{ category }}">{{ category }}</md-option>
+        </md-select>
       </div>
 
       <div layout="row">

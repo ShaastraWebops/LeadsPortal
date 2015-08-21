@@ -83,7 +83,7 @@ exports.update = function (req, res) {
                 .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider', function (err, up) {
                   return res.status(200).json(up);
                 });
-              notifier.notifyDeal(deal.assignees, req.user, deal, ' has edited an update to deal - ', function () {
+              notifier.notifyDeal(deal.assignees, req.user, deal, ' has edited an update in deal - ', function () {
                 var info = req.user.name + ' has edited an update to deal - ' + deal.title;
                 mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] Update edited - ' + deal.title, info);
             });  

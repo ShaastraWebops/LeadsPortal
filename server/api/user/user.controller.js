@@ -2,6 +2,8 @@
 
 var User = require('./user.model');
 var passport = require('passport');
+var _ = require('lodash');
+var mongoose = require('mongoose');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 var async = require('async');
@@ -10,6 +12,7 @@ var nodemailer = require('nodemailer');
 var nodemailer = require('nodemailer');
 var smtpapi    = require('smtpapi');
 var Department = require('../department/department.model');
+var Notification = require('../notification/notification.model')
 
 var EMAIL = ''; // Put your fest mail id here
 var PASSWORD = ''; // Put your fest password here 
@@ -82,8 +85,6 @@ function handleError(res, err) {
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
 
-  
-
   User.findById(userId, function (err, user) {
     if(user.authenticate(oldPass)) {
       user.password = newPass;
@@ -125,15 +126,16 @@ function handleError(res, err) {
 /**
  * Get my info
  */
- exports.me = function (req, res, next) {
+exports.me = function (req, res, next) {
   var userId = req.user._id;
   User.findOne({
     _id: userId
   }, '-salt -hashedPassword', function (err, user) { // don't ever give out the password or salt
-  if (err) return next(err);
-  if (!user) return res.sendStatus(401);
-  res.json(user);
-});
+    if (err) return next(err);
+    if (!user) return res.sendStatus(401);
+    res.json(user);
+  })
+  .populate('notifications');
 };
 
 /**
@@ -339,4 +341,18 @@ exports.getCoords = function (req, res, next) {
   });
 };
 
-
+exports.deleteNotifs = function (req, res) {
+  if(req.body._id) { delete req.body._id; }
+  User.findById(req.user._id, function (err, user) {
+    if(err) { return handleError(res, err); }
+    if(!user) { return res.sendStatus(400); }
+    // converting user notifications to strings since _.difference method doesn't work on objects
+    var userNotifs = user.notifications.map(function (o){ return String(o); });
+    var newNotifs = _.difference(userNotifs, req.body.notifs);
+    user.notifications = newNotifs;
+    user.save(function (err) {
+      if(err) { return handleError(res, err); }
+      return res.sendStatus(201);
+    });
+  });
+};
