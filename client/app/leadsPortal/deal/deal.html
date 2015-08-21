@@ -152,7 +152,7 @@
 				    <md-list>
 			    		<h1 class="md-headline">Assigned to</h1>
 			    		<div layout="row">
-						    <md-list-item class="md-3-line" ng-repeat="person in deal.assignees">
+						    <md-list-item class="md-3-line" ng-repeat="person in deal.assignees track by $index">
 						    	<ng-md-icon icon="perm_identity" style="fill:#00A2FF" size="48" class="md-avatar" alt="deal-assignee-img"></ng-md-icon>
 						        <div class="md-list-item-text">
 							        <h3>{{ person.name }}</h3>
@@ -193,7 +193,7 @@
 							    <span>No updates as of now</span>
 							</md-whiteframe>
 						</div>
-						<div ng-show="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;" ng-repeat="update in sortedUpdates | orderBy: 'createdOn':true">
+						<div ng-show="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;" ng-repeat="update in sortedUpdates track by $index | orderBy: 'createdOn':true">
 			      	<div class="md-actions" layout="row" layout-align="end center">
 								<md-button class="md-raised md-primary md-hue-1" ng-click="updateEditModal(update, $index)" ng-show="showButton && !deal.status">
 									Edit this Update

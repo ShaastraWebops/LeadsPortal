@@ -78,7 +78,7 @@
             <div layout="row">
              <div flex="20">
               <md-select placeholder="Select Vertical" ng-model="deal.vertical">
-                <md-option ng-repeat="vertical in allVerticals" value="{{ vertical }}">{{ vertical.title }}</md-option>
+                <md-option ng-repeat="vertical in allVerticals track by $index" value="{{ vertical }}">{{ vertical.title }}</md-option>
               </md-select>
              </div>
 
@@ -158,7 +158,7 @@
 
             <md-content class="allVerticals" layout-padding>
               <md-list>
-                <md-list-item ng-repeat="vertical in allVerticals | orderBy: 'createdOn':true">
+                <md-list-item ng-repeat="vertical in allVerticals track by $index | orderBy: 'createdOn':true">
                   <h4>{{ vertical.title }}</h4>
                   <ng-md-icon icon="edit" class="md-secondary" ng-click="verticalEditModal(vertical)" aria-label="edit-vertical"></ng-md-icon>
                   <md-divider></md-divider>
