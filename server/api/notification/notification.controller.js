@@ -75,8 +75,8 @@ exports.notifyDeal = function(assignees, updatedBy, deal, message, callback) {
       	if(assignees[i].toString() === updatedBy._id.toString())
       		continue;
         User.findById(assignees[i], function (err, user) {
-          if(err) { console.log('error'); }
-          if(!user) { console.log('no user'); }
+          if(err) { console.log('Error'); }
+          if(!user) { console.log('No user'); }
           if(user) {
             user.notifications.push(notif._id);
             user.save(function (err) {

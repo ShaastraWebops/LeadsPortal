@@ -46,7 +46,6 @@ exports.create = function (req, res) {
                 return res.status(201).json(up);
               });
             notifier.notifyDeal(deal.assignees, req.user, deal, ' has posted an update to deal - ', function () {
-              console.log("notified");
               var info = req.user.name + ' has posted an update to deal - ' + deal.title;
               mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] New update added to deal - ' + deal.title, info);
             });
@@ -85,8 +84,7 @@ exports.update = function (req, res) {
                   return res.status(200).json(up);
                 });
               notifier.notifyDeal(deal.assignees, req.user, deal, ' has edited an update to deal - ', function () {
-                console.log("notified");
-                var info=req.user.name + ' has edited an update to deal - ' + deal.title;
+                var info = req.user.name + ' has edited an update to deal - ' + deal.title;
                 mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] Update edited - ' + deal.title, info);
             });  
           });
