@@ -6,6 +6,9 @@ var deepPopulate = require('mongoose-deep-populate');
 var Deal = require('./deal.model');
 var User = require('../user/user.model');
 var Vertical = require('../vertical/vertical.model');
+var notifier = require('../notification/notification.controller');
+var mongoose = require('mongoose');
+var mailer = require('../mailer/mailer.controller');
 
 //Error handling
 var validationError = function (res, err) {
@@ -76,7 +79,13 @@ exports.create = function(req, res) {
       if(!vertical) { return res.sendStatus(404); }
         Deal.create(req.body, function (err, deal) {
           if (err) { return handleError(res, err); }
-          return res.status(201).json(deal);
+          else {
+            notifier.notifyDeal(deal.assignees, req.user, deal, ' has assigned you to a new deal - ', function () {
+              var info = req.user.name + ' has assigned you to a deal -  ' + deal.title;
+              mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] New Deal created-' + deal.title, info);
+        
+            });
+          }
         });
     });
   });
@@ -101,10 +110,28 @@ exports.update = function(req, res) {
         if(req.user.role === 'coord') { req.body.assignees = deal.assignees; }
 
         if(req.user.role === 'core' || req.user.role === 'admin' || 
-          (req.user.role === 'coord' && deal.assignees.indexOf(req.user._id)>-1)) {      
+          (req.user.role === 'coord' && deal.assignees.indexOf(req.user._id) >- 1)) {      
           Vertical.findById(req.body.vertical, function (err, vertical) {
             if(err) { return handleError(res, err); }
             if(!vertical) { return res.sendStatus(404); }
+
+            //Converting mongoose objectIds to string so that lodash can process it
+            var i;
+            var request_assignees = [];
+            var initial_assignees = [];
+            for(i=0; i<req.body.assignees.length; i++)
+              request_assignees.push(req.body.assignees[i].toString());
+            
+            for(i=0; i<deal.assignees.length; i++)
+              initial_assignees.push(deal.assignees[i].toString());
+
+            // checking for change of assignees before updating
+            var newAssignees_str = _.difference(request_assignees, initial_assignees);
+            var newAssignees = [];
+
+            //reconverting strings to mongoose objectIds
+            for(i=0; i<newAssignees_str.length; i++)
+              newAssignees.push(mongoose.Types.ObjectId(newAssignees_str[i]));
 
             var updatedDeal = _.extend(deal, req.body);
             updatedDeal.save(function (err) {
@@ -118,6 +145,17 @@ exports.update = function(req, res) {
                 .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider', function (err, upde) {
                   return res.status(200).json(upde);
                 });
+              if(newAssignees.length != 0) {
+                notifier.notifyDeal(newAssignees, req.user, deal, ' has assigned you to a deal - ', function () {
+                  var info = req.user.name + ' has assigned you to a deal - ' + deal.title;
+                  mailer.sendMail(newAssignees, '[Shaastra16-LeadsPortal] New assignee added to deal - ' + deal.title, info);
+                });
+              } else {
+                notifier.notifyDeal(req.body.assignees,req.user, deal, ' has edited the deal - ', function () {
+                  var info = req.user.name + ' has edited the deal - ' + deal.title;
+                  mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] Deal edited - ' + deal.title, info);
+                });
+              }                
             });
           });
         } else { 
@@ -155,6 +193,11 @@ exports.closeDeal = function(req, res) {
             .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider', function (err, upde) {
               return res.status(200).json(upde);
             });
+          notifier.notifyDeal(deal.assignees, req.user, deal, ' has closed the deal - ', function () {
+            var info = req.user.name + ' has closed the deal - ' + deal.title;
+            mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] Deal closed - ' + deal.title, info);
+          })
+
         });
     } else { 
       res.sendStatus(403);
@@ -172,7 +215,7 @@ exports.openDeal = function(req, res) {
    // checking if the deal is closed or not
    if(deal.status === true) {  
     if(req.user.role === 'core' || req.user.role === 'admin' || 
-      (req.user.role === 'coord' && deal.assignees.indexOf(req.user._id)>-1)) {  
+      (req.user.role === 'coord' && deal.assignees.indexOf(req.user._id) >- 1)) {  
         deal.updatedOn = Date.now();
         deal.lastEditedBy = req.user._id;
         deal.status = false;
@@ -188,6 +231,10 @@ exports.openDeal = function(req, res) {
             .populate('lastEditedBy', '-salt -hashedPassword -lastSeen -provider', function (err, upde) {
               return res.status(200).json(upde);
             });
+          notifier.notifyDeal(deal.assignees, req.user, deal, ' has re-opened the deal - ', function () {
+            var info = req.user.name + ' has re-opened the deal - ' + deal.title;
+            mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] Deal re-opened - ' + deal.title, info);
+          });            
         });
       } else { 
         res.sendStatus(403);
