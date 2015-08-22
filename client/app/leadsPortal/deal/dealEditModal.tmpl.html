@@ -61,7 +61,7 @@
              <div flex="20">
               <md-select placeholder="Change Vertical" ng-model="editDeal.vertical" ng-change="changeVertical()">
               <md-select-label>{{ editDeal.vertical.title }}</md-select-label>
-                <md-option ng-repeat="vertical in allVerticals" value="{{ vertical }}">{{ vertical.title }}</md-option>
+                <md-option ng-repeat="vertical in allVerticals track by $index" value="{{ vertical }}">{{ vertical.title }}</md-option>
               </md-select>
              </div>
              

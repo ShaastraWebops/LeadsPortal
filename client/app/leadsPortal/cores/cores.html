@@ -19,7 +19,7 @@
               <label>Title</label>
               <input name="title" ng-model="deal.title" ng-required="true" mongoose-error />
             </md-input-container>
-            <div style="color:red">
+            <div class="error">
               <span ng-show="form.title.$error.required && dealSubmitted">
                 Title is required.
               </span>
@@ -30,7 +30,7 @@
               <label>Deal Info</label>
               <textarea required name="info" ng-model="deal.info" mongoose-error></textarea>
             </md-input-container>
-            <div style="color:red">
+            <div class="error">
               <span ng-show="form.info.$error.required && dealSubmitted">
                 Title is required.
               </span>
@@ -43,7 +43,7 @@
                 <label>Company Name</label>
                 <input required name="companyName" ng-model="deal.companyName" mongoose-error />
               </md-input-container>
-              <div style="color:red">
+              <div class="error">
                 <span ng-show="form.companyName.$error.required && dealSubmitted">
                   Title is required.
                 </span>
@@ -78,7 +78,7 @@
             <div layout="row">
              <div flex="20">
               <md-select placeholder="Select Vertical" ng-model="deal.vertical">
-                <md-option ng-repeat="vertical in allVerticals" value="{{ vertical }}">{{ vertical.title }}</md-option>
+                <md-option ng-repeat="vertical in allVerticals track by $index" value="{{ vertical }}">{{ vertical.title }}</md-option>
               </md-select>
              </div>
 
@@ -123,7 +123,7 @@
                   <label>Title</label>
                   <input name="title" ng-model="vertical.title" ng-required="true" mongoose-error />
                 </md-input-container>
-                <div style="color:red">
+                <div class="error">
                   <span ng-show="formVertical.title.$error.required && verticalSubmitted">
                     Title is required.
                   </span>
@@ -134,7 +134,7 @@
                   <label>Description</label>
                   <textarea required name="description" ng-model="vertical.description" mongoose-error></textarea>
                 </md-input-container>
-                <div style="color:red">
+                <div class="error">
                   <span ng-show="formVertical.description.$error.required && verticalSubmitted">
                     Title is required.
                   </span>
@@ -158,7 +158,7 @@
 
             <md-content class="allVerticals" layout-padding>
               <md-list>
-                <md-list-item ng-repeat="vertical in allVerticals | orderBy: 'createdOn':true">
+                <md-list-item ng-repeat="vertical in allVerticals track by $index | orderBy: 'createdOn':true">
                   <h4>{{ vertical.title }}</h4>
                   <ng-md-icon icon="edit" class="md-secondary" ng-click="verticalEditModal(vertical)" aria-label="edit-vertical"></ng-md-icon>
                   <md-divider></md-divider>

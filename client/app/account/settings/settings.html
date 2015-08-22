@@ -18,7 +18,7 @@
 
             <input type="password" name="password" ng-model="user.oldPassword"
                      mongoose-error/>
-            <p style="color:red" ng-show="form.password.$error.mongoose">
+            <p class="error" ng-show="form.password.$error.mongoose">
                   {{ errors.other }}
             </p>
           </md-input-container>
@@ -29,13 +29,13 @@
             <input type="password" name="newPassword" ng-model="user.newPassword"
                      ng-minlength="3"
                      required/>
-            <p style="color:red"
+            <p class="error"
                  ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
               Password must be at least 3 characters.
             </p>
           </md-input-container>
 
-          <p style="color:red"> {{ message }} </p>
+          <p class="error"> {{ message }} </p>
 
           <md-button class="md-raised md-primary" type="submit">Save changes</md-button>
         </form>

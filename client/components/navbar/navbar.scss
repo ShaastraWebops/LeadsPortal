@@ -1,7 +1,8 @@
 #notificationLink {
-	position:relative;
+	position: relative;
 	cursor: pointer;
 }
+
 #notificationContainer {
 	background-color: #fff;
 	border: 1px solid rgba(100, 100, 100, .4);
@@ -13,6 +14,7 @@
 	width: 400px;
 	z-index: 100;
 }
+
 // Popup Arrow
 #notificationContainer:before {
 	content: '';
@@ -26,6 +28,7 @@
 	margin-top: -20px;
 	margin-left: 188px;
 }
+
 #notificationTitle { 
 	font-weight: bold;
 	padding: 8px;
@@ -36,11 +39,13 @@
 	width: 398px;
 	border-bottom: 3px solid #dddddd;
 }
+
 #notificationsBody {
 	padding: 33px 0px 0px 0px !important;
-	max-height:300px;
+	max-height: 300px;
 	overflow-y: auto;
 }
+
 #notificationFooter {
 	background-color: #e9eaed;
 	text-align: center;
@@ -49,6 +54,7 @@
 	font-size: 12px;
 	border-top: 1px solid #dddddd;
 }
+
 #notificationCount {
 	padding: 0px 5px 0px 5px;
 	background: #cc0000;
@@ -62,23 +68,33 @@
 	margin-top: -11px;
 	font-size: 11px;
 }
+
 .md-whiteframe-z2 {
- 	min-height: 100px;
+ 	min-height: 75px;
 }
+
 .notifDiv {
-	min-height: 100px;
+	min-height: 75px;
 	width: 100%;
 }
+
 #notifMessage {
-	margin-top: 15px;
+	color: #1589FF;
+	margin-top: 5px;
 	margin-left: 10px;
 }
+
 #closeButton {
 	margin-top: 7px;
 	margin-left: 365px;
 	fill: #d3d3d3;
 }
+
 #closeButton:hover {
 	fill: #000000;
 	cursor: pointer;
+}
+
+.navbar-brand {
+	padding-top: 0px;
 }

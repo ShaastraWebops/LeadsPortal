@@ -10,7 +10,7 @@
         <span class="icon-bar"></span>
       </button>
       <div>
-        <a href="/" class="navbar-brand" height="60px" style="padding-top: 0px;"><img src="../../assets/images/shaastra-logo.png" height="50px">Leads Portal Shaastra 2016</a>
+        <a href="/" class="navbar-brand" height="60px"><img src="../../assets/images/shaastra-logo.png" height="50px">Leads Portal Shaastra 2016</a>
       </div>
     </div>
     <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
@@ -33,9 +33,9 @@
             <span>No new notifications</span>
             </md-whiteframe>
             <md-whiteframe class="md-whiteframe-z2" layout layout-align="center center" ng-repeat="notification in notifications">
-            <div class="notifDiv">
-              <ng-md-icon layout layout-align="end start" icon="close" id="closeButton" size="18" alt="close-notification-img" ng-click="notifHide($index)"></ng-md-icon>
-              <div id="notifMessage">{{ notification }}</div>
+            <div class="notifDiv" ng-click="notifClick($index)">
+              <ng-md-icon layout layout-align="end start" icon="close" id="closeButton" size="18" alt="close-notification-img" ng-click="notifDelete($index)"></ng-md-icon>
+              <div id="notifMessage" ui-sref="deal({id: notification.deal})">{{ notification.info }}</div>
             </div>
             </md-whiteframe>
           </div>

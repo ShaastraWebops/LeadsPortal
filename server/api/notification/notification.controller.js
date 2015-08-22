@@ -1,54 +1,64 @@
 'use strict';
 
 var _ = require('lodash');
-var Notifcation = require('./notification.model');
+var Notification = require('./notification.model');
 var User = require('../user/user.model');
+var mongoose = require('mongoose');
 
-// Get list of notifcations
+//Error handling
+var validationError = function (res, err) {
+  return res.status(422).json(err);
+};
+
+function handleError (res, err) {
+  return res.status(500).json(err);
+};
+
+// Get list of notifications
 exports.index = function(req, res) {
-  Notifcation.find(function (err, notifcations) {
+  Notification.find(function (err, notifications) {
     if(err) { return handleError(res, err); }
-    return res.json(200, notifcations);
+    return res.json(200, notifications);
   });
 };
 
-// Get a single notifcation
+// Get a single notification
 exports.show = function(req, res) {
-  Notifcation.findById(req.params.id, function (err, notifcation) {
+  Notification.findById(req.params.id, function (err, notification) {
     if(err) { return handleError(res, err); }
-    if(!notifcation) { return res.send(404); }
-    return res.json(notifcation);
+    if(!notification) { return res.send(404); }
+    return res.json(notification);
   });
 };
 
-// Creates a new notifcation in the DB.
+// Creates a new notification in the DB.
 exports.create = function(req, res) {
-  Notifcation.create(req.body, function (err, notifcation) {
+  Notification.create(req.body, function (err, notification) {
     if(err) { return handleError(res, err); }
-    return res.json(201, notifcation);
+    return res.json(201, notification);
   });
 };
 
-// Updates an existing notifcation in the DB.
+// Updates an existing notification in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  Notifcation.findById(req.params.id, function (err, notifcation) {
+  Notification.findById(req.params.id, function (err, notification) {
     if (err) { return handleError(res, err); }
-    if(!notifcation) { return res.send(404); }
-    var updated = _.merge(notifcation, req.body);
+    if(!notification) { return res.send(404); }
+    var updated = _.merge(notification, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
-      return res.json(200, notifcation);
+      return res.json(200, notification);
     });
   });
 };
 
-// Deletes a notifcation from the DB.
+// Deletes a notification from the DB.
 exports.destroy = function(req, res) {
-  Notifcation.findById(req.params.id, function (err, notifcation) {
+  Notification.findById(req.params.id, function (err, notification) {
     if(err) { return handleError(res, err); }
-    if(!notifcation) { return res.sendStatus(404); }
-    notifcation.remove(function (err) {
+    if(!notification) { return res.sendStatus(404); }
+    notification.remove(function (err) {
       if(err) { return handleError(res, err); }
       return res.sendStatus(204);
     });
@@ -60,7 +70,7 @@ function handleError(res, err) {
 }
 
 exports.notifyDeal = function(assignees, updatedBy, deal, message, callback) {
-  var notif = new Notifcation();
+  var notif = new Notification();
   notif.info = updatedBy.name + message + deal.title;
   notif.deal = deal._id;
   notif.save(function (err) {
@@ -90,17 +100,10 @@ exports.notifyDeal = function(assignees, updatedBy, deal, message, callback) {
   });  
 };
 
-exports.deleteNotifs = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
-  User.findById(req.user._id, function (err, user) {
+exports.myNotifs = function(req, res) {
+  Notification.find({ _id: { "$in" : req.user.notifications } }, function (err, notifs) {
     if(err) { return handleError(res, err); }
-    console.log(user);
-    if(!user) { return res.sendStatus(404); }
-    var newNotifs = _.difference(user.notifications, req.body.notifs);
-    user.notifications = newNotifs;
-    user.save(function (err) {
-      if(err) { return handleError(res, err); }
-      return res.sendStatus(201);
-    });
+    if(notifs.length === 0) { return res.sendStatus(404); }
+    return res.status(200).json(notifs);
   });
 };

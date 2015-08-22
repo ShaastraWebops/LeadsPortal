@@ -4,8 +4,8 @@ angular.module('erp2015App')
   .service('LeadsPortalService', function ($http) {
     // AngularJS will instantiate a singleton by calling "new" on this function
   	return {
-      createDeal:function(data){
-        return $http.post('/api/deals', data).then(function(response){
+      createDeal:function (data) {
+        return $http.post('/api/deals', data).then(function (response) {
           return response;
         });
       },

@@ -258,7 +258,9 @@ angular.module('erp2015App')
     })
     .then(function (response) {
       if(response.status === 200) {
+        console.log('index', index);
         $scope.deal.updates[index] = response.data;
+        console.log('upadates', $scope.deal.updates);
         $scope.sortedUpdates = $scope.deal.updates;
         $rootScope.showToast('Success!');
       } else {

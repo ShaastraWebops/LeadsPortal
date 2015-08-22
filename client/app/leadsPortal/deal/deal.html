@@ -27,7 +27,7 @@
 						</md-button>
 			   	</div>
 			   </div>
-		   		<md-card-content style="word-break:break-all">
+		   		<md-card-content class="wordBreak">
 		     		<h2 class="md-display-1"> Deal Details </h2>
 						<md-divider></md-divider>
 				    <md-list>
@@ -152,7 +152,7 @@
 				    <md-list>
 			    		<h1 class="md-headline">Assigned to</h1>
 			    		<div layout="row">
-						    <md-list-item class="md-3-line" ng-repeat="person in deal.assignees">
+						    <md-list-item class="md-3-line" ng-repeat="person in deal.assignees track by $index">
 						    	<ng-md-icon icon="perm_identity" style="fill:#00A2FF" size="48" class="md-avatar" alt="deal-assignee-img"></ng-md-icon>
 						        <div class="md-list-item-text">
 							        <h3>{{ person.name }}</h3>
@@ -169,7 +169,7 @@
 
 			<md-content>
 		    <md-card>
-		    	<md-card-content style="word-break:break-all">
+		    	<md-card-content class="wordBreak">
 		    		<div layout="row">
 			     		<h2 flex class="md-display-1"> Updates </h2>
 			     		<div layout="row" layout-align="center center">
@@ -188,19 +188,20 @@
 					
 						<md-divider></md-divider>
 					
-						<div ng-hide="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;">
-							<md-whiteframe class="md-whiteframe-z1" style="background:#fff; margin:20px; padding: 20px;" layout layout-align="left center">
+						<div ng-hide="(deal.updates.length)" layout="column" layout-fill class="padBottom32px">
+							<md-whiteframe class="md-whiteframe-z1" layout layout-align="left center" id="noUpdatesAsOfNow">
 							    <span>No updates as of now</span>
 							</md-whiteframe>
 						</div>
-						<div ng-show="(deal.updates.length)" layout="column" layout-fill style="padding-bottom: 32px;" ng-repeat="update in sortedUpdates | orderBy: 'createdOn':true">
+
+						<div ng-show="(deal.updates.length)" layout="column" layout-fill class="padBottom32px" ng-repeat="update in sortedUpdates track by $index | orderBy: 'createdOn':true">
 			      	<div class="md-actions" layout="row" layout-align="end center">
 								<md-button class="md-raised md-primary md-hue-1" ng-click="updateEditModal(update, $index)" ng-show="showButton && !deal.status">
 									Edit this Update
 								</md-button>
 			      	</div>						
-							<md-whiteframe class="md-whiteframe-z3" style="background:#fff; padding: 20px;" layout layout-align="left center">
-						    <md-list style="width:100%;">
+							<md-whiteframe class="md-whiteframe-z3" layout layout-align="left center" id="updatesBackground">
+						    <md-list class="updatesWidth">
 							    <md-list-item class="md-3-line">
 							    	<ng-md-icon icon="subject" style="fill:#00517F" size="32" class="md-avatar" alt="update-title-img"></ng-md-icon>
 							        <div class="md-list-item-text">
