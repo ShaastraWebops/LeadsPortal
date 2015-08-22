@@ -99,9 +99,12 @@ angular.module('erp2015App')
       element._id = String(item._id);
       dealDates.push(element);
     });
+    if ($scope.searchdate == undefined) {
+      $scope.searchdate = "null";
+    }
     if ($scope.searchdate != "null") {
      $scope.searchDate = $filter('date')(new Date($scope.searchdate), 'yyyy-MM-dd');
-        // when ever we remove the date after search in the input box then the default date choosen by the date picker is "1970-01-01"
+        // whenever we remove the date after search in the input box then the default date choosen by the date picker is "1970-01-01"
        if ($scope.searchDate == "1970-01-01") { 
           $scope.searchdate = "null"
        }
