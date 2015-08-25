@@ -19,9 +19,8 @@ exports.sendMail = function (sendList, subj, message) {
     subject: subj,
     text: message
   }, function (error, info) {
-    if(error)
-      return console.log(error);
-    console.log(info);
+    console.log('mailer-error', error);
+    console.log('mailer-info', info);
   });
 }
 

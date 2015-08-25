@@ -77,11 +77,7 @@ exports.notifyDeal = function(assignees, updatedBy, deal, message, callback) {
     if(err) { console.log(err); }
     else {
       var len = assignees.length;
-      var sendTo = [];
-      //console.log(updatedBy);
-      //console.log(updatedBy._id.toString());
       for(var i=0; i<len; i++) {
-      	//console.log(assignees[i].toString());
       	if(assignees[i].toString() === updatedBy._id.toString())
       		continue;
         User.findById(assignees[i], function (err, user) {
