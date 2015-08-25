@@ -18,7 +18,7 @@ function handleError (res, err) {
 exports.index = function(req, res) {
   Notification.find(function (err, notifications) {
     if(err) { return handleError(res, err); }
-    return res.json(200, notifications);
+    return res.status(200).json(notifications);
   });
 };
 
@@ -26,7 +26,7 @@ exports.index = function(req, res) {
 exports.show = function(req, res) {
   Notification.findById(req.params.id, function (err, notification) {
     if(err) { return handleError(res, err); }
-    if(!notification) { return res.send(404); }
+    if(!notification) { return res.sendStatus(404); }
     return res.json(notification);
   });
 };
@@ -35,7 +35,7 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   Notification.create(req.body, function (err, notification) {
     if(err) { return handleError(res, err); }
-    return res.json(201, notification);
+    return res.status(201).json(notification);
   });
 };
 
@@ -44,11 +44,11 @@ exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
   Notification.findById(req.params.id, function (err, notification) {
     if (err) { return handleError(res, err); }
-    if(!notification) { return res.send(404); }
+    if(!notification) { return res.sendStatus(404); }
     var updated = _.merge(notification, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
-      return res.json(200, notification);
+      return res.status(200).json(notification);
     });
   });
 };
