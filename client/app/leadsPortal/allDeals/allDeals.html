@@ -109,7 +109,7 @@
  -->  
 
         <md-list>
-          <div ng-repeat="deal in sortedDeals track by $index | orderBy: 'updatedOn':true">
+          <div ng-repeat="deal in sortedDeals | orderBy: 'updatedOn':true track by $index">
             <md-list-item ng-click="gotoDeal(deal)">
                 <ng-md-icon icon="dns" ng-style="{true: {fill: '#FF4D4D'}, false: {fill: '#00A2FF'}}[ deal.status ]" size="32" class="md-avatar" alt="deal-title-img"></ng-md-icon>
                 <div layout="row" layout-margin layout-fill layout-padding>
