@@ -83,7 +83,7 @@ exports.create = function(req, res) {
             notifier.notifyDeal(deal.assignees, req.user, deal, ' has assigned you to a new deal - ', function () {
               var info = req.user.name + ' has assigned you to a deal -  ' + deal.title;
               mailer.sendMail(deal.assignees, '[Shaastra16-LeadsPortal] New Deal created-' + deal.title, info);
-        
+             return res.status(201).json(deal);
             });
           }
         });
