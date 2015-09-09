@@ -26,7 +26,7 @@ var all = {
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
-    session: 'erp2015-secret'
+    session: 'erp2016-secret'
   },
 
   // List of user roles
