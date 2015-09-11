@@ -1,3 +1,37 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<h1>Welcome to leads portal</h1>
+<div class="leadsPortal">
+	<div class="left right">
+		<div class="md-whiteframe-z2">
+			<md-toolbar class="md-primary">
+			  <div class="md-toolbar-tools">
+			    <h1 class="md-flex">Welome to Leads Portal</h1>
+			  </div>
+			</md-toolbar>
+
+			<md-content layout-padding>
+				<div>
+					<p class="md-headline">Instructions</p>
+					<ul>
+						<li class="md-subhead">Leads Portal for Sponsorship and PR department - annual technical festival of IIT Madras, <a href="http://shaastra.org">Shaastra</a></li>
+						<li class="md-subhead">You can find all the deals updated in the portal <a ui-sref="allDeals">here</a></li>
+						<li class="md-subhead">You can find the deals assigned to you <a ui-sref="leadsPortalDashboard">here</a></li>
+					</ul>
+				</div>
+			</md-content>
+			
+			<md-divider ng-if="!$last"></md-divider>
+			
+			<md-content layout-padding>
+				<div layout layout-align="center center">
+					<p class="md-subhead">If you encounter any bugs (or) issues (or) have any queries, please mail us at <a target="_blank" href="mailto:webops@shaastra.org">webops@shaastra.org</a></p>
+				</div>
+				<div layout layout-align="center center">
+				  <md-subheader>
+	    			Made with <span class="glyphicon glyphicon-heart"></span> by WebOps Team
+	  			</md-subheader>
+	  		</div>
+			</md-content>
+		</div>
+	</div>
+</div>
