@@ -15,7 +15,7 @@ angular.module('erp2015App')
         })
         .then( function() {
           // Logged in, redirect to home
-          $state.go('/');
+          $state.go('main');
         })
         .catch( function(err) {
           $scope.errors.other = err.message;
